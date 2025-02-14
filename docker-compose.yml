@@ -1,0 +1,50 @@
+services:
+
+  # monservice php
+  web:
+    build: .
+    container_name: php-apache
+    ports:
+      - "80:80"
+    volumes:
+      - ./www:/var/www/html
+
+  # mon service postgres
+  # db:
+  #   image: postgres:13
+  #   container_name: postgres
+  #   restart: always
+  #   environment:
+  #     POSTGRES_DB: exempledb
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: password
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - ./db_postgres:/var/lib/postgresql/data
+
+  # mon service mysql
+  mysql:
+      image: mysql:latest
+      container_name: mysql_container
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: greta_teacher
+        MYSQL_DATABASE: db_refuge_animaux
+        MYSQL_USER: greta
+        MYSQL_PASSWORD: greta_refuge
+      ports:
+        - "3307:3306"
+      volumes: 
+        - ./db:/var/lib/mysql
+
+  # mon service phpmyadmin
+  # phpmyadmin:
+  #     image: phpmyadmin/phpmyadmin
+  #     container_name: phpmyadmin_container
+  #     restart: unless-stopped
+  #     environment:
+  #       PMA_HOST: mysql
+  #       MYSQL_ROOT_PASSWORD: greta_teacher
+  #     ports:
+  #       - "8090:80"

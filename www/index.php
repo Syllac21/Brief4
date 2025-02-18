@@ -7,12 +7,10 @@
 </head>
 <body>
     <?php 
-    include './src/template/dashboard.php' ?>
-<?php
-    include_once('./src/template/main.php')
-    ?>
-    <?php
-    include './src/template/footer.php' ?>
+    include './src/template/dashboard.php' ;
+    include_once('./src/template/main.php');
+    
+    include './src/template/footer.php' ;?>
     
 </body>
 </html>

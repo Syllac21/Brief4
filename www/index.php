@@ -6,7 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <?php 
+<?php
+    include_once('./src/template/main.php')
+    ?>
+    <?php
     include './src/template/footer.php' ?>
+    
 </body>
 </html>

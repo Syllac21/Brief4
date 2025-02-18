@@ -2,7 +2,7 @@
 
 // mes variables de connexion à ma BDD
 const MYSQL_HOST = 'mysql_container';
-const MYSQL_PORT = 3306;
+const MYSQL_PORT = 3307;
 const MYSQL_NAME = 'db_refuge_animaux';
 const MYSQL_USER = 'greta';
 const MYSQL_PASSWORD = 'greta_refuge';

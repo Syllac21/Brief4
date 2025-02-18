@@ -1,3 +1,6 @@
+<?php
+require_once 'src/model/Model.php';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,6 +9,8 @@
     <title>Document</title>
 </head>
 <body>
-    <?php phpinfo(); ?>
+    <?php
+    phpinfo();
+    ?>
 </body>
 </html>

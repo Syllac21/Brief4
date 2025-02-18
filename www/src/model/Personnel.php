@@ -1,5 +1,5 @@
 <?php
-require_once 'src/model/Model.php';
+require_once 'Model.php';
 class Personnel
 {
     public function getAllPersonnel()

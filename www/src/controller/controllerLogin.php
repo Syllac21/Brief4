@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'src/model/Personnel.php';
+require_once '../model/Personnel.php';
 $persoObj = new Personnel();
 
 $login =trim(strip_tags($_POST['login']));

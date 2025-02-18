@@ -11,6 +11,21 @@
 
 <main class="container mt-5">
         <h1 class="text-center mb-4">Bienvenue au refuge pour animaux</h1>
+        <div class="mb-4">
+            <select class="form-control" id="speciesSelect" onchange="filterCards()">
+                <option value="all">Toutes les espèces</option>
+                <option value="chien">Chiens</option>
+                <option value="giraffe">Giraffes</option>
+                <option value="elephant">Éléphants</option>
+                <option value="crocodile">Crocodiles</option>
+                <option value="serpent">Serpents</option>
+                <option value="loup">Loups</option>
+                <option value="chat">Chats</option>
+                <option value="ane">Ânes</option>
+                <option value="mulet">Mulets</option>
+                <option value="cheval">Chevaux</option>
+            </select>
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-4 mb-4 d-flex justify-content-center">
                 <div class="card">

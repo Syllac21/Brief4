@@ -1,3 +1,15 @@
+<?php
+require_once 'src/model/Model.php';
+function getAnimaux() : array
+    {
+        $mysqlClient=dbConnect();
+        $animauxStatement = $mysqlClient->prepare('SELECT * FROM animal');
+        $animauxStatement->execute();
+        $animaux=$animauxStatement->fetchAll();
+
+        return $animaux;
+    } 
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,6 +18,9 @@
     <title>Document</title>
 </head>
 <body>
-    <?php phpinfo(); ?>
+    <?php
+    $animaux=getAnimaux();
+    var_dump($animaux);
+    ?>
 </body>
 </html>

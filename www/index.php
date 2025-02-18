@@ -1,6 +1,7 @@
 <?php
-session_start();?>
-
+session_start();
+require_once 'src/model/Model.php';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

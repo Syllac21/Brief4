@@ -7,6 +7,6 @@
 </head>
 <body>
     <?php 
-    include './src/template/footer.php' ?>
+    include './src/template/dashboard.php' ?>
 </body>
 </html>

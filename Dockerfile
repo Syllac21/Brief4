@@ -7,4 +7,6 @@ RUN apt-get update && apt-get install -y libicu-dev libpq-dev libzip-dev && rm -
 RUN docker-php-ext-configure intl
 
 # # Installation des extensions PHP
-RUN docker-php-ext-install intl
+RUN docker-php-ext-install intl \
+                            pdo \
+                            pdo_mysql

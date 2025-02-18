@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <?php phpinfo(); ?>
+    <?php 
+    include './src/template/footer.php' ?>
 </body>
 </html>

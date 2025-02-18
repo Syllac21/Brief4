@@ -6,11 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-<?php
-    include_once('./src/template/main.php')
-    ?>
-    <?php
-    include './src/template/footer.php' ?>
+    <?php 
+    include './src/template/dashboard.php' ;
+    include_once('./src/template/main.php');
+    
+    include './src/template/footer.php' ;?>
     
 </body>
 </html>

@@ -8,7 +8,7 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
     </style>
-</head>
+
 <main class="container mt-5">
         <h1 class="text-center mb-4">Bienvenue au refuge pour animaux</h1>
         <div class="row justify-content-center">

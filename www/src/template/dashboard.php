@@ -1,6 +1,3 @@
-
-
-
 <style>
     .btn{
         margin-top: 20px;
@@ -29,50 +26,43 @@
     nav{
         color: white;
     }
-    /* .btn-danger{
-
-    } */
 
 </style>
 
 
 
 <aside class="sidebar">
-    <button class="btn btn-outline-light mt-5">Gestion des Cages</button>
-    <button class="btn btn-outline-light">Gestion des Animaux</button>
-    <button class="btn btn-outline-light">Gestion des Personnes</button>
+    <a class="btn btn-outline-light mt-5" href="/?page=dashboard&table=cage">Gestion des Cages</a>
+    <a class="btn btn-outline-light" href="/?page=dashboard&table=animaux">Gestion des Animaux</a>
+    <a class="btn btn-outline-light" href="/?page=dashboard&table=personnel">Gestion des Personnes</a>
 </aside>
 
 
 <div class="content-wrapper">
-            <div class="content-header">
-                <h1 class="mt-5 text-center">Gestion des Animaux</h1>
-            </div>
             <div class="content">
             <div class="container mt-4">
                 <!-- Users Table -->
                 <div class="container mt-4">
-                    <table id="usersTable" class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                                <td>1</td>
-                                <td>John Doe</td>
-                                <td>john@example.com</td>
-                                <td>
-                                <button class="btn btn-info" onclick=""> View</button>
-                                    <button class="btn btn-danger" onclick=""> Delete</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <?php
+                    if(isset($_GET['table'])){
+                        switch ($_GET['table']) {
+                            case 'cage':
+                                include "tableCage.php";
+                                break;
+                            case 'animaux':
+                                include "tableanimal.php";
+                                break;
+                            case 'personnel':
+                                include "tablePersonnel.php";
+                                break;
+                            default:
+                                header('Location: /controller/logout.php');
+                                break;
+                            }
+                    }else{
+                        include "tableCage.php";
+                    }
+                    ?>
                     <button class="btn btn-success" data-toggle="modal" data-target="#addUserModal">Add User</button>
                 </div>
         </div>

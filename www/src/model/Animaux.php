@@ -6,7 +6,7 @@ class Animaux
     public function getAllAnimaux()
     {
         $pdo = dbConnect();
-        $requete = $pdo->query("SELECT nom, sexe, description FROM animal");
+        $requete = $pdo->query("SELECT nom, genre, description FROM animal");
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
 }

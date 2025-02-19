@@ -52,27 +52,10 @@
             <div class="container mt-4">
                 <!-- Users Table -->
                 <div class="container mt-4">
-                    <table id="usersTable" class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                                <td>1</td>
-                                <td>John Doe</td>
-                                <td>john@example.com</td>
-                                <td>
-                                <button class="btn btn-info" onclick=""> View</button>
-                                    <button class="btn btn-danger" onclick=""> Delete</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <?php
+                    include "tablecage.php" 
+                    
+                    ?>
                     <button class="btn btn-success" data-toggle="modal" data-target="#addUserModal">Add User</button>
                 </div>
         </div>

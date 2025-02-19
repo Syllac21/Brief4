@@ -1,6 +1,3 @@
-
-
-
 <style>
     .btn{
         margin-top: 20px;
@@ -29,9 +26,8 @@
     nav{
         color: white;
     }
-    .btn-danger{
-
-    }
+    /* .bts-danger:{
+    } */
 
 </style>
 
@@ -53,8 +49,7 @@
                 <!-- Users Table -->
                 <div class="container mt-4">
                     <?php
-                    include "tablecage.php" 
-                    
+                    include "tableanimal.php"
                     ?>
                     <button class="btn btn-success" data-toggle="modal" data-target="#addUserModal">Add User</button>
                 </div>

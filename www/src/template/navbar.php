@@ -7,8 +7,8 @@
         <ul class="navbar-nav">
             <?php if (isset($_SESSION['login'])): ?>
                 <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item"><a class="nav-link" href="#">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="dashboard.php">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/?page=dashboard">Dashboard</a></li>
                 </ul>
                 <li class="nav-item"><a class="nav-link" href="./src/controller/controllerLogout.php">Se déconnecter🔑</a></li>
             <?php else: ?>

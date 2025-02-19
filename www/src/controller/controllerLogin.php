@@ -13,11 +13,9 @@ if ($login != '' &&
     if ($personnel) {
         $_SESSION['login'] = $login;
         $_SESSION['time'] = $time;
-        
-        var_dump($_SESSION);
-        // header('Location: /');
+        header('Location: /');
     } else {
         echo 'Erreur de connexion';
-        // header('Location: /');
+        header('Location: /');
     }
 }

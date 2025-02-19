@@ -3,13 +3,13 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
-        <ul class="navbar-nav">
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item"><a class="nav-link" href="#">Accueil</a></li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
             <?php if (isset($_SESSION['login'])): ?>
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item"><a class="nav-link" href="#">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="dashboard.php">Dashboard</a></li>
-                </ul>
+                <li class="nav-item"><a class="nav-link" href="dashboard.php">Dashboard</a></li>
                 <li class="nav-item"><a class="nav-link" href="./src/controller/controllerLogout.php">Se déconnecter🔑</a></li>
             <?php else: ?>
                 <li class="nav-item">
@@ -29,4 +29,3 @@
         </ul>
     </div>
 </nav>
-

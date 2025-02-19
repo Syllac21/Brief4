@@ -29,9 +29,9 @@
     nav{
         color: white;
     }
-    .btn-danger{
+    /* .btn-danger{
 
-    }
+    } */
 
 </style>
 

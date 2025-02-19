@@ -1,13 +1,8 @@
 <?php
-// Include necessary files
-require_once 'src/model/Model.php';
-require_once 'src/model/Cage.php';
-
-// Create an instance of the Cage class
-$cage = new Cage;
+require_once (dirname(__DIR__,1).'/model/Cage.php');
+// Récupérer toutes les cages
 $allCages = $cage->getAllCages();
 ?>
-
 
 
 <!DOCTYPE html>
@@ -29,7 +24,6 @@ $allCages = $cage->getAllCages();
         <table class="table table-bordered table-striped">
             <thead class="thead-dark">
                 <tr>
-                    <th>ID</th>
                     <th>numero</th>
                     <th>alle</th>
                     <th>salle</th>
@@ -38,18 +32,19 @@ $allCages = $cage->getAllCages();
             <tbody>
                 <?php
                 foreach ($allCages as $cage){
+                    
                     echo "<tr>";
-                    echo "<td" . $cage['id'] . "</td>";
-                    echo "<td" . $cage['numero'] . "</td>";
-                    echo "<td" . $cage['alle'] . "</td>";
-                    echo "<td" . $cage['salle'] . "</td>";
+                    echo "<td>" . $cage['numero'] . "</td>";
+                    echo "<td>" . $cage['allee'] . "</td>";
+                    echo "<td>" . $cage['salle'] . "</td>";
                     echo "</tr>";
                 }
                 ?>
             </tbody>
         </table>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
 </body>
 </html>

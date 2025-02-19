@@ -3,7 +3,7 @@ require_once 'Model.php';
 class Cage
 
 {
-    private $pdo;
+    // private $pdo;
 
     // Constructor: Connect to the database
     // public function __construct()

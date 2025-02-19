@@ -11,9 +11,7 @@ require_once 'src/model/Cage.php';
 </head>
 <body>
     <?php
-    $cage = new Cage;
-    $allCages = $cage->getAllCages();
-    var_dump($allCages);
+    
     ?>
 </body>
 </html>

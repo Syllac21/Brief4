@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'src/model/Model.php';
+require_once 'src/model/Cage.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">

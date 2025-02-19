@@ -1,5 +1,6 @@
 <?php
 require_once 'src/model/Model.php';
+require_once 'src/model/Cage.php';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -10,7 +11,9 @@ require_once 'src/model/Model.php';
 </head>
 <body>
     <?php
-    phpinfo();
+    $cage = new Cage;
+    $allCages = $cage->getAllCages();
+    var_dump($allCages);
     ?>
 </body>
 </html>

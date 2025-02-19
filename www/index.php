@@ -1,6 +1,13 @@
 <?php
 session_start();
 require_once 'src/model/Model.php';
+require_once 'src/model/Animaux.php'; // Inclusion du fichier Animaux.php
+
+// Création d'une instance de la classe Animaux
+$animauxModel = new Animaux();
+
+// Récupération des animaux depuis la base de données
+$animaux = $animauxModel->getAllAnimaux();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -22,7 +29,8 @@ require_once 'src/model/Model.php';
     } else {
         include './src/template/main.php';
     }
-    
+    afficherCartesAnimaux($animaux); // Appel de la fonction pour afficher les cartes
+
     include './src/template/footer.php' ;?>
     
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

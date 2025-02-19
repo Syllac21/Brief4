@@ -13,8 +13,15 @@ require_once 'src/model/Model.php';
 </head>
 <body>
     <?php include './src/template/navbar.php';
-    include './src/template/dashboard.php' ;
-    include_once('./src/template/main.php');
+    if (isset($_SESSION['login']) && isset($_GET['page']) ) {
+        if ($_GET['page'] == 'dashboard') {
+            include './src/template/dashboard.php';
+        } else {
+            include './src/template/main.php';
+        }
+    } else {
+        include './src/template/main.php';
+    }
     
     include './src/template/footer.php' ;?>
     

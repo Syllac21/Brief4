@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-</head>
-<body>
+
 
 <style>
     .btn{
@@ -44,37 +35,6 @@
 
 </style>
 
-
-<nav class="main-header navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a href="#  mx-4" class="navbar-brand">Menu</a>
-        
-        <div class="collapse navbar-collapse " id="navbarNav">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="# mx-4 text-white" href="#">Accueil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="# mx-4 text-white" href="#">Tableau de bord</a>
-                </li>
-                <li class="nav-item">
-                    <a class="# mx-4 text-white" href="#">Connexion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="# mx-4 text-white" href="#">Mot de passe</a>
-                </li>
-                <li class="nav-item">
-                    <a class="# mx-4 text-white" href="#">Inscription</a>
-                </li>
-            </ul>
-
-            <!-- Déconnexion Button -->
-            <form class="d-flex  ml-auto">
-                <button class="btn btn-danger" type="submit">Déconnexion</button>
-            </form>
-        </div>
-    </div>
-</nav>
 
 
 <aside class="sidebar">
@@ -118,6 +78,3 @@
         </div>
     </div>
 </div>
-
-</body>
-</html>

@@ -6,7 +6,7 @@ class Animaux
     public function getAllAnimaux()
     {
         $pdo = dbConnect();
-        $requete = $pdo->query("SELECT nom, sexe, description FROM animal");
+        $requete = $pdo->query("SELECT nom, genre, description FROM animal");
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
 }
@@ -22,7 +22,7 @@ class Animaux
         echo '<img src="https://images8.alphacoders.com/873/873630.jpg" class="card-img-top" alt="' . htmlspecialchars($animal['nom']) . '">';
         echo '<div class="card-body">';
         echo '<h5 class="card-title">' . htmlspecialchars($animal['nom']) . '</h5>';
-        echo '<p class="card-text"><strong>Sexe :</strong> ' . htmlspecialchars($animal['sexe']) . '</p>';
+        echo '<p class="card-text"><strong>Sexe :</strong> ' . htmlspecialchars($animal['genre']) . '</p>';
         echo '<p class="card-text">' . htmlspecialchars($animal['description']) . '</p>';
         echo '</div>';
         echo '</div>';

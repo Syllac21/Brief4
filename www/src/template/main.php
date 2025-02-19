@@ -1,3 +1,5 @@
+<?php
+require_once (dirname(__DIR__,1).'/model/Model.php');?>
 <style>
         .card {
             max-width: 250px;
@@ -26,33 +28,8 @@
                 <option value="cheval">Chevaux</option>
             </select>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-md-4 mb-4 d-flex justify-content-center">
-                <div class="card">
-                    <img src="https://images8.alphacoders.com/873/873630.jpg" class="card-img-top" alt="Chien">
-                    <div class="card-body">
-                        <h5 class="card-title">Max</h5>
-                        <p class="card-text">Max est un chien adorable qui aime jouer et courir dans le parc.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4 d-flex justify-content-center">
-                <div class="card">
-                    <img src="https://images8.alphacoders.com/873/873630.jpg" class="card-img-top" alt="Chat">
-                    <div class="card-body">
-                        <h5 class="card-title">Mimi</h5>
-                        <p class="card-text">Mimi est une chatte douce et câline, parfaite pour les foyers aimants.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4 d-flex justify-content-center">
-                <div class="card">
-                    <img src="https://images8.alphacoders.com/873/873630.jpg" class="card-img-top" alt="Lapin">
-                    <div class="card-body">
-                        <h5 class="card-title">Fluffy</h5>
-                        <p class="card-text">Fluffy est un lapin curieux et joueur, idéal pour les familles avec enfants.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php
+            afficherCartesAnimaux($animaux); // Appel de la fonction pour afficher les cartes
+        ?>
+        
     </main>

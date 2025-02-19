@@ -29,7 +29,8 @@ $animaux = $animauxModel->getAllAnimaux();
     } else {
         include './src/template/main.php';
     }
-    
+    afficherCartesAnimaux($animaux); // Appel de la fonction pour afficher les cartes
+
     include './src/template/footer.php' ;?>
     
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

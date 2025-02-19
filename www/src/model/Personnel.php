@@ -1,5 +1,5 @@
 <?php
-require_once 'src/model/Model.php';
+require_once 'Model.php';
 class Personnel
 {
     public function getAllPersonnel()
@@ -17,7 +17,7 @@ class Personnel
     public function loginPersonnel($login, $password)
     {
         $mysqlClient=dbConnect();
-        $personnelStatement = $mysqlClient->prepare('SELECT * FROM personnel WHERE login = :login AND password = :password');
+        $personnelStatement = $mysqlClient->prepare('SELECT * FROM personnel WHERE login = :login AND mot_de_passe = :password');
         $personnelStatement->bindParam(':login', $login);
         $personnelStatement->bindParam(':password', $password);
         $personnelStatement->execute();

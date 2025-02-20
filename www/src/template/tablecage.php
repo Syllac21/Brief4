@@ -29,7 +29,7 @@ $allCages = $cage->getAllCages();
                     <th>salle</th>
                 </tr>
             </thead>
-            <tbody>
+            
                 <?php
                 foreach ($allCages as $cage){
                     
@@ -40,7 +40,7 @@ $allCages = $cage->getAllCages();
                     echo "</tr>";
                 }
                 ?>
-            </tbody>
+            
         </table>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

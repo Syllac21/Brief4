@@ -22,7 +22,8 @@
                             <label for="password" class="sr-only">Password</label>
                             <input type="password" id="password" name="password" class="form-control" placeholder="Password">
                         </div>
-                        <button type="submit" class="btn btn-primary">Se connecter🔑</button>
+                        <button type="submit" class="btn btn-primary d-none d-lg-inline">Se connecter 🔑</button>
+                        <button type="submit" class="btn btn-primary d-lg-none">🔑</button>
                     </form>
                 </li>
             <?php endif; ?>

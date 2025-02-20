@@ -9,8 +9,15 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             <?php if (isset($_SESSION['login'])): ?>
-                <li class="nav-item"><a class="nav-link" href="dashboard.php">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="./src/controller/controllerLogout.php">Se déconnecter🔑</a></li>
+                <li class="nav-item d-flex align-items-center">
+                    <span class="nav-link">👤 <?php echo htmlspecialchars($_SESSION['login']); ?></span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboard.php">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./src/controller/controllerLogout.php">Se déconnecter 🔑</a>
+                </li>
             <?php else: ?>
                 <li class="nav-item">
                     <form id="login-form" action="./src/controller/controllerLogin.php" method="POST" class="d-flex align-items-center">

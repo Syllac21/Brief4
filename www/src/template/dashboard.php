@@ -38,6 +38,7 @@
     <a class="btn btn-outline-light" href="/?page=dashboard&table=animaux">Gestion des Animaux</a>
     <a class="btn btn-outline-light" href="/?page=dashboard&table=personnel">Gestion des Personnes</a>
     <a class="btn btn-outline-light" href="/?page=dashboard&table=espece">Gestion des Espèce</a>
+    <a class="btn btn-outline-light" href="/?page=dashboard&table=animal">Page un animal</a>
 </aside>
 
 <div class="content-wrapper">
@@ -59,6 +60,9 @@
                                 break;
                             case 'espece':
                                 include "tableEspece.php";
+                                break;
+                            case 'animal':
+                                include "oneAnimal.php";
                                 break;
                             default:
                                 header('Location: /controller/logout.php');

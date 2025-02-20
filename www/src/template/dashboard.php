@@ -1,5 +1,5 @@
 <style>
-    .btn{
+    .btn {
         margin-top: 20px;
         background: green;
     }
@@ -13,6 +13,7 @@
         background-color: #343a40;
         padding-top: 20px;
     }
+
     .sidebar .btn {
         width: 100%;
         margin-bottom: 15px;
@@ -23,7 +24,7 @@
         padding: 20px;
     }
 
-    nav{
+    nav {
         color: white;
     }
 </style>
@@ -37,38 +38,38 @@
 </aside>
 
 <div class="content-wrapper">
-            <div class="content">
+    <div class="content">
+        <div class="container mt-4">
+            <!-- Users Table -->
             <div class="container mt-4">
-                <!-- Users Table -->
-                <div class="container mt-4">
-                    <?php
-                    if(isset($_GET['table'])){
-                        switch ($_GET['table']) {
-                            case 'cage':
-                                include "tableCage.php";
-                                break;
-                            case 'animaux':
-                                include "tableanimal.php";
-                                break;
-                            case 'personnel':
-                                include "tablePersonnel.php";
-                                break;
-                            case 'espece':
-                                include "tableEspece.php";
-                                break;
-                            case 'animal':
-                                include "oneAnimal.php";
-                                break;
-                            default:
-                                header('Location: /controller/logout.php');
-                                break;
-                            }
-                    }else{
-                        include "tableCage.php";
+                <?php
+                if (isset($_GET['table'])) {
+                    switch ($_GET['table']) {
+                        case 'cage':
+                            include "tableCage.php";
+                            break;
+                        case 'animaux':
+                            include "tableanimal.php";
+                            break;
+                        case 'personnel':
+                            include "tablePersonnel.php";
+                            break;
+                        case 'espece':
+                            include "tableEspece.php";
+                            break;
+                        case 'animal':
+                            include "oneAnimal.php";
+                            break;
+                        default:
+                            header('Location: /controller/logout.php');
+                            break;
                     }
-                    ?>
-                    <button class="btn btn-success" data-toggle="modal" data-target="#addUserModal">Add User</button>
-                </div>
+                } else {
+                    include "tableCage.php";
+                }
+                ?>
+                <button class="btn btn-success" data-toggle="modal" data-target="#addUserModal">Add User</button>
+            </div>
         </div>
     </div>
 </div>

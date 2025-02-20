@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once(dirname(__DIR__, 1) . '/model/Animaux.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -16,12 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Vérifie si des résultats sont trouvés
     if (!empty($resultats)) {
-        foreach ($resultats as $animal) {
-            echo "<div class='animal-card'>";
-            echo "<h3>" . htmlspecialchars($animal['nom']) . "</h3>";
-            // echo "<p>Espèce : " . htmlspecialchars($animal['espece']) . "</p>";
-            echo "</div>";
-        }
+        $_SESSION['list'] = $resultats;
+        header('location: /?requete=animaux');
     } else {
         echo "Aucun animal trouvé.";
     }

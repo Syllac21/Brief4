@@ -41,8 +41,12 @@
             </form>
             </div>
             <?php
-            $animauxModel->afficherCartesAnimaux($animaux);// Appel de la fonction pour afficher les cartes   
-                // afficherCartesAnimaux($animaux);  
+            if(isset($_GET['requete'])){
+                $animauxModel->afficherCartesAnimaux($_SESSION['list']);
+            }else{
+                $animauxModel->afficherCartesAnimaux($animaux);// Appel de la fonction pour afficher les cartes   
+                    // afficherCartesAnimaux($animaux);  
+            }
             ?>
         </main>
 

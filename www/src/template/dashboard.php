@@ -37,8 +37,8 @@
     <a class="btn btn-outline-light mt-5" href="/?page=dashboard&table=cage">Gestion des Cages</a>
     <a class="btn btn-outline-light" href="/?page=dashboard&table=animaux">Gestion des Animaux</a>
     <a class="btn btn-outline-light" href="/?page=dashboard&table=personnel">Gestion des Personnes</a>
+    <a class="btn btn-outline-light" href="/?page=dashboard&table=espece">Gestion des Espèce</a>
 </aside>
-
 
 <div class="content-wrapper">
             <div class="content">
@@ -56,6 +56,9 @@
                                 break;
                             case 'personnel':
                                 include "tablePersonnel.php";
+                                break;
+                            case 'espece':
+                                include "tableEspece.php";
                                 break;
                             default:
                                 header('Location: /controller/logout.php');

@@ -6,11 +6,15 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             <?php if (isset($_SESSION['login'])): ?>
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/?page=dashboard">Dashboard</a></li>
-                </ul>
-                <li class="nav-item"><a class="nav-link" href="./src/controller/controllerLogout.php">Se déconnecter🔑</a></li>
+                <li class="nav-item d-flex align-items-center">
+                    <span class="nav-link">👤 <?php echo htmlspecialchars($_SESSION['login']); ?></span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboard.php">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./src/controller/controllerLogout.php">Se déconnecter 🔑</a>
+                </li>
             <?php else: ?>
                 <li class="nav-item">
                     <form id="login-form" action="./src/controller/controllerLogin.php" method="POST" class="d-flex align-items-center">

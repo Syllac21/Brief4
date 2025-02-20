@@ -1,6 +1,3 @@
-
-
-
 <style>
     .btn{
         margin-top: 20px;
@@ -29,13 +26,7 @@
     nav{
         color: white;
     }
-    .btn-danger{
-
-    }
-
 </style>
-
-
 
 <aside class="sidebar">
     <button class="btn btn-outline-light mt-5">Gestion des Cages</button>

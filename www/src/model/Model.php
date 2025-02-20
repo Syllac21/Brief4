@@ -15,8 +15,8 @@ function dbConnect()
         $database = new PDO('mysql:host='.MYSQL_HOST.';dbname='.MYSQL_NAME.';charset=utf8',
             MYSQL_USER, MYSQL_PASSWORD
         );
-        return $database;
         $database->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $database;
     } catch(Exception $exception){
         die('Erreur : '.$exception->getMessage());
     }

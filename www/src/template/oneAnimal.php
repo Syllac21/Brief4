@@ -9,17 +9,26 @@
         body {
             background-color: #a9c8d4;
         }
-        .card {
+        .card, .highlight {
             background-color: #dcecec;
             border-radius: 10px;
             padding: 15px;
             box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+            height: 100%;
         }
         .highlight {
-            border: 2px solid #0066cc;
-            padding: 15px;
-            border-radius: 10px;
             background-color: #ffffff;
+            border: 2px solid #0066cc;
+        }
+        .container {
+            background-color: #AFDFDF;
+            padding: 14px;
+        }
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -27,17 +36,28 @@
 
 <div class="container mt-4">
     <div class="row">
-        <!-- Informations sur le Soigneur first -->
+        <!-- Left Column: Soigneur Info -->
         <div class="col-md-6">
-            <div class="card">
+            <div class="card ">
                 <h5>Informations sur le Soigneur :</h5>
                 <p><strong>Nom :</strong> Sarah Johnson</p>
                 <p><strong>Rôle :</strong> Soigneur Principal</p>
                 <p><strong>Email :</strong> sarah@refugeanimaux.org</p>
             </div>
+        </div>
 
-            <!-- Informations sur l'Animal -->
-            <div class="card mt-4">
+        <!-- Right Column: Animal Photo -->
+        <div class="col-md-6">
+            <div class="img-container">
+                <img src="https://cdn.britannica.com/79/232779-050-6B0411D7/German-Shepherd-dog-Alsatian.jpg" alt="Image de l'animal">
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <!-- Left Column: Animal Info -->
+        <div class="col-md-6">
+            <div class="card">
                 <h5>Informations sur l'Animal :</h5>
                 <p><strong>Nom :</strong> Max</p>
                 <p><strong>Espèce :</strong> Chien</p>
@@ -48,15 +68,9 @@
             </div>
         </div>
 
-        <!-- Right side: Image + Options d’Adoption -->
+        <!-- Right Column: Options d’Adoption -->
         <div class="col-md-6">
-            <!-- Image principale -->
-            <div class="text-center">
-                <img src="https://cdn.pixabay.com/photo/2020/06/18/18/01/golden-retriever-5638780_960_720.jpg" class="img-fluid rounded" alt="Image de l'animal">
-            </div>
-
-            <!-- Options d’Adoption -->
-            <div class="highlight mt-4">
+            <div class="highlight">
                 <h5>Options d’Adoption :</h5>
                 <p><strong>Statut :</strong> Disponible</p>
                 <p><strong>Frais d’adoption :</strong> 150 €</p>
@@ -66,6 +80,12 @@
         </div>
     </div>
 </div>
+
+<footer class="text-dark text-center custom-footer py-4 mt-5">
+    <div class="container">
+        <p class="mb-1">@2025 Refuge pour Animaux. WebNovices : Tous droits réservés.</p>
+    </div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

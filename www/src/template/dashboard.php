@@ -26,10 +26,7 @@
     nav{
         color: white;
     }
-
 </style>
-
-
 
 <aside class="sidebar">
     <a class="btn btn-outline-light mt-5" href="/?page=dashboard&table=cage">Gestion des Cages</a>

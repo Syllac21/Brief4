@@ -10,7 +10,10 @@
                     <span class="nav-link">👤 <?php echo htmlspecialchars($_SESSION['login']); ?></span>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="dashboard.php">Dashboard</a>
+                    <a class="nav-link" href="/">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./src/template/dashboard.php">Dashboard</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./src/controller/controllerLogout.php">Se déconnecter 🔑</a>

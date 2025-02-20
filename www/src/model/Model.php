@@ -11,6 +11,7 @@ const MYSQL_PASSWORD = 'greta_refuge';
 
 function dbConnect()
 {
+    compareTime();
     try{
         $database = new PDO('mysql:host='.MYSQL_HOST.';dbname='.MYSQL_NAME.';charset=utf8',
             MYSQL_USER, MYSQL_PASSWORD
@@ -19,5 +20,16 @@ function dbConnect()
         return $database;
     } catch(Exception $exception){
         die('Erreur : '.$exception->getMessage());
+    }
+}
+
+function compareTime(){
+    if(isset($_SESSION['time'])){
+        $deltaTime = time() - $_SESSION['time'];
+        if($deltaTime > 15*60){
+            header('Location: /src/controller/controllerLogout.php');
+        } else {
+            $_SESSION['time'] = time();
+        }   
     }
 }

@@ -16,62 +16,25 @@ class Animaux
         // Retourne les résultats sous forme de tableau associatif
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    public function getAnimalById($id)
-    {
-        $pdo = dbConnect();
-        try{
-            $sql = "SELECT animal.nom, animal.genre, animal.numero, animal.pays, animal.date_naissance, personnel.nom, personnel.prenom  FROM animal JOIN s_occuper ON animal.id_animal = s_occuper.id_animal JOIN personnel ON s_occuper.id_personnel = s_occuper.id_personnel  WHERE animal.id_animal = ?;";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$id]);
-        }catch(PDOException $e){
-            echo "Erreur lors de la récupération de l'animal" . $e->getMessage();
-        }
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
-    // Cette fonction affiche les cartes des animaux passés en argument
-    public function afficherCartesAnimaux($animaux)
-    {
-        // Début du conteneur principal
-        echo '<div class="container mt-4">';
-        echo '<div class="row">';
-    
-        // Boucle à travers chaque animal et crée une carte
-        foreach ($animaux as $animal) {
-            echo '<div class="col-md-4 mb-4 d-flex justify-content-center">';
-            echo '<div class="card">';
-    
-            // Image de l'animal avec un lien fixe (à remplacer par une URL dynamique si nécessaire)
-            echo '<img src="https://images8.alphacoders.com/873/873630.jpg" class="card-img-top" alt="' . htmlspecialchars($animal['nom']) . '">';
-    
-            // Corps de la carte avec le nom, le genre et la description de l'animal
-            echo '<div class="card-body">';
-            echo '<h5 class="card-title">' . htmlspecialchars($animal['nom']) . '</h5>';
-            echo '<p class="card-text"><strong>Sexe :</strong> ' . htmlspecialchars($animal['genre']) . '</p>';
-            echo '<p class="card-text">' . htmlspecialchars($animal['description']) . '</p>';
-            echo '</div>'; // Fin du corps de la carte
-            echo '</div>'; // Fin de la carte
-            echo '</div>'; // Fin de la colonne
-        }
-            echo '</div>'; // Fin de la ligne
-            echo '</div>'; // Fin du conteneur principal
-    }
-
-    // fonction pour récupérer les animaux dont le nom contient le texte en paramètre
-    public function searchAnimaux($search, $species = 'all')
-    {
-        $pdo = dbConnect();
-        $sql = "SELECT * FROM animal WHERE nom LIKE ?";
-        $params = ["%$search%"];
-        if ($species != 'all') {
-            $sql .= " AND espece = ?";
-            $params[] = $species;
-        }
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute($params);
-        return $stmt->rowCount() > 0 ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
-    }
-    
 }
 
+    function afficherCartesAnimaux($animaux)
+    {
+    echo '<div class="container mt-4">';
+    echo '<div class="row">';
+    
+    foreach ($animaux as $animal) {
+        echo '<div class="col-md-4 mb-4 d-flex justify-content-center">';
+        echo '<div class="card">';
+        echo '<img src="https://images8.alphacoders.com/873/873630.jpg" class="card-img-top" alt="' . htmlspecialchars($animal['nom']) . '">';
+        echo '<div class="card-body">';
+        echo '<h5 class="card-title">' . htmlspecialchars($animal['nom']) . '</h5>';
+        echo '<p class="card-text"><strong>Sexe :</strong> ' . htmlspecialchars($animal['genre']) . '</p>';
+        echo '<p class="card-text">' . htmlspecialchars($animal['description']) . '</p>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+    }
+    echo '</div>';
+    echo '</div>';
+}

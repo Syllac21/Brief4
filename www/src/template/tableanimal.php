@@ -10,7 +10,7 @@ $animal = new Animaux;
 $limit = 10;
 
 // Récupérer le numéro de page depuis l'URL (1 par défaut)
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = isset($_GET['index']) ? (int)$_GET['index'] : 1;
 $page = max($page, 1); // S'assurer que la page est au minimum 1
 
 // Calculer l'offset
@@ -52,19 +52,19 @@ $totalPages = ceil($totalAnimals / $limit);
         <ul class="pagination justify-content-center">
             <!-- Bouton Précédent -->
             <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
-                <a class="page-link" href="animaux.php?page=<?= max($page - 1, 1) ?>">Précédent</a>
+                <a class="page-link" href="/?page=dashboard&table=animaux&index=<?= max($page - 1, 1) ?>">Précédent</a>
             </li>
 
             <!-- Numéros de pages -->
             <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                 <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
-                    <a class="page-link" href="animaux.php?page=<?= $i ?>"><?= $i ?></a>
+                    <a class="page-link" href="/?page=dashboard&table=animaux&index=<?= $i ?>"><?= $i ?></a>
                 </li>
             <?php endfor; ?>
 
             <!-- Bouton Suivant -->
             <li class="page-item <?= ($page >= $totalPages) ? 'disabled' : '' ?>">
-                <a class="page-link" href="animaux.php?page=<?= min($page + 1, $totalPages) ?>">Suivant</a>
+                <a class="page-link" href="/?page=dashboard&table=animaux&index=<?= min($page + 1, $totalPages) ?>">Suivant</a>
             </li>
         </ul>
     </nav>

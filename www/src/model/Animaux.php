@@ -11,11 +11,25 @@ class Animaux
         $pdo = dbConnect();
 
         // Requête SQL pour sélectionner les colonnes nom, genre et description de la table animal
-        $requete = $pdo->query("SELECT nom, genre, description FROM animal");
+        $requete = $pdo->query("SELECT * FROM animal");
 
         // Retourne les résultats sous forme de tableau associatif
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getAnimalById($id)
+    {
+        $pdo = dbConnect();
+        try{
+            $sql = "SELECT animal.nom, animal.genre, animal.numero, animal.pays, animal.date_naissance, personnel.nom, personnel.prenom  FROM animal JOIN s_occuper ON animal.id_animal = s_occuper.id_animal JOIN personnel ON s_occuper.id_personnel = s_occuper.id_personnel  WHERE animal.id_animal = ?;";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$id]);
+        }catch(PDOException $e){
+            echo "Erreur lors de la récupération de l'animal" . $e->getMessage();
+        }
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     // Cette fonction affiche les cartes des animaux passés en argument
     public function afficherCartesAnimaux($animaux)
     {

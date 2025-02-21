@@ -9,16 +9,18 @@
         body {
             background-color: #a9c8d4;
         }
-        .card, .highlight {
-            background-color: #dcecec;
+        .card {
+            background-color:rgb(203, 236, 236);
             border-radius: 10px;
             padding: 15px;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
             height: 100%;
         }
         .highlight {
             background-color: #ffffff;
-            border: 2px solid #0066cc;
+            border: 2px solid;
+            border-radius: 10px;
+            padding: 15px;
+            height: 100%;
         }
         .container {
             background-color: #AFDFDF;
@@ -71,21 +73,16 @@
         <!-- Right Column: Options d’Adoption -->
         <div class="col-md-6">
             <div class="highlight">
-                <h5>Options d’Adoption :</h5>
+                <h5>Options d'Adoption :</h5>
                 <p><strong>Statut :</strong> Disponible</p>
-                <p><strong>Frais d’adoption :</strong> 150 €</p>
-                <p><strong>Procédure :</strong> Une visite est recommandée avant l'adoption. Les frais couvrent la vaccination, la stérilisation et l’identification.</p>
-                <button class="btn btn-primary">Remplir le formulaire d’adoption</button>
+                <p><strong>Frais d'adoption :</strong> 150 €</p>
+                <p><strong>Procédure :</strong> Une visite est recommandée avant l'adoption. Les frais couvrent la vaccination, la stérilisation et l'identification.</p>
+                <button class="btn btn-primary">Remplir le formulaire d'adoption</button>
             </div>
         </div>
     </div>
 </div>
 
-<footer class="text-dark text-center custom-footer py-4 mt-5">
-    <div class="container">
-        <p class="mb-1">@2025 Refuge pour Animaux. WebNovices : Tous droits réservés.</p>
-    </div>
-</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

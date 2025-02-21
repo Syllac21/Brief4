@@ -56,7 +56,7 @@
                 <h4 class="text-center mb-3">Détails de l'Employé</h4>
                 <p><strong>Identifiant :</strong> EMP12345</p>
                 <p><strong>Nom :</strong> Dupont</p>
-                <p><strong>Prénom :</strong> Jean</p>
+                <p><strong>Prénom :</strong> Dupont</p>
                 <p><strong>Email :</strong> jean.dupont@example.com</p>
 
                 <!-- Bouton pour réinitialiser le mot de passe -->

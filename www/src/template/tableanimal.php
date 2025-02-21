@@ -1,16 +1,33 @@
 <?php
 // Inclure les fichiers nécessaires
-require_once 'src/model/Model.php'; // Inclure le modèle de base
-require_once 'src/model/Animaux.php'; // Inclure la classe Animaux
+require_once 'src/model/Model.php';
+require_once 'src/model/Animaux.php';
 
 // Créer une instance de la classe Animaux
 $animal = new Animaux;
-// Récupérer tous les animaux
-$allAnimals = $animal->getAllAnimaux();
+
+// Définir le nombre d'animaux par page
+$limit = 10;
+
+// Récupérer le numéro de page depuis l'URL (1 par défaut)
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = max($page, 1); // S'assurer que la page est au minimum 1
+
+// Calculer l'offset
+$offset = ($page - 1) * $limit;
+
+// Récupérer les animaux de la page courante
+$paginatedAnimals = $animal->getPaginatedAnimaux($limit, $offset);
+
+// Récupérer le nombre total d'animaux pour la pagination
+$totalAnimals = $animal->getTotalAnimaux();
+
+// Calculer le nombre total de pages
+$totalPages = ceil($totalAnimals / $limit);
 ?>
 <div class="container mt-4">
     <h2 class="mb-4">Liste des Animaux</h2>
-    <!-- Créer un tableau avec les classes Bootstrap -->
+
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
             <tr>
@@ -20,16 +37,35 @@ $allAnimals = $animal->getAllAnimaux();
             </tr>
         </thead>
         <tbody>
-        <?php
-            // Boucler à travers tous les animaux et les afficher dans le tableau
-            foreach ($allAnimals as $animal) {
-                echo "<tr>";
-                    echo "<td>" . $animal['nom'] . "</td>";
-                    echo "<td>" . $animal['genre'] . "</td>";
-                    echo "<td>" . $animal['description'] . "</td>";
-                echo "</tr>";
-            }
-        ?>
+        <?php foreach ($paginatedAnimals as $animal): ?>
+            <tr>
+                <td><?= htmlspecialchars($animal['nom']) ?></td>
+                <td><?= htmlspecialchars($animal['genre']) ?></td>
+                <td><?= htmlspecialchars($animal['description']) ?></td>
+            </tr>
+        <?php endforeach; ?>
         </tbody>
     </table>
+
+    <!-- Pagination Bootstrap -->
+    <nav>
+        <ul class="pagination justify-content-center">
+            <!-- Bouton Précédent -->
+            <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
+                <a class="page-link" href="animaux.php?page=<?= max($page - 1, 1) ?>">Précédent</a>
+            </li>
+
+            <!-- Numéros de pages -->
+            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                    <a class="page-link" href="animaux.php?page=<?= $i ?>"><?= $i ?></a>
+                </li>
+            <?php endfor; ?>
+
+            <!-- Bouton Suivant -->
+            <li class="page-item <?= ($page >= $totalPages) ? 'disabled' : '' ?>">
+                <a class="page-link" href="animaux.php?page=<?= min($page + 1, $totalPages) ?>">Suivant</a>
+            </li>
+        </ul>
+    </nav>
 </div>

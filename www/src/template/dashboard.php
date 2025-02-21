@@ -49,7 +49,11 @@
                             include "tableCage.php";
                             break;
                         case 'animaux':
+                            if(isset($_GET['id'])){
+                                include "oneAnimal.php";
+                            }else{
                             include "tableanimal.php";
+                            };
                             break;
                         case 'personnel':
                             include "tablePersonnel.php";

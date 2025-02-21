@@ -1,6 +1,10 @@
 <?php
 require_once(dirname(__DIR__,1).'/model/Animaux.php');
-$id = 5;
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+}else{
+    header('Location: /controller/logout.php');
+}
 $modelAnimaux = new Animaux;
 $animal = $modelAnimaux->getAnimalById($id);
 $especes = $modelAnimaux->getSpeciesById($id);
@@ -35,9 +39,7 @@ $especes = $modelAnimaux->getSpeciesById($id);
 </style>
 
 <div class="container mt-4">
-    <pre>
-    <?php var_dump($especes);?>
-    </pre>
+    
     <div class="row">
         <!-- Left Column: Soigneur Info -->
         <div class="col-md-6">

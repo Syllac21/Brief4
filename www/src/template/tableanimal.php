@@ -39,10 +39,14 @@ $totalPages = ceil($totalAnimals / $limit);
         <tbody>
         <?php foreach ($paginatedAnimals as $animal): ?>
             <tr>
-                <td><?= htmlspecialchars($animal['nom']) ?></td>
+                <td>
+                    <a href='/?page=dashboard&table=animaux&id=<?php echo $animal['id_animal'];?>'>
+                    <?= htmlspecialchars($animal['nom']) ?>
+                    </a>
+                </td>
                 <td><?= htmlspecialchars($animal['genre']) ?></td>
                 <td><?= htmlspecialchars($animal['description']) ?></td>
-            </tr>
+                </tr>
         <?php endforeach; ?>
         </tbody>
     </table>

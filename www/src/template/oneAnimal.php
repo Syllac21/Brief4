@@ -1,55 +1,60 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard Animal</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #a9c8d4;
-        }
-        .card, .highlight {
-            background-color: #dcecec;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-            height: 100%;
-        }
-        .highlight {
-            background-color: #ffffff;
-            border: 2px solid #0066cc;
-        }
-        .container {
-            background-color: #AFDFDF;
-            padding: 14px;
-        }
-        .img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-    </style>
-</head>
+<?php
+require_once(dirname(__DIR__,1).'/model/Animaux.php');
+$id = 5;
+$modelAnimaux = new Animaux;
+$animal = $modelAnimaux->getAnimalById($id);
+$especes = $modelAnimaux->getSpeciesById($id);
+
+?>
 <body>
+<style>
+    body {
+        background-color: #a9c8d4;
+    }
+    .card, .highlight {
+        background-color: #dcecec;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        height: 100%;
+    }
+    .highlight {
+        background-color: #ffffff;
+        border: 2px solid #0066cc;
+    }
+    .container {
+        background-color: #AFDFDF;
+        padding: 14px;
+    }
+    .img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+</style>
 
 <div class="container mt-4">
+    <pre>
+    <?php var_dump($especes);?>
+    </pre>
     <div class="row">
         <!-- Left Column: Soigneur Info -->
         <div class="col-md-6">
             <div class="card ">
-                <h5>Informations sur le Soigneur :</h5>
-                <p><strong>Nom :</strong> Sarah Johnson</p>
-                <p><strong>Rôle :</strong> Soigneur Principal</p>
-                <p><strong>Email :</strong> sarah@refugeanimaux.org</p>
+                <h5>Informations sur les Soigneurs :</h5>
+                <div>
+                    <?php foreach($animal as $soigneur){
+                        echo "<p><strong>Nom :</strong>". $soigneur['prenom']." ". $soigneur['nomSoigneur'] ."</p>";
+                    } ?>
+                </div>
             </div>
         </div>
 
         <!-- Right Column: Animal Photo -->
         <div class="col-md-6">
             <div class="img-container">
-                <img src="https://cdn.britannica.com/79/232779-050-6B0411D7/German-Shepherd-dog-Alsatian.jpg" alt="Image de l'animal">
+                <img src= <?=$animal[0]['image'] ?> alt="Image de l'animal">
             </div>
         </div>
     </div>
@@ -60,11 +65,14 @@
             <div class="card">
                 <h5>Informations sur l'Animal :</h5>
                 <p><strong>Nom :</strong> Max</p>
-                <p><strong>Espèce :</strong> Chien</p>
-                <p><strong>Race :</strong> Labrador Retriever</p>
-                <p><strong>Âge :</strong> 2 ans</p>
-                <p><strong>Date de naissance :</strong> 15 Juin 2022</p>
-                <p><strong>Identifiant :</strong> #12345</p>
+                <p><strong>Espèce :</strong><?php 
+                foreach($especes as $espece){
+                    echo $espece['nom'] . " ";
+                }
+                ?> </p>
+                <p><strong>Genre :</strong> <?= $sexe = $animal[0]['genre'] === 'F' ? 'Femelle' : 'Mâle';?>  </p>
+                <p><strong>Date de naissance :</strong><?=$animal[0]['date_naissance'] ?></p>
+                <p><strong>Identifiant :</strong><?= $animal[0]['numero'] ?></p>
             </div>
         </div>
 

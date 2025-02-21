@@ -20,7 +20,7 @@ class Animaux
     public function getPaginatedAnimaux($limit, $offset)
     {
         $pdo = dbConnect();
-        $sql = "SELECT nom, genre, description FROM animal LIMIT :limit OFFSET :offset";
+        $sql = "SELECT * FROM animal LIMIT :limit OFFSET :offset";
         $requete = $pdo->prepare($sql);
         $requete->bindValue(':limit', $limit, PDO::PARAM_INT);
         $requete->bindValue(':offset', $offset, PDO::PARAM_INT);
@@ -84,12 +84,25 @@ class Animaux
     {
         $pdo = dbConnect();
         try{
-            $sql = "SELECT animal.nom, animal.genre, animal.numero, animal.pays, animal.date_naissance, personnel.nom, personnel.prenom  FROM animal JOIN s_occuper ON animal.id_animal = s_occuper.id_animal JOIN personnel ON s_occuper.id_personnel = s_occuper.id_personnel  WHERE animal.id_animal = ?;";
+            $sql = "SELECT a.nom ,a.genre,a.image, a.date_naissance, a.numero, p.nom nomSoigneur, p.prenom FROM animal a JOIN s_occuper so ON a.id_animal = so.id_animal JOIN personnel p ON so.id_personnel = p.id_personnel WHERE a.id_animal = ?";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$id]);
         }catch(PDOException $e){
             echo "Erreur lors de la récupération de l'animal" . $e->getMessage();
         }
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getSpeciesById($id){
+        $pdo = dbConnect();
+        try{
+            $sql = "SELECT a.id_animal, e.nom FROM animal a JOIN animal_espece ae ON a.id_animal = ae.id_animal JOIN espece e ON ae.id_espece = e.id_espece WHERE a.id_animal = ?;";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$id]);
+
+        }catch(PDOException $e){
+            echo "Erreur lors de la récupération de l'espèce" . $e->getMessage();
+        }
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

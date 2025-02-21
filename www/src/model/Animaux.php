@@ -79,7 +79,7 @@ class Animaux
         return $stmt->rowCount() > 0 ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
     }
 
-    // fonction pour récupérer un animal et ses informations en fonction de son id
+    // fonction pour récupérer un animal et ses soigneurs en fonction de son id
     public function getAnimalById($id)
     {
         $pdo = dbConnect();

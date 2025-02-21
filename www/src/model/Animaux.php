@@ -78,4 +78,18 @@ class Animaux
         $stmt->execute($params);
         return $stmt->rowCount() > 0 ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
     }
+
+    // fonction pour récupérer un animal et ses informations en fonction de son id
+    public function getAnimalById($id)
+    {
+        $pdo = dbConnect();
+        try{
+            $sql = "SELECT animal.nom, animal.genre, animal.numero, animal.pays, animal.date_naissance, personnel.nom, personnel.prenom  FROM animal JOIN s_occuper ON animal.id_animal = s_occuper.id_animal JOIN personnel ON s_occuper.id_personnel = s_occuper.id_personnel  WHERE animal.id_animal = ?;";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$id]);
+        }catch(PDOException $e){
+            echo "Erreur lors de la récupération de l'animal" . $e->getMessage();
+        }
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

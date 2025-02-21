@@ -34,7 +34,7 @@
     <a class="btn btn-outline-light" href="/?page=dashboard&table=animaux">Gestion des Animaux</a>
     <a class="btn btn-outline-light" href="/?page=dashboard&table=personnel">Gestion des Personnes</a>
     <a class="btn btn-outline-light" href="/?page=dashboard&table=espece">Gestion des Espèce</a>
-    <a class="btn btn-outline-light" href="/?page=dashboard&table=animal">Page un animal</a>
+    <!-- <a class="btn btn-outline-light" href="/?page=dashboard&table=animal">Page un animal</a>git -->
 </aside>
 
 <div class="content-wrapper">

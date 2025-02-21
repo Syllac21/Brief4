@@ -21,12 +21,15 @@ $animaux = $animauxModel->getAllAnimaux();
 <body>
     <?php include './src/template/navbar.php';
     if (isset($_SESSION['login']) && isset($_GET['page']) ) {
+        
         if ($_GET['page'] == 'dashboard') {
-            include './src/template/dashboard.php';
+            require_once './src/template/dashboard.php';
         } else {
+            
             include './src/template/main.php';
         }
     } else {
+        
         include './src/template/main.php';
     }
 

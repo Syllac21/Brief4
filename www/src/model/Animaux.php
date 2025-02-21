@@ -11,7 +11,7 @@ class Animaux
         $pdo = dbConnect();
 
         // Requête SQL pour sélectionner les colonnes nom, genre et description de la table animal
-        $requete = $pdo->query("SELECT nom, genre, description FROM animal");
+        $requete = $pdo->query("SELECT * FROM animal");
 
         // Retourne les résultats sous forme de tableau associatif
         return $requete->fetchAll(PDO::FETCH_ASSOC);
@@ -49,7 +49,8 @@ class Animaux
             echo '<div class="card">';
     
             // Image de l'animal avec un lien fixe (à remplacer par une URL dynamique si nécessaire)
-            echo '<img src="https://images8.alphacoders.com/873/873630.jpg" class="card-img-top" alt="' . htmlspecialchars($animal['nom']) . '">';
+            
+            echo '<img src='.$animal['image'] . ' class="card-img-top" alt="' . htmlspecialchars($animal['nom']) . '">';
     
             // Corps de la carte avec le nom, le genre et la description de l'animal
             echo '<div class="card-body">';

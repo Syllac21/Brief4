@@ -14,7 +14,25 @@
                     transform: translateY(-10px);
                     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
                 }
+
+                .heading-style {
+                    font-size: 24px;
+                    font-weight: bold;
+                    margin-bottom: 20px;
+                    transition: color 0.3s ease, box-shadow 0.3s ease;
+                    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+                    margin-left: 60px;
+                    margin-right: 60px;
+                    padding: 8px;
+                }
+
+                .heading-style:hover {
+                    color: #ff6600;
+                    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+                }
             </style>
+
+
         <main class="container mt-5">
             <h1 class="text-center mb-4">Bienvenue au refuge pour animaux</h1>
             <div class="d-flex justify-content-between align-items-center mb-4">
@@ -40,7 +58,24 @@
                 <button type="submit">Rechercher</button>
             </form>
             </div>
+
             <?php
+
+
+
+            
+            echo "<h2 class='text-center mt-3 heading-style'>
+            Nombre d'animaux dans la liste : " . count(isset($_GET['requete']) ? $_SESSION['list'] : $animaux) . "
+            </h2>";
+            if(isset($_GET['requete'])){
+                $animauxModel->afficherCartesAnimaux($_SESSION['list']);
+            }else{
+                $animauxModel->afficherCartesAnimaux($animaux);
+            }
+            
+
+
+
             if(isset($_GET['requete'])){
                 $animauxModel->afficherCartesAnimaux($_SESSION['list']);
             }else{

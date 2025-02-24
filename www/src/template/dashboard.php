@@ -72,7 +72,7 @@
                             break;
                     }
                 } else {
-                    include "tableCage.php";
+                    include "occupation.php";
                 }
                 ?>
                 <button class="btn btn-success" data-toggle="modal" data-target="#addUserModal">Add User</button>

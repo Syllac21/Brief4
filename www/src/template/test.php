@@ -13,13 +13,14 @@ $limit = 10;
 $page = isset($_GET['index']) ? (int)$_GET['index'] : 1;
 $page = max($page, 1); // S'assurer que la page est au minimum 1
 
-// Calculer l'offset
-$offset = ($page - 1) * $limit;
-
 // Récupérer les paramètres de tri depuis l'URL
 $sort = isset($_GET['sort']) ? $_GET['sort'] : 'nom'; // Colonne par défaut pour le tri
 $order = isset($_GET['order']) ? $_GET['order'] : 'asc'; // Ordre par défaut
-// Récupérer les animaux de la page courante
+
+// Calculer l'offset
+$offset = ($page - 1) * $limit;
+
+// Récupérer les animaux de la page courante avec tri
 $paginatedAnimals = $animal->getPaginatedAnimaux($limit, $offset, $sort, $order);
 
 // Récupérer le nombre total d'animaux pour la pagination
@@ -34,18 +35,20 @@ $totalPages = ceil($totalAnimals / $limit);
     <table class="table table-bordered table-striped">
         <thead class="thead-dark">
             <tr>
-            <th>
-                Nom <a href="/?page=dashboard&table=animaux&sort=nom&order=<?= ($sort == 'nom' && $order == 'asc') ? 'desc' : 'asc' ?>">
-                         <?= ($sort == 'nom') ? ($order == 'asc' ? '↑' : '↓') : '' ?>
+                <th>
+                    <a href="/?page=dashboard&table=animaux&sort=nom&order=<?= ($sort == 'nom' && $order == 'asc') ? 'desc' : 'asc' ?>">
+                        Nom <?= ($sort == 'nom') ? ($order == 'asc' ? '↑' : '↓') : '' ?>
                     </a>
                 </th>
                 <th>
                     <a href="/?page=dashboard&table=animaux&sort=genre&order=<?= ($sort == 'genre' && $order == 'asc') ? 'desc' : 'asc' ?>">
-                    genre<?= ($sort == 'genre') ? ($order == 'asc' ? '↑' : '↓') : '' ?>
+                        Genre <?= ($sort == 'genre') ? ($order == 'asc' ? '↑' : '↓') : '' ?>
                     </a>
                 </th>
                 <th>
-                    description
+                    <a href="/?page=dashboard&table=animaux&sort=description&order=<?= ($sort == 'description' && $order == 'asc') ? 'desc' : 'asc' ?>">
+                        Description <?= ($sort == 'description') ? ($order == 'asc' ? '↑' : '↓') : '' ?>
+                    </a>
                 </th>
             </tr>
         </thead>
@@ -59,7 +62,7 @@ $totalPages = ceil($totalAnimals / $limit);
                 </td>
                 <td><?= htmlspecialchars($animal['genre']) ?></td>
                 <td><?= htmlspecialchars($animal['description']) ?></td>
-                </tr>
+            </tr>
         <?php endforeach; ?>
         </tbody>
     </table>
@@ -69,24 +72,20 @@ $totalPages = ceil($totalAnimals / $limit);
         <ul class="pagination justify-content-center">
             <!-- Bouton Précédent -->
             <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
-                <a class="page-link" href="/?page=dashboard&table=animaux&index=<?= max($page - 1, 1) ?>">Précédent</a>
+                <a class="page-link" href="/?page=dashboard&table=animaux&index=<?= max($page - 1, 1) ?>&sort=<?= $sort ?>&order=<?= $order ?>">Précédent</a>
             </li>
 
             <!-- Numéros de pages -->
             <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                 <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
-                    <a class="page-link" href="/?page=dashboard&table=animaux&index=<?= $i ?>"><?= $i ?></a>
+                    <a class="page-link" href="/?page=dashboard&table=animaux&index=<?= $i ?>&sort=<?= $sort ?>&order=<?= $order ?>"><?= $i ?></a>
                 </li>
             <?php endfor; ?>
 
             <!-- Bouton Suivant -->
             <li class="page-item <?= ($page >= $totalPages) ? 'disabled' : '' ?>">
-                <a class="page-link" href="/?page=dashboard&table=animaux&index=<?= min($page + 1, $totalPages) ?>">Suivant</a>
+                <a class="page-link" href="/?page=dashboard&table=animaux&index=<?= min($page + 1, $totalPages) ?>&sort=<?= $sort ?>&order=<?= $order ?>">Suivant</a>
             </li>
         </ul>
-        </tbody>
-    </table>
-
- <!-- Pagination -->
-<?php
-
+    </nav>
+</div>

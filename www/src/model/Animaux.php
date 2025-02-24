@@ -106,21 +106,20 @@ class Animaux
         }
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    function getSortUrl($column, $sort, $order) {
+        $sortIndex = array_search($column, $sort);
+        $newOrder = ($sortIndex !== false && $order[$sortIndex] === 'asc') ? 'desc' : 'asc';
+        
+        $newSort = [$column];
+        $newOrderArr = [$newOrder];
+        
+        foreach ($sort as $key => $col) {
+            if ($col !== $column) {
+                $newSort[] = $col;
+                $newOrderArr[] = $order[$key];
+            }
+        }
+        
+        return "?page=dashboard&table=animaux&sort=" . implode(',', $newSort) . "&order=" . implode(',', $newOrderArr);
+    }
 }
-$animaux = [
-    ["nom" => "Tigre", "date_naissance" => "2018-06-12", "pays" => "Inde", "date_arrivee" => "2020-05-10"],
-    ["nom" => "Zèbre", "date_naissance" => "2019-02-20", "pays" => "Afrique du Sud", "date_arrivee" => "2021-07-01"],
-    ["nom" => "Éléphant", "date_naissance" => "2015-09-05", "pays" => "Kenya", "date_arrivee" => "2019-11-25"],
-    ["nom" => "Tigre", "date_naissance" => "2016-04-08", "pays" => "Inde", "date_arrivee" => "2020-01-15"]
-];
-
-usort($animaux, function ($a, $b) {
-    // Trier par nom (alphabétique)
-    $cmp = strcmp($a["nom"], $b["nom"]);
-    if ($cmp !== 0) return $cmp;
-
-    // Si les noms sont identiques, trier par date d'arrivée (plus ancien d'abord)
-    return strtotime($a["date_arrivee"]) <=> strtotime($b["date_arrivee"]);
-});
-
-print_r($animaux);

@@ -1,10 +1,20 @@
-        <?php
-        require_once(dirname(__DIR__,1).'/model/Animaux.php');
-        require_once(dirname(__DIR__,1).'/model/Model.php');
-        $animauxModel = new Animaux;
-        $animaux = $animauxModel->getAllAnimaux();
+<?php
+require_once(dirname(__DIR__, 1) . '/model/Animaux.php');
+require_once(dirname(__DIR__, 1) . '/model/Model.php');
 
-        ?>
+// Instancie la classe Animaux
+$animauxModel = new Animaux;
+
+// Vérifie si l'utilisateur est connecté
+if (isset($_SESSION['id_personnel'])) {
+    // Récupère l'ID du personnel connecté
+    $id_personnel = $_SESSION['id_personnel'];
+
+
+    // Récupère les animaux assignés au personnel connecté
+    $animaux = $animauxModel->getAnimauxByPersonnel($id_personnel);
+}
+?>
         <style>
                 .card {
                     max-width: 250px;

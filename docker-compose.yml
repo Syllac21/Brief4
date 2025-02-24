@@ -25,6 +25,7 @@ services:
 
   # mon service mysql
   mysql:
+<<<<<<< HEAD
     image: mysql:latest
     container_name: mysql_container
     restart: always
@@ -37,6 +38,20 @@ services:
       - "3307:3306"
     volumes: 
       - ./db:/var/lib/mysql
+=======
+      image: mysql:latest
+      container_name: mysql_container
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: greta_teacher
+        MYSQL_DATABASE: db_refuge_animaux
+        MYSQL_USER: greta
+        MYSQL_PASSWORD: greta_refuge
+      ports:
+        - "3307:3306"
+      volumes: 
+        - ./db:/var/lib/mysql
+>>>>>>> composant
 
   # mon service phpmyadmin
   # phpmyadmin:

@@ -17,16 +17,16 @@ class Animaux
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
     // 🔹 Récupérer SEULEMENT les animaux de la page demandée
-    public function getPaginatedAnimaux($limit, $offset)
-    {
-        $pdo = dbConnect();
-        $sql = "SELECT * FROM animal LIMIT :limit OFFSET :offset";
-        $requete = $pdo->prepare($sql);
-        $requete->bindValue(':limit', $limit, PDO::PARAM_INT);
-        $requete->bindValue(':offset', $offset, PDO::PARAM_INT);
-        $requete->execute();
-        return $requete->fetchAll(PDO::FETCH_ASSOC);
-    }
+    // public function getPaginatedAnimaux($limit, $offset)
+    // {
+    //     $pdo = dbConnect();
+    //     $sql = "SELECT * FROM animal LIMIT :limit OFFSET :offset";
+    //     $requete = $pdo->prepare($sql);
+    //     $requete->bindValue(':limit', $limit, PDO::PARAM_INT);
+    //     $requete->bindValue(':offset', $offset, PDO::PARAM_INT);
+    //     $requete->execute();
+    //     return $requete->fetchAll(PDO::FETCH_ASSOC);
+    // }
 
     // 🔹 Récupérer le nombre total d'animaux pour la pagination
     public function getTotalAnimaux()
@@ -106,20 +106,17 @@ class Animaux
         }
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    function getSortUrl($column, $sort, $order) {
-        $sortIndex = array_search($column, $sort);
-        $newOrder = ($sortIndex !== false && $order[$sortIndex] === 'asc') ? 'desc' : 'asc';
-        
-        $newSort = [$column];
-        $newOrderArr = [$newOrder];
-        
-        foreach ($sort as $key => $col) {
-            if ($col !== $column) {
-                $newSort[] = $col;
-                $newOrderArr[] = $order[$key];
-            }
-        }
-        
-        return "?page=dashboard&table=animaux&sort=" . implode(',', $newSort) . "&order=" . implode(',', $newOrderArr);
+    public function getPaginatedAnimaux($limit, $offset, $sort, $order) {
+        $pdo = dbConnect();
+        // $sort = real_escape_string($sort);
+        // $order = real_escape_string($order);
+        $query = "SELECT * FROM animal ORDER BY $sort $order LIMIT :limit OFFSET :offset";
+        $stmt = $pdo->prepare($query);
+       
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
 }

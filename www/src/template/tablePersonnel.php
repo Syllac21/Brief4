@@ -30,4 +30,6 @@ $listPersonnel = $personnel->getAllPersonnel();
             ?>
         </tbody>
     </table>
+    <button class="btn btn-success" data-toggle="modal" data-target="#addUserModal">Ajouter Employé</button>
+
 </div>

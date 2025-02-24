@@ -88,5 +88,7 @@ $totalPages = ceil($totalAnimals / $limit);
     </table>
 
  <!-- Pagination -->
+    <button class="btn btn-success" data-toggle="modal" data-target="#addAnimalModal">Ajouter Animal</button>
+    
 <?php
 

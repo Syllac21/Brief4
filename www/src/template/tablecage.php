@@ -1,6 +1,7 @@
 <?php
 require_once (dirname(__DIR__,1).'/model/Cage.php');
 // Récupérer toutes les cages
+$cage = new Cage;
 $allCages = $cage->getAllCages();
 ?>
     <div class="container mt-4">
@@ -28,6 +29,8 @@ $allCages = $cage->getAllCages();
                 ?>
             
         </table>
+        <button class="btn btn-success" data-toggle="modal" data-target="#addCageModal">Ajouter un enclos</button>
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>

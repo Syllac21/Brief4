@@ -30,5 +30,7 @@ $listEspeces = $espece->getAllEspeces();
                 ?>
             </tbody>
         </table>
+        <button class="btn btn-success" data-toggle="modal" data-target="#addSpecieModal">Ajouter Espèce</button>
+
     </div>
 

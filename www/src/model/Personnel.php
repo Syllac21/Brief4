@@ -37,7 +37,7 @@ class Personnel
     {
         try{
         $mysqlClient=dbConnect();
-        $personnelStatement = $mysqlClient->prepare('SELECT * FROM personnel WHERE id = :id');
+        $personnelStatement = $mysqlClient->prepare('SELECT * FROM personnel WHERE id_personnel = :id');
         $personnelStatement->bindParam(':id', $id);
         $personnelStatement->execute();
         $personnel=$personnelStatement->fetch();

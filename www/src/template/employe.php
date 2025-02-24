@@ -1,10 +1,19 @@
+<?php
+// Include the model for personnel (employees)
+require_once(dirname(__DIR__) . '/model/Personnel.php');
+
+
+$id = 1;  
+$modelPersonnel = new Personnel();
+$employe = $modelPersonnel->getPersonnelById($id); 
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Informations Employé</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <style>
@@ -35,39 +44,47 @@
         .btn-reset:hover {
             background-color: #AFDFDF;
         }
-        .text-primary{
+
+        .text-primary {
             color:black;
         }
-        .container{
-        background-color: #AFDFDF;
-        padding: 14px;
-    }
 
+        .container {
+            background-color: #AFDFDF;
+            padding: 14px;
+        }
     </style>
 </head>
 <body>
+
+<?php var_dump($employe); ?>
+
 <div class="container mt-5">
     <h2 class="text-center text-primary mb-4">Informations sur l'Employé</h2>
     
+    <!-- Loop through personnel and display the details -->
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="employee-card">
-                <h4 class="text-center mb-3">Détails de l'Employé</h4>
-                <p><strong>Identifiant :</strong> EMP12345</p>
-                <p><strong>Nom :</strong> Dupont</p>
-                <p><strong>Prénom :</strong> Dupont</p>
-                <p><strong>Email :</strong> jean.dupont@example.com</p>
+        <?php if ($employe): ?>
+                <div class="employee-card">
+                    <h4 class="text-center mb-3">Détails de l'Employé</h4>
+                    <p><strong>Nom :</strong> <?= htmlspecialchars($employe['nom']) ?></p>
+                    <p><strong>Prénom :</strong> <?= htmlspecialchars($employe['prenom']) ?></p>
+                    <p><strong>Poste :</strong> <?= htmlspecialchars($employe['poste']) ?></p>
+                    <p><strong>Login :</strong> <?= htmlspecialchars($employe['login']) ?></p>
+                    <p><strong>Mot de Passe :</strong> <?= htmlspecialchars($employe['mot_de_passe']) ?></p>
 
-                <!-- Bouton pour réinitialiser le mot de passe -->
-                <div class="text-center mt-4">
-                    <button class="btn btn-reset px-4">Réinitialiser le mot de passe</button>
+                    <!-- Button to reset the password (this could be a placeholder for actual functionality) -->
+                    <div class="text-center mt-4">
+                        <button class="btn btn-reset px-4">Réinitialiser le mot de passe</button>
+                    </div>
                 </div>
-            </div>
+                <?php endif; ?>
         </div>
     </div>
 </div>
 
-<footer class="text-dark text-center custom-footer py-4 mt-5 ">
+<footer class="text-dark text-center custom-footer py-4 mt-5">
     <div class="container">
         <p class="mb-1">@2025 Refuge pour Animaux. WebNovices : Tous droits réservés.</p>
     </div>

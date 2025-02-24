@@ -2,8 +2,8 @@
 // Include the model for personnel (employees)
 require_once(dirname(__DIR__) . '/model/Personnel.php');
 
+$id = isset($_GET['id']) ? $_GET['id'] : 1;
 
-$id = 1;  
 $modelPersonnel = new Personnel();
 $employe = $modelPersonnel->getPersonnelById($id); 
 ?>
@@ -53,6 +53,9 @@ $employe = $modelPersonnel->getPersonnelById($id);
             background-color: #AFDFDF;
             padding: 14px;
         }
+        .btn{
+            background:#023636;
+        }
     </style>
 </head>
 <body>
@@ -72,7 +75,6 @@ $employe = $modelPersonnel->getPersonnelById($id);
                     <p><strong>Prénom :</strong> <?= htmlspecialchars($employe['prenom']) ?></p>
                     <p><strong>Poste :</strong> <?= htmlspecialchars($employe['poste']) ?></p>
                     <p><strong>Login :</strong> <?= htmlspecialchars($employe['login']) ?></p>
-                    <p><strong>Mot de Passe :</strong> <?= htmlspecialchars($employe['mot_de_passe']) ?></p>
 
                     <!-- Button to reset the password (this could be a placeholder for actual functionality) -->
                     <div class="text-center mt-4">

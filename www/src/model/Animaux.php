@@ -39,22 +39,27 @@ class Animaux
     // Cette fonction affiche les cartes des animaux passés en argument
     public function afficherCartesAnimaux($animaux)
     {
+    
         // Début du conteneur principal
         echo '<div class="container mt-4">';
         echo '<div class="row">';
-    
+        
         // Boucle à travers chaque animal et crée une carte
         foreach ($animaux as $animal) {
+            $espece = $this->getSpeciesById($animal['id_animal']);
             echo '<div class="col-md-4 mb-4 d-flex justify-content-center">';
             echo '<div class="card">';
     
             // Image de l'animal avec un lien fixe (à remplacer par une URL dynamique si nécessaire)
             
             echo '<img src='.$animal['image'] . ' class="card-img-top" alt="' . htmlspecialchars($animal['nom']) . '">';
-    
+            
             // Corps de la carte avec le nom, le genre et la description de l'animal
             echo '<div class="card-body">';
             echo '<h5 class="card-title">' . htmlspecialchars($animal['nom']) . '</h5>';
+            foreach($espece as $especes){
+                echo '<p class="card-text"><strong>Espece :</strong> ' . htmlspecialchars($especes['nom']) . '</p>';
+            }
             echo '<p class="card-text"><strong>Sexe :</strong> ' . htmlspecialchars($animal['genre']) . '</p>';
             echo '<p class="card-text">' . htmlspecialchars($animal['description']) . '</p>';
             echo '</div>'; // Fin du corps de la carte

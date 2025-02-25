@@ -1,11 +1,15 @@
 <?php
 // Include the model for personnel (employees)
 require_once(dirname(__DIR__) . '/model/Personnel.php');
+require_once(dirname(__DIR__) . '/model/Animaux.php');
 
 $id = isset($_GET['id']) ? $_GET['id'] : 1;
 
 $modelPersonnel = new Personnel();
 $employe = $modelPersonnel->getPersonnelById($id); 
+
+$animalObj = new Animaux();
+$animaux = $animalObj->getAnimauxByPersonnel($id);
 ?>
 
     <style>
@@ -73,6 +77,18 @@ $employe = $modelPersonnel->getPersonnelById($id);
                     </div>
                 </div>
                 <?php endif; ?>
+        </div>
+        <div class="col-md-6">
+            <?php 
+            foreach($animaux as $animal){
+                echo '<div class="employee-card mb-4">';
+                echo '<h4 class="text-center mb-3">Animaux attribués</h4>';
+                echo '<p><strong>Nom :</strong> ' . htmlspecialchars($animal['nom']) . '</p>';
+                echo '<p><strong>Genre :</strong> ' . htmlspecialchars($animal['genre']) . '</p>';
+                echo '<p><strong>Description :</strong> ' . htmlspecialchars($animal['description']) . '</p>';
+                echo '</div>';
+            }
+            ?>
         </div>
     </div>
 </div>

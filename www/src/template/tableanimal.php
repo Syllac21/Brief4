@@ -55,6 +55,7 @@ $totalPages = ceil($totalAnimals / $limit);
         <tbody>
         <?php foreach ($paginatedAnimals as $animal): ?>
             <tr>
+                <!-- Récupérer la ou les espèce (s) de l'animal -->
                 <?php $espece = $animalObj->getSpeciesById($animal['id_animal']); ?>
                 <td>
                     <a href='/?page=dashboard&table=animaux&id=<?php echo $animal['id_animal'];?>'>
@@ -62,6 +63,7 @@ $totalPages = ceil($totalAnimals / $limit);
                     </a>
                 </td>
                 <td>
+                    <!-- afficher la ou les espèces -->
                     <?php foreach($espece as $especes): ?>
                         <?= htmlspecialchars($especes['nom']) ?>
                     <?php endforeach; ?>

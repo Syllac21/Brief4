@@ -29,12 +29,12 @@
     }
 </style>
 
-<aside class="sidebar">
-    <a class="btn btn-outline-light mt-5" href="/?page=dashboard&table=cage">Gestion des Cages</a>
+<aside class="sidebar pt-5">
+    <a class="btn btn-outline-light" href="/?page=dashboard">Accueil dashboard</a>
+    <a class="btn btn-outline-light" href="/?page=dashboard&table=cage">Gestion des Cages</a>
     <a class="btn btn-outline-light" href="/?page=dashboard&table=animaux">Gestion des Animaux</a>
     <a class="btn btn-outline-light" href="/?page=dashboard&table=personnel">Gestion des Personnes</a>
     <a class="btn btn-outline-light" href="/?page=dashboard&table=espece">Gestion des Espèce</a>
-    <a class="btn btn-outline-light" href="/?page=dashboard&table=employe">Page un employé</a>git
 </aside>
 
 <div class="content-wrapper">
@@ -75,7 +75,6 @@
                     include "occupation.php";
                 }
                 ?>
-                <button class="btn btn-success" data-toggle="modal" data-target="#addUserModal">Add User</button>
             </div>
         </div>
     </div>

@@ -1,10 +1,18 @@
 <?php
+require_once (dirname(__DIR__,1).'/model/Cage.php');
+$cageObj = new Cage;
+
 // récuparation du nombre de cages
+$cageTot = $cageObj->countCages();
+// récuparation du nombre de cages occupées 
+$cageOcc = $cageObj->countCagesOccupied();
+// calcul du nombre de cages disponibles
+$cageDispo = $cageTot[0] - $cageOcc[0];
 
 // Exemple de données - à remplacer par vos données réelles depuis la base de données
 $donnees = [
-    'Occupé' => 62,
-    'Disponible' => 30
+    'Occupe' => $cageOcc[0],
+    'Disponible' => $cageDispo
 ];
 
 // Conversion en format JSON pour JavaScript
@@ -15,6 +23,12 @@ $donnees_json = json_encode($donnees);
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Taux d'occupation</h3>
+        <?php
+        // Affichage du nombre de cages 
+        echo "<p>Nombre de cages : " . $cageTot[0] . "</p>";
+        // Affichage du nombre de cages occupées        
+        echo "<p>Nombre de cages occupées : " . $cageOcc[0] . "</p>";
+        ?>
     </div>
     <div class="card-body">
         <canvas id="occupationChart"></canvas>

@@ -8,14 +8,6 @@ $modelPersonnel = new Personnel();
 $employe = $modelPersonnel->getPersonnelById($id); 
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Informations Employé</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
     <style>
         body {
             background-color: #AFDFDF;
@@ -57,7 +49,6 @@ $employe = $modelPersonnel->getPersonnelById($id);
             background:#023636;
         }
     </style>
-</head>
 <body>
 
 

@@ -80,6 +80,22 @@ class Animaux
         return $stmt->rowCount() > 0 ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
     }
 
+
+    public function getAnimauxByPersonnel($id_personnel)
+    {
+        $pdo = dbConnect();
+
+        // Requête SQL pour récupérer les animaux assignés au personnel
+        $sql = "SELECT *
+                FROM animal a
+                JOIN s_occuper s ON a.id_animal = s.id_animal
+                WHERE s.id_personnel = :id_personnel";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(['id_personnel' => $id_personnel]);
+
+        // Retourne les résultats sous forme de tableau associatif
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     // fonction pour récupérer un animal et ses soigneurs en fonction de son id
     public function getAnimalById($id)
     {

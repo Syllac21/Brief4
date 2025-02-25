@@ -1,6 +1,7 @@
 <?php
 // Inclusion du modèle de gestion du personnel (employees)
 require_once(dirname(__DIR__) . '/model/Personnel.php');
+require_once(dirname(__DIR__) . '/model/Animaux.php');
 
 // Récupération de l'ID de l'employé à afficher, par défaut 1 si non défini
 $id = isset($_GET['id']) ? $_GET['id'] : 1;
@@ -10,6 +11,9 @@ $modelPersonnel = new Personnel();
 
 // Récupération des informations de l'employé correspondant à l'ID donné
 $employe = $modelPersonnel->getPersonnelById($id); 
+
+$animalObj = new Animaux();
+$animaux = $animalObj->getAnimauxByPersonnel($id);
 ?>
 
 <style>
@@ -84,6 +88,18 @@ $employe = $modelPersonnel->getPersonnelById($id);
                     </div>
                 </div>
             <?php endif; ?>
+        </div>
+        <div class="col-md-6">
+            <?php 
+            foreach($animaux as $animal){
+                echo '<div class="employee-card mb-4">';
+                echo '<h4 class="text-center mb-3">Animaux attribués</h4>';
+                echo '<p><strong>Nom :</strong> ' . htmlspecialchars($animal['nom']) . '</p>';
+                echo '<p><strong>Genre :</strong> ' . htmlspecialchars($animal['genre']) . '</p>';
+                echo '<p><strong>Description :</strong> ' . htmlspecialchars($animal['description']) . '</p>';
+                echo '</div>';
+            }
+            ?>
         </div>
     </div>
 </div>

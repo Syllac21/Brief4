@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 <?php
 require_once(dirname(__DIR__, 1) . '/model/Animaux.php');
 require_once(dirname(__DIR__, 1) . '/model/Model.php');
@@ -96,5 +94,3 @@ if (isset($_SESSION['id_personnel'])) {
             }
             ?>
         </main>
-
->>>>>>> f76fe618a181924d19d4da99fea271a14b23b4e2

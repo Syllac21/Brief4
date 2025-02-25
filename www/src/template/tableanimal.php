@@ -4,7 +4,7 @@ require_once 'src/model/Model.php';
 require_once 'src/model/Animaux.php';
 
 // Créer une instance de la classe Animaux
-$animal = new Animaux;
+$animalObj = new Animaux;
 
 // Définir le nombre d'animaux par page
 $limit = 10;
@@ -20,10 +20,10 @@ $offset = ($page - 1) * $limit;
 $sort = isset($_GET['sort']) ? $_GET['sort'] : 'nom'; // Colonne par défaut pour le tri
 $order = isset($_GET['order']) ? $_GET['order'] : 'asc'; // Ordre par défaut
 // Récupérer les animaux de la page courante
-$paginatedAnimals = $animal->getPaginatedAnimaux($limit, $offset, $sort, $order);
+$paginatedAnimals = $animalObj->getPaginatedAnimaux($limit, $offset, $sort, $order);
 
 // Récupérer le nombre total d'animaux pour la pagination
-$totalAnimals = $animal->getTotalAnimaux();
+$totalAnimals = $animalObj->getTotalAnimaux();
 
 // Calculer le nombre total de pages
 $totalPages = ceil($totalAnimals / $limit);
@@ -38,10 +38,13 @@ $totalPages = ceil($totalAnimals / $limit);
                 Nom <a href="/?page=dashboard&table=animaux&sort=nom&order=<?= ($sort == 'nom' && $order == 'asc') ? 'desc' : 'asc' ?>">
                          <?= ($sort == 'nom') ? ($order == 'asc' ? '↑' : '↓') : '' ?>
                     </a>
-                </th>
+            </th>
+            <th>
+                Espèce(s)
+            </th>
                 <th>
                     <a href="/?page=dashboard&table=animaux&sort=genre&order=<?= ($sort == 'genre' && $order == 'asc') ? 'desc' : 'asc' ?>">
-                    genre<?= ($sort == 'genre') ? ($order == 'asc' ? '↑' : '↓') : '' ?>
+                    genre <?= ($sort == 'genre') ? ($order == 'asc' ? '↑' : '↓') : '' ?>
                     </a>
                 </th>
                 <th>
@@ -52,10 +55,16 @@ $totalPages = ceil($totalAnimals / $limit);
         <tbody>
         <?php foreach ($paginatedAnimals as $animal): ?>
             <tr>
+                <?php $espece = $animalObj->getSpeciesById($animal['id_animal']); ?>
                 <td>
                     <a href='/?page=dashboard&table=animaux&id=<?php echo $animal['id_animal'];?>'>
                     <?= htmlspecialchars($animal['nom']) ?>
                     </a>
+                </td>
+                <td>
+                    <?php foreach($espece as $especes): ?>
+                        <?= htmlspecialchars($especes['nom']) ?>
+                    <?php endforeach; ?>
                 </td>
                 <td><?= htmlspecialchars($animal['genre']) ?></td>
                 <td><?= htmlspecialchars($animal['description']) ?></td>

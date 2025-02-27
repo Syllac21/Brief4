@@ -15,7 +15,7 @@ class Personnel
             $mysqlClient = dbConnect();
             
             // Préparation de la requête SQL pour sélectionner tous les membres du personnel
-            $personnelStatement = $mysqlClient->prepare('SELECT * FROM personnel');
+            $personnelStatement = $mysqlClient->prepare('SELECT * FROM personnel WHERE IsArchived = 0');
             
             // Exécution de la requête SQL
             $personnelStatement->execute();
@@ -44,7 +44,7 @@ class Personnel
             $mysqlClient = dbConnect();
             
             // Préparation de la requête SQL pour vérifier les identifiants de connexion
-            $personnelStatement = $mysqlClient->prepare('SELECT * FROM personnel WHERE login = :login AND mot_de_passe = :password');
+            $personnelStatement = $mysqlClient->prepare('SELECT * FROM personnel WHERE login = :login AND mot_de_passe = :password AND IsArchived = 0');
             
             // Liaison des paramètres sécurisée pour éviter les injections SQL
             $personnelStatement->bindParam(':login', $login);

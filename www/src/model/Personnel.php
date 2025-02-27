@@ -66,7 +66,7 @@ public function ajoutPersonnel($post)
         $stmt->bindParam(':password',          $_POST['password'], PDO::PARAM_STR);
         $stmt->bindParam(':login',             $_POST['login'], PDO::PARAM_STR);
         $stmt->execute();
-        $success = true;
+        // $success = true;
         // echo "success";
     } catch(PDOException $e) {
             echo 'Erreur lors de l\'insertion: ' . $e->getMessage();

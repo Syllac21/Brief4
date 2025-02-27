@@ -25,7 +25,7 @@ if (empty($nom) || empty($prenom) || empty($poste) || empty($password) || empty(
     echo $errorMessage;
 } else {
     // $success = true;
-    
+    $personnel->ajoutPersonnel($_POST);
     header('Location: /?page=dashboard&table=personnel');
     exit();
 

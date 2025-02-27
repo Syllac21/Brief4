@@ -24,7 +24,7 @@ if ($login != '' && $password != '') {
         header('Location: /');
     } else {
         // Si les identifiants sont incorrects, affiche un message d'erreur et redirige vers la page de connexion
-        echo 'Erreur de connexion';
+        // echo 'Erreur de connexion';
         header('Location: /');
     }
 }

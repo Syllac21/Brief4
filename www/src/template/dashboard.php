@@ -67,6 +67,9 @@
                         case 'employe':
                             include "employe.php";
                             break;
+                            case 'ajoutEmploye':
+                                include "ajoutEmploye.php";
+                                break;
                         default:
                             header('Location: /controller/logout.php');
                             break;

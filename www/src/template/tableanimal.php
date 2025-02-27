@@ -118,7 +118,7 @@ $totalPages = ceil($totalAnimals / $limit);
 <body>
     <!-- Bouton pour déclencher la modale -->
     <button class="btn btn-success" data-toggle="modal" data-target="#addAnimalModal">Ajouter Animal</button>
-
+    
     <!-- Structure de la modale -->
     <div class="modal fade" id="addAnimalModal" tabindex="-1" role="dialog" aria-labelledby="addAnimalModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">

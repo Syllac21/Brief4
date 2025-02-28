@@ -68,6 +68,7 @@ public function ajoutPersonnel($post)
         $stmt->execute();
         // $success = true;
         // echo "success";
+        return $pdo->lastInsertId();
     } catch(PDOException $e) {
             echo 'Erreur lors de l\'insertion: ' . $e->getMessage();
     }

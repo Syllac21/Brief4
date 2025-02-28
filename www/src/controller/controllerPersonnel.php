@@ -25,12 +25,12 @@ if (empty($nom) || empty($prenom) || empty($poste) || empty($password) || empty(
     echo $errorMessage;
 } else {
     // $success = true;
-    $personnel->ajoutPersonnel($_POST);
-    header('Location: /?page=dashboard&table=personnel');
+    $lastId = $personnel->ajoutPersonnel($_POST);
+    header("Location: /?page=dashboard&table=employe&id=" . $lastId);
     exit();
 
 }
 
 }
-?>
+
 

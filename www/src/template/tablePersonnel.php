@@ -51,24 +51,35 @@ $showModal = false; // Flag to control modal display
 
     <!-- Create a table with Bootstrap classes -->
     <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-            <tr>
-                <th>nom</th>
-                <th>prénom</th>
-                <th>poste</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            foreach ($listPersonnel as $personne) {
-                // Create a link to the employee profile page
-                echo "<tr>";
-                echo "<td><a href='?page=dashboard&table=employe&id=" . $personne['id_personnel'] . "'>" . htmlspecialchars($personne['nom']) . "</a></td>";
-                echo "<td>" . htmlspecialchars($personne['prenom']) . "</td>";
-                echo "<td>" . htmlspecialchars($personne['poste']) . "</td>";
-                echo "</tr>";
-            }
-            ?>
+    <thead class="thead-dark">
+    <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Poste</th>
+        <th class="text-center">Modifier</th>  <!-- Nouvelle colonne pour Modifier -->
+        <th class="text-center">Supprimer</th> <!-- Nouvelle colonne pour Supprimer -->
+    </tr>
+</thead>
+<tbody>
+    <?php
+    foreach ($listPersonnel as $personne) {
+        echo "<tr>";
+        echo "<td><a href='?page=dashboard&table=employe&id=" . $personne['id_personnel'] . "'>" . htmlspecialchars($personne['nom']) . "</a></td>";
+        echo "<td>" . htmlspecialchars($personne['prenom']) . "</td>";
+        echo "<td>" . htmlspecialchars($personne['poste']) . "</td>";
+
+            // Colonne Modifier : centrer le bouton Modifier
+            echo "<td class='text-center'><a href='?page=updatePersonnel&id=" . $personne['id_personnel'] . "' class='btn btn-warning btn-sm'>Modifier</a></td>";
+
+            // Colonne Supprimer : centrer le bouton Supprimer
+            echo "<td class='text-center'>
+            <a href='?delete_id=" . $personne['id_personnel'] . "&confirm_delete=yes' class='btn btn-danger btn-sm' 
+            onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer" . htmlspecialchars($personne['nom']) . " ?\");'>
+            Supprimer
+            </a>
+            </td>";
+    }
+    ?>
         </tbody>
     </table>
 </div>

@@ -10,12 +10,13 @@ class AnimalController {
             $gender = $_POST['animalGender'];
             $number = trim($_POST['animalNumber']);
             $country = trim($_POST['animalCountry']);
-            $dob = $_POST['animalDOB'];
             $arrivalDate = $_POST['animalArrivalDate'];
             $description = trim($_POST['animalDescription']);
             $imageUrl = trim($_POST['animalImage']);
             $cage = trim($_POST['animalCage']);
+            $responsable = trim($_POST['animalResponsable']); // En supposant que ce champ soit ajouté au formulaire
             // Effectuez vos validations et traitements ici
+           // Effectuez vos validations et traitements ici
             $errors = [];
 
             if ($name === '') {
@@ -30,14 +31,8 @@ class AnimalController {
             if ($country === '') {
                 $errors[] = "Le pays ne peut pas être vide.";
             }
-            if ($dob === '') {
-                $errors[] = "Veuillez entrer une date de naissance.";
-            }
             if ($arrivalDate === '') {
                 $errors[] = "Veuillez entrer une date d'arrivée.";
-            }
-            if ($dob && $arrivalDate && strtotime($dob) > strtotime($arrivalDate)) {
-                $errors[] = "La date de naissance ne peut pas être après la date d'arrivée.";
             }
             if ($description === '') {
                 $errors[] = "La description ne peut pas être vide.";
@@ -57,9 +52,10 @@ class AnimalController {
                 // Traitement pour ajouter l'animal (enregistrer dans la base de données, etc.)
                 echo "<p>Formulaire valide ! Ajout de l'animal...</p>";
             }
-        }
-    }
-}
+
+                    }
+                }
+            }
 // Créez une instance du contrôleur et appelez la méthode pour ajouter un animal
 $controller = new AnimalController();
 $controller->ajouterAnimal();

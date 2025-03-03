@@ -81,6 +81,9 @@
                             // Inclusion du fichier pour afficher un employé spécifique
                             include "employe.php";
                             break;
+                            case 'ajoutEmploye':
+                                include "ajoutEmploye.php";
+                                break;
                         default:
                             // Si la valeur de "table" ne correspond à aucun cas, redirige vers la déconnexion
                             header('Location: /controller/logout.php');

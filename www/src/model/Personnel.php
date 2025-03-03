@@ -6,7 +6,7 @@ class Personnel
     {
        try{ 
         $mysqlClient=dbConnect();
-        $personnelStatement = $mysqlClient->prepare('SELECT * FROM personnelWHERE IsArchived = 0;'); 
+        $personnelStatement = $mysqlClient->prepare('SELECT * FROM personnel WHERE IsArchived = 0;'); 
         $personnelStatement->execute();
         $personnels=$personnelStatement->fetchAll();
 

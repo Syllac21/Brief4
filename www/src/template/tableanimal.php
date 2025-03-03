@@ -167,21 +167,22 @@ $totalPages = ceil($totalAnimals / $limit);
                     </div>
                   </div>
                   <div class="col-md-6">
-                  <style>
-                    .checkbox { margin-bottom: 10px; /* Espace entre chaque case à cocher */ }</style>
-                        <div class="form-group">
-                          <label for="animalSpecies">Espèce(S)</label>
-                          <div class="row">
-                            <?php foreach ($allespece as $index => $espece) { ?>
-                              <div class="col-6 checkbox"> <!-- col-6 pour 2 colonnes -->
-                                <input class="form-check-input" type="checkbox" value="<?= $espece['id_espece'] ?>" id="Checkespece<?= $espece['id_espece'] ?>">
-                                <label class="form-check-label" for="Checkespece<?= $espece['id_espece'] ?>">
-                                  <?= $espece['nom'] ?>
-                                </label>
-                              </div>
-                            <?php } ?>
-                          </div>
+                  <style>.checkbox {margin-bottom: 10px; /* Espace entre chaque case à cocher */}</style>
+                      <div class="form-group">
+                        <label for="animalSpecies">Espèce(S)</label>
+                        <div class="row">
+                          <?php foreach ($allespece as $index => $espece) { ?>
+                            <div class="col-6 checkbox"> <!-- col-6 pour 2 colonnes -->
+                              <input class="form-check-input" type="checkbox" value="<?= $espece['id_espece'] ?>" id="Checkespece<?= $espece['id_espece'] ?>">
+                              <label class="form-check-label" for="Checkespece<?= $espece['id_espece'] ?>">
+                                <?= $espece['nom'] ?>
+                              </label>
+                            </div>
+                          <?php } ?>
                         </div>
+                        <!-- Bouton "Ajouter un animal" -->
+                        <button type="button" class="btn btn-success mt-3">Ajouter un animal</button>
+                      </div>
                   <div class="form-group">
                     <textarea class="form-control" name="animalDescription" rows="3" placeholder="Description"></textarea>
                   </div>

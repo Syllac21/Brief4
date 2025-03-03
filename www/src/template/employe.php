@@ -135,7 +135,7 @@ $allAnimaux = $animalObj->getAllAnimaux();
                                     <tr>
                                     <?php if($animalTread['id_animal'] == $animal['id_animal']){$soigne = true;} ?>
                                 <?php endforeach; ?>
-                                    <td><?=$animalTread['nom']?></td><?php echo ($soigne == true)? "<td></td><td><a class='btn btn-danger'>supprimer</a>" : "<td><a href='/src/controller/controllerAddTreadAnimal.php?idAnimal=". $animalTread['id_animal'] ."&idPersonnel=". $_GET['id'] . "' class='btn btn-primary'>ajouter</a></td><td></td>"; ?>
+                                    <td><?=$animalTread['nom']?></td><?php echo ($soigne == true)? "<td></td><td><a href='/src/controller/controllerSupTreadAnimal.php?idAnimal=". $animalTread['id_animal'] ."&idPersonnel=". $_GET['id'] ."' class='btn btn-danger'>supprimer</a>" : "<td><a href='/src/controller/controllerAddTreadAnimal.php?idAnimal=". $animalTread['id_animal'] ."&idPersonnel=". $_GET['id'] . "' class='btn btn-primary'>ajouter</a></td><td></td>"; ?>
                                     </tr>
                             <?php endforeach; ?>
                     </tbody>

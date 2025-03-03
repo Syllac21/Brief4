@@ -180,4 +180,22 @@ class Animaux
             return "Erreur lors de la mise à jour du soigneur: " . $e->getMessage();
         }
     }
+
+    // supprimer le lien s_occuper entre le soigneur et l'animal
+    public function removeSoigneur($id_animal, $id_personnel)
+    {
+        // Connexion à la base de données
+        $pdo = dbConnect();
+        try {
+            // Requête SQL pour supprimer le lien entre le soigneur et l'animal
+            $sql = "DELETE FROM s_occuper WHERE id_animal = :id_animal AND id_personnel = :id_personnel";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(
+                ['id_animal' => $id_animal,
+                'id_personnel' => $id_personnel]);
+        } catch (PDOException $e) {
+            // Gestion des erreurs
+            return "Erreur lors de la suppression du soigneur: " . $e->getMessage();
+        }
+    }
 }

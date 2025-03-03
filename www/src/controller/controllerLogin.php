@@ -20,6 +20,7 @@ if ($login != '' && $password != '') {
         $_SESSION['login'] = $login;
         $_SESSION['time'] = $time;
         $_SESSION['id_personnel'] = $personnel['id_personnel'];
+        $_SESSION['role'] = $personnel['role'];
         // Redirige vers la page d'accueil
         header('Location: /');
     } else {

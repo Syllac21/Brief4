@@ -1,6 +1,5 @@
 <?php
 
-
 require_once (dirname(__DIR__,1).'/model/Personnel.php');
 // Récupérer tous les personnels
 $personnel = new Personnel;
@@ -15,6 +14,20 @@ $modelPersonnel = new Personnel();
 $success = false; // Flag to indicate success
 $errorMessage = '';
 $showModal = false; // Flag to control modal display
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Check if the form is submitted using POST method
 // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -38,13 +51,7 @@ $showModal = false; // Flag to control modal display
 
     
 // }
-
-
-
-
 ?>
-
-
 
 <div class="container mt-4">
     <h2 class="mb-4">Liste des Personnel</h2>
@@ -73,12 +80,21 @@ $showModal = false; // Flag to control modal display
 
             // Colonne Supprimer : centrer le bouton Supprimer
             echo "<td class='text-center'>
-            <a href='?delete_id=" . $personne['id_personnel'] . "&confirm_delete=yes' class='btn btn-danger btn-sm' 
-            onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer" . htmlspecialchars($personne['nom']) . " ?\");'>
-            Supprimer
+                <a href='./src/controller/controllerSupPersonnel.php?delete_id=" . $personne['id_personnel'] . "&confirm_delete=yes' 
+                class='btn btn-danger btn-sm' 
+                onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer " . htmlspecialchars($personne['nom']) . " ?\");'>
+                Supprimer
             </a>
+    
+
             </td>";
     }
+
+
+
+
+
+
     ?>
         </tbody>
     </table>

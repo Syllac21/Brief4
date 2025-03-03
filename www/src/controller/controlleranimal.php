@@ -1,20 +1,26 @@
 <?php
-//Démarre une nouvelle session ou reprend une session existante
-session_start();
+// Démarre une nouvelle session ou reprend une session existante
+// session_start();
+// require_once 'tableanimal.php';
+
 class AnimalController {
 
     public function ajouterAnimal() {
         // Vérifiez si la demande est POST et si les données du formulaire existent
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['animalName'])) {
-            $name = trim($_POST['animalName']);
-            $gender = $_POST['animalGender'];
-            $number = trim($_POST['animalNumber']);
-            $country = trim($_POST['animalCountry']);
-            $dob = $_POST['animalDOB'];
-            $arrivalDate = $_POST['animalArrivalDate'];
-            $description = trim($_POST['animalDescription']);
-            $imageUrl = trim($_POST['animalImage']);
-            $cage = trim($_POST['animalCage']);
+            // Utilisation de htmlspecialchars pour éviter les injections XSS
+            $name = htmlspecialchars(trim($_POST['animalName']), ENT_QUOTES, 'UTF-8');
+            $gender = htmlspecialchars($_POST['animalGender'], ENT_QUOTES, 'UTF-8');
+            $number = htmlspecialchars(trim($_POST['animalNumber']), ENT_QUOTES, 'UTF-8');
+            $country = htmlspecialchars(trim($_POST['animalCountry']), ENT_QUOTES, 'UTF-8');
+            $birthDate = htmlspecialchars($_POST['animalBirthDate'], ENT_QUOTES, 'UTF-8');
+            $arrivalDate = htmlspecialchars($_POST['animalArrivalDate'], ENT_QUOTES, 'UTF-8');
+            $species = htmlspecialchars($_POST['animalSpecies'], ENT_QUOTES, 'UTF-8');
+            $description = htmlspecialchars(trim($_POST['animalDescription']), ENT_QUOTES, 'UTF-8');
+            $imageUrl = htmlspecialchars(trim($_POST['animalImage']), ENT_QUOTES, 'UTF-8');
+            $cage = htmlspecialchars(trim($_POST['animalCage']), ENT_QUOTES, 'UTF-8');
+            $responsable = htmlspecialchars(trim($_POST['animalResponsable']), ENT_QUOTES, 'UTF-8');
+            
             // Effectuez vos validations et traitements ici
             $errors = [];
 
@@ -30,14 +36,14 @@ class AnimalController {
             if ($country === '') {
                 $errors[] = "Le pays ne peut pas être vide.";
             }
-            if ($dob === '') {
+            if ($birthDate === '') {
                 $errors[] = "Veuillez entrer une date de naissance.";
             }
             if ($arrivalDate === '') {
                 $errors[] = "Veuillez entrer une date d'arrivée.";
             }
-            if ($dob && $arrivalDate && strtotime($dob) > strtotime($arrivalDate)) {
-                $errors[] = "La date de naissance ne peut pas être après la date d'arrivée.";
+            if ($species === '') {
+                $errors[] = "L'espèce ne peut pas être vide.";
             }
             if ($description === '') {
                 $errors[] = "La description ne peut pas être vide.";
@@ -48,10 +54,14 @@ class AnimalController {
             if ($cage === '') {
                 $errors[] = "Le champ 'Cage' ne peut pas être vide.";
             }
+            if ($responsable === '') {
+                $errors[] = "Le champ 'Responsable' ne peut pas être vide.";
+            }
 
             if (count($errors) > 0) {
                 foreach ($errors as $error) {
-                    echo "<p>$error</p>";
+                    // Affichage des erreurs en toute sécurité
+                    echo "<p>" . htmlspecialchars($error, ENT_QUOTES, 'UTF-8') . "</p>";
                 }
             } else {
                 // Traitement pour ajouter l'animal (enregistrer dans la base de données, etc.)
@@ -60,8 +70,10 @@ class AnimalController {
         }
     }
 }
+
+
 // Créez une instance du contrôleur et appelez la méthode pour ajouter un animal
-$controller = new AnimalController();
-$controller->ajouterAnimal();
+// $controller = new AnimalController();
+// $controller->ajouterAnimal();
 
 ?>

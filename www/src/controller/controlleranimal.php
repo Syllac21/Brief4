@@ -2,7 +2,6 @@
 // Démarre une nouvelle session ou reprend une session existante
 // session_start();
 // require_once 'tableanimal.php';
-
 class AnimalController {
 
     public function ajouterAnimal() {
@@ -70,8 +69,6 @@ class AnimalController {
         }
     }
 }
-
-
 // Créez une instance du contrôleur et appelez la méthode pour ajouter un animal
 // $controller = new AnimalController();
 // $controller->ajouterAnimal();

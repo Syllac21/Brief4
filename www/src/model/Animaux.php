@@ -1,6 +1,6 @@
 <?php
 require_once 'Model.php'; // Inclut le fichier Model.php
-
+require_once (dirname(__DIR__,1).'/controller/controlleranimal.php');// Inclut le fichier conreolleranimal.php
 class Animaux
 {
     // Cette méthode récupère tous les animaux de la base de données

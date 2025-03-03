@@ -71,7 +71,21 @@ public function ajoutPersonnel($post)
     } catch(PDOException $e) {
             echo 'Erreur lors de l\'insertion: ' . $e->getMessage();
     }
-
 }
+
+public function archivePersonnel($id){
+    $pdo = dbconnect();
+    try {
+        $stmt = $pdo->prepare('UPDATE personnel SET IsArchived = 1 WHERE id_personnel = :id');
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+        echo "Lien avec le soigneur supprimé fghj" ;
+
+    } catch (PDOException $e) {
+        echo 'Erreur lors de l\'archivage: ' . $e->getMessage();
+        return false;
+    }
+}
+
 
 }

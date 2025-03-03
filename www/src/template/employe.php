@@ -119,25 +119,25 @@ $allAnimaux = $animalObj->getAllAnimaux();
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table>
+                <table class="table">
                     <thead>
-                        <th>
-                            <td>nom</td>
-                            <td>ajouter</td>
-                            <td>retirer</td>
-                        </th>
+                        
+                            <th>nom</th>
+                            <th>ajouter</th>
+                            <th>retirer</th>
+                        
                     </thead>
                     <tbody>
-                        <tr>
-                            <?php foreach($allAnimaux as $animalTread) : ?>
-
-                                <?php $soigne = false;
+                        <?php foreach($allAnimaux as $animalTread) : ?>
+                            
+                            <?php $soigne = false;
                                 foreach($animaux as $animal) : ?>
+                                    <tr>
                                     <?php if($animalTread['id_animal'] == $animal['id_animal']){$soigne = true;} ?>
                                 <?php endforeach; ?>
-                            <td><?=$animalTread['nom']?></td><?php echo ($soigne == true)? '<td></td><td><button>supprimer</button>' : '<td><button>ajouter</button></td><td></td>'; ?>
+                                    <td><?=$animalTread['nom']?></td><?php echo ($soigne == true)? '<td></td><td><a class="btn btn-danger">supprimer</a>' : '<td><a href="" class="btn btn-primary">ajouter</a></td><td></td>'; ?>
+                                    </tr>
                             <?php endforeach; ?>
-                        </tr>
                     </tbody>
                 </table>
                 <button class="btn btn-secondary">Valider</button>

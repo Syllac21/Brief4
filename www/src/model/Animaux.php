@@ -164,4 +164,20 @@ class Animaux
         // Retourne les résultats sous forme de tableau associatif
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    // Cette méthode permet de modifier le soigneur d'un animal
+    public function updateSoigneur($id_animal, $id_personnel)
+    {
+        // Connexion à la base de données
+        $pdo = dbConnect();
+        try {
+            // Requête SQL pour mettre à jour le soigneur de l'animal
+            $sql = "INSERT INTO s_occuper (id_animal, id_personnel) VALUES (:id_animal, :id_personnel)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['id_animal' => $id_animal, 'id_personnel' => $id_personnel]);
+        } catch (PDOException $e) {
+            // Gestion des erreurs
+            return "Erreur lors de la mise à jour du soigneur: " . $e->getMessage();
+        }
+    }
 }

@@ -30,4 +30,56 @@ class Espece
             die('Erreur : ' . $exception->getMessage());
         }
     }
+
+    public function addSpecie($nom)
+    {
+        try {
+            // Connexion à la base de données via la fonction dbConnect() définie dans 'Model.php'
+            $pdo = dbConnect();
+            
+            // Préparation de la requête SQL pour insérer une nouvelle espèce
+            $addSpecieStatement = $pdo->prepare('INSERT INTO espece (nom) VALUES (:nom)');
+            $addSpecieStatement->bindParam(':nom', $nom);
+            $addSpecieStatement->execute();
+
+        } catch (Exception $exception) {
+            // En cas d'erreur, on arrête l'exécution et on affiche un message d'erreur
+            die('Erreur : ' . $exception->getMessage());
+        }
+    }
+
+    public function deleteSpecie($id)
+    {
+        try {
+            // Connexion à la base de données via la fonction dbConnect() définie dans 'Model.php'
+            $pdo = dbConnect();
+            
+            // Préparation de la requête SQL pour supprimer une espèce
+            $deleteSpecieStatement = $pdo->prepare('DELETE FROM espece WHERE id_espece = :id');
+            $deleteSpecieStatement->bindParam(':id', $id);
+            $deleteSpecieStatement->execute();
+
+        } catch (Exception $exception) {
+            // En cas d'erreur, on arrête l'exécution et on affiche un message d'erreur   
+            die('Erreur : ' . $exception->getMessage());
+        }
+    }
+    
+    public function updateSpecie($id, $nom)
+    {
+        try {
+            // Connexion à la base de données via la fonction dbConnect() définie dans 'Model.php'
+            $pdo = dbConnect();
+            
+            // Préparation de la requête SQL pour mettre à jour une espèce
+            $updateSpecieStatement = $pdo->prepare('UPDATE espece SET nom = :nom WHERE id_espece = :id');
+            $updateSpecieStatement->bindParam(':id', $id);
+            $updateSpecieStatement->bindParam(':nom', $nom);
+            $updateSpecieStatement->execute();
+
+        } catch (Exception $exception) {
+            // En cas d'erreur, on arrête l'exécution et on affiche un message d'erreur  
+            die('Erreur : ' . $exception->getMessage());
+        }
+    }
 }

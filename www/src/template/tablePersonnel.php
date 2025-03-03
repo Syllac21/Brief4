@@ -90,11 +90,6 @@ $showModal = false; // Flag to control modal display
             </td>";
     }
 
-
-
-
-
-
     ?>
         </tbody>
     </table>

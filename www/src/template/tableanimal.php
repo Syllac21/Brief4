@@ -2,9 +2,13 @@
 // Inclure les fichiers nécessaires
 require_once 'src/model/Model.php';
 require_once 'src/model/Animaux.php';
+require_once 'src/model/Cage.php';
+require_once 'src/model/espece.php';
 
 // Créer une instance de la classe Animaux
 $animalObj = new Animaux;
+$cageObj = new Cage;
+$especeObj = new Espece;
 
 // Définir le nombre d'animaux par page
 $limit = 10;
@@ -21,6 +25,12 @@ $sort = isset($_GET['sort']) ? $_GET['sort'] : 'nom'; // Colonne par défaut pou
 $order = isset($_GET['order']) ? $_GET['order'] : 'asc'; // Ordre par défaut
 // Récupérer les animaux de la page courante
 $paginatedAnimals = $animalObj->getPaginatedAnimaux($limit, $offset, $sort, $order);
+
+// Récupérer les cages de la page courante
+$allespece = $especeObj->getAllEspeces();
+
+// Récupérer les especes de la page courante
+$allCages = $cageObj->getAllCages();
 
 // Récupérer le nombre total d'animaux pour la pagination
 $totalAnimals = $animalObj->getTotalAnimaux();
@@ -137,8 +147,8 @@ $totalPages = ceil($totalAnimals / $limit);
                     <div class="form-group">
                    <label>Genre</label>
                      <div>
-                          <label><input type="checkbox" name="animalGender[]" value="male"> Mâle</label><br>
-                          <label><input type="checkbox" name="animalGender[]" value="male">Femelle</label><br>
+                          <label><input type="radio" name="animalGender[]" value="male"> Mâle</label><br>
+                          <label><input type="radio" name="animalGender[]" value="male">Femelle</label><br>
                       </div>
                   </div>
                       <div class="form-group">
@@ -157,22 +167,21 @@ $totalPages = ceil($totalAnimals / $limit);
                     </div>
                   </div>
                   <div class="col-md-6">
-                      <div class="form-group">
-                          <label for="animalSpecies">Espèce</label>
+                  <style>
+                    .checkbox { margin-bottom: 10px; /* Espace entre chaque case à cocher */ }</style>
+                        <div class="form-group">
+                          <label for="animalSpecies">Espèce(S)</label>
                           <div class="row">
-                              <div class="col-md-6">
-                                  <label><input type="checkbox" name="animalSpecies[]" value="lion"> Lion</label><br>
-                                  <label><input type="checkbox" name="animalSpecies[]" value="tigre"> Tigre</label><br>
-                                  <label><input type="checkbox" name="animalSpecies[]" value="éléphant"> Éléphant</label><br>
+                            <?php foreach ($allespece as $index => $espece) { ?>
+                              <div class="col-6 checkbox"> <!-- col-6 pour 2 colonnes -->
+                                <input class="form-check-input" type="checkbox" value="<?= $espece['id_espece'] ?>" id="Checkespece<?= $espece['id_espece'] ?>">
+                                <label class="form-check-label" for="Checkespece<?= $espece['id_espece'] ?>">
+                                  <?= $espece['nom'] ?>
+                                </label>
                               </div>
-                              <div class="col-md-6">
-                                  <label><input type="checkbox" name="animalSpecies[]" value="girafe"> Girafe</label><br>
-                                  <label><input type="checkbox" name="animalSpecies[]" value="zèbre"> Zèbre</label><br>
-                                  <label><input type="checkbox" name="animalSpecies[]" value="ours"> Ours</label><br>
-                              </div>
+                            <?php } ?>
                           </div>
-                      </div>
-                  </div>
+                        </div>
                   <div class="form-group">
                     <textarea class="form-control" name="animalDescription" rows="3" placeholder="Description"></textarea>
                   </div>
@@ -182,12 +191,12 @@ $totalPages = ceil($totalAnimals / $limit);
                   <div class="form-group">
                     <label for="animalcage">Cage</label>
                     <select class="form-control" name="animalcage" id="animalcage">
-                        <?php
-                            for ($i = 0; $i <= 35; $i++) {
-                               echo "<option value=\"$i\">$i</option>";
-                            }
+                      <option value="">---</option>
+                        <?php foreach ($allCages as $cage) {
+                            echo "<option value=".$cage['id_cage']."> " . $cage['numero'] . "<option>";
+                        }
                         ?>
-                  </select>
+                    </select>
               </div>
                 </div>
             </div>

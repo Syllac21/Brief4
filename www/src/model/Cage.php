@@ -6,6 +6,7 @@ class Cage
     // Fonction pour récupérer toutes les cages de la base de données
     public function getAllCages()
     {
+        
         // Connexion à la base de données
         $pdo = dbConnect();
         try {
@@ -19,7 +20,9 @@ class Cage
             echo $e->getMessage();
             return [];
         }
+
     }
+
 
     // Fonction pour compter le nombre total de cages
     public function countCages()

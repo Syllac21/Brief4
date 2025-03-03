@@ -162,7 +162,7 @@ $allAnimaux = $animalObj->getAllAnimaux();
                         
                             <th>nom</th>
                             <th>ajouter</th>
-                            <th>retirer</th>
+                        
                         
                     </thead>
                     <tbody>
@@ -171,10 +171,7 @@ $allAnimaux = $animalObj->getAllAnimaux();
                             <?php $resp = false;
                                 if($animalResp['id_responsable'] == $_GET['id']){$resp = true;} ?>
                                     <tr>
-                                    <td><?=$animalResp['nom']?></td><?php echo ($resp == true)? "<td></td><td><a href='/src/controller/controllerSupRespAnimal.php?idAnimal=". $animalResp['id_animal'] ."&idPersonnel=". $_GET['id'] ."' class='btn btn-danger'>supprimer</a>" : "<td><a href='/src/controller/controllerAddRespAnimal.php?idAnimal=". $animalResp['id_animal'] ."&idPersonnel=". $_GET['id'] . "' class='btn btn-primary'>ajouter</a></td><td></td>"; ?>
-                                    </tr>
-                                
-                                    <td><?=$animalTread['nom']?></td><?php echo ($soigne == true)? "<td></td><td><a href='/src/controller/controllerSupRespAnimal.php?idAnimal=". $animalTread['id_animal'] ."&idPersonnel=". $_GET['id'] ."' class='btn btn-danger'>supprimer</a>" : "<td><a href='/src/controller/controllerAddRespAnimal.php?idAnimal=". $animalTread['id_animal'] ."&idPersonnel=". $_GET['id'] . "' class='btn btn-primary'>ajouter</a></td><td></td>"; ?>
+                                    <td><?=$animalResp['nom']?></td><?php echo ($resp == true)? "<td></td><td> déjà responsable" : "<td><a href='/src/controller/controllerAddRespAnimal.php?idAnimal=". $animalResp['id_animal'] ."&idPersonnel=". $_GET['id'] . "' class='btn btn-primary'>ajouter</a></td><td></td>"; ?>
                                     </tr>
                             <?php endforeach; ?>
                     </tbody>

@@ -198,4 +198,19 @@ class Animaux
             return "Erreur lors de la suppression du soigneur: " . $e->getMessage();
         }
     }
+
+    public function updateResp($idAnimal, $idPersonnel)
+    {
+        // Connexion à la base de données
+        $pdo = dbConnect();
+        try {
+            // Requête SQL pour mettre à jour le soigneur de l'animal
+            $sql = "UPDATE animal a SET a.id_responsable = :id_personnel WHERE a.id_animal = :id_animal";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['id_animal' => $idAnimal, 'id_personnel' => $idPersonnel]);
+        } catch (PDOException $e) {
+            // Gestion des erreurs
+            return "Erreur lors de la mise à jour du soigneur: " . $e->getMessage();
+        }
+    }	
 }

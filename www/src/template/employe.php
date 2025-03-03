@@ -93,7 +93,7 @@ $allAnimaux = $animalObj->getAllAnimaux();
         <?php if($_SESSION['role'] == 'superadmin') :?>
             <div class="container d-flex justify-content-center gap-3">
                 <button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#animalsTreated">gérer les animaux soigné</button>
-                <button type="button" class="btn btn-secondary btn-lg">gérer les animaux en responsabilité</button>
+                <button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#animalsResp">gérer les animaux en responsabilité</button>
             </div>
         <?php else : ?>
         <div class="col-md-6">
@@ -136,6 +136,45 @@ $allAnimaux = $animalObj->getAllAnimaux();
                                     <?php if($animalTread['id_animal'] == $animal['id_animal']){$soigne = true;} ?>
                                 <?php endforeach; ?>
                                     <td><?=$animalTread['nom']?></td><?php echo ($soigne == true)? "<td></td><td><a href='/src/controller/controllerSupTreadAnimal.php?idAnimal=". $animalTread['id_animal'] ."&idPersonnel=". $_GET['id'] ."' class='btn btn-danger'>supprimer</a>" : "<td><a href='/src/controller/controllerAddTreadAnimal.php?idAnimal=". $animalTread['id_animal'] ."&idPersonnel=". $_GET['id'] . "' class='btn btn-primary'>ajouter</a></td><td></td>"; ?>
+                                    </tr>
+                            <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <button class="btn btn-secondary">Valider</button>
+            </div>
+            
+        </div>
+    </div>
+
+</div>
+
+<!-- modale pour attribuer ou oter la responsabilité d'un animal -->
+<div class="modal fade" id="animalsResp" tabindex="-1" aria-labelledby="animalsRespLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="animalsRespLabel">Animaux dont l'employé est responsable</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        
+                            <th>nom</th>
+                            <th>ajouter</th>
+                            <th>retirer</th>
+                        
+                    </thead>
+                    <tbody>
+                        <?php foreach($allAnimaux as $animalResp) : ?>
+                            
+                            <?php $resp = false;
+                                if($animalResp['id_responsable'] == $_GET['id']){$resp = true;} ?>
+                                    <tr>
+                                    <td><?=$animalResp['nom']?></td><?php echo ($resp == true)? "<td></td><td><a href='/src/controller/controllerSupRespAnimal.php?idAnimal=". $animalResp['id_animal'] ."&idPersonnel=". $_GET['id'] ."' class='btn btn-danger'>supprimer</a>" : "<td><a href='/src/controller/controllerAddRespAnimal.php?idAnimal=". $animalResp['id_animal'] ."&idPersonnel=". $_GET['id'] . "' class='btn btn-primary'>ajouter</a></td><td></td>"; ?>
+                                    </tr>
+                                
+                                    <td><?=$animalTread['nom']?></td><?php echo ($soigne == true)? "<td></td><td><a href='/src/controller/controllerSupRespAnimal.php?idAnimal=". $animalTread['id_animal'] ."&idPersonnel=". $_GET['id'] ."' class='btn btn-danger'>supprimer</a>" : "<td><a href='/src/controller/controllerAddRespAnimal.php?idAnimal=". $animalTread['id_animal'] ."&idPersonnel=". $_GET['id'] . "' class='btn btn-primary'>ajouter</a></td><td></td>"; ?>
                                     </tr>
                             <?php endforeach; ?>
                     </tbody>

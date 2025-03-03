@@ -1,9 +1,9 @@
 <?php
-
 require_once(dirname(__DIR__, 1) . '/model/personnel.php');
 
 // Récupérer tous les personnels
 $personnel = new Personnel;
+
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -25,16 +25,12 @@ if (empty($nom) || empty($prenom) || empty($poste) || empty($password) || empty(
     echo $errorMessage;
 } else {
     // $success = true;
-    $personnel->ajoutPersonnel($_POST);
-    header('Location: /?page=dashboard&table=personnel');
+    $lastId = $personnel->ajoutPersonnel($_POST);
+    header("Location: /?page=dashboard&table=employe&id=" . $lastId);
     exit();
 
 }
 
-$personnel->archivePersonnel($_id);
-header('Location: /?page=dashboard&table=personnel');
-
 }
 
-?>
 

@@ -1,6 +1,5 @@
 <?php
-require_once 'Model.php';
-// require_once 'src/model/Animaux.php';
+require_once 'Model.php'; // Inclut le fichier Model.php
 
 class Animaux
 {
@@ -10,32 +9,25 @@ class Animaux
         // Connexion à la base de données
         $pdo = dbConnect();
 
-        // Requête SQL pour sélectionner les colonnes nom, genre et description de la table animal
-        $requete = $pdo->query("SELECT * FROM animal");
+        // Requête SQL pour sélectionner tous les enregistrements de la table animal
+        $requete = $pdo->query("SELECT * FROM animal WHERE isArchived = 0");
 
         // Retourne les résultats sous forme de tableau associatif
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
-    // 🔹 Récupérer SEULEMENT les animaux de la page demandée
-    // public function getPaginatedAnimaux($limit, $offset)
-    // {
-    //     $pdo = dbConnect();
-    //     $sql = "SELECT * FROM animal LIMIT :limit OFFSET :offset";
-    //     $requete = $pdo->prepare($sql);
-    //     $requete->bindValue(':limit', $limit, PDO::PARAM_INT);
-    //     $requete->bindValue(':offset', $offset, PDO::PARAM_INT);
-    //     $requete->execute();
-    //     return $requete->fetchAll(PDO::FETCH_ASSOC);
-    // }
 
-    // 🔹 Récupérer le nombre total d'animaux pour la pagination
+    // Cette méthode récupère le nombre total d'animaux
     public function getTotalAnimaux()
     {
+        // Connexion à la base de données
         $pdo = dbConnect();
-        $sql = "SELECT COUNT(*) as total FROM animal";
+        $sql = "SELECT COUNT(*) as total FROM animal WHERE isArchived = 0";
         $requete = $pdo->query($sql);
+
+        // Retourne le nombre total d'animaux
         return $requete->fetch(PDO::FETCH_ASSOC)['total'];
     }
+
     // Cette fonction affiche les cartes des animaux passés en argument
     public function afficherCartesAnimaux($animaux)
     {
@@ -51,7 +43,6 @@ class Animaux
             echo '<div class="card">';
     
             // Image de l'animal avec un lien fixe (à remplacer par une URL dynamique si nécessaire)
-            
             echo '<img src='.$animal['image'] . ' class="card-img-top" alt="' . htmlspecialchars($animal['nom']) . '">';
             
             // Corps de la carte avec le nom, le genre et la description de l'animal
@@ -66,78 +57,111 @@ class Animaux
             echo '</div>'; // Fin de la carte
             echo '</div>'; // Fin de la colonne
         }
-            echo '</div>'; // Fin de la ligne
-            echo '</div>'; // Fin du conteneur principal
+
+        echo '</div>'; // Fin de la ligne
+        echo '</div>'; // Fin du conteneur principal
     }
 
-    // fonction pour récupérer les animaux dont le nom contient le texte en paramètre
+    // Cette fonction recherche les animaux dont le nom contient le texte passé en paramètre
     public function searchAnimaux($search, $species = 'all')
     {
+        // Connexion à la base de données
         $pdo = dbConnect();
         $sql = "SELECT * FROM animal WHERE nom LIKE ?";
         $params = ["%$search%"];
+
+        // Ajoute une condition pour filtrer par espèce si ce n'est pas 'all'
         if ($species != 'all') {
             $sql .= " AND espece = ?";
             $params[] = $species;
         }
+
+        // Prépare et exécute la requête avec les paramètres
         $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
+
+        // Retourne les résultats sous forme de tableau associatif
         return $stmt->rowCount() > 0 ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
     }
 
-
+    // Cette méthode récupère les animaux assignés à un personnel donné
     public function getAnimauxByPersonnel($id_personnel)
     {
+        // Connexion à la base de données
         $pdo = dbConnect();
 
         // Requête SQL pour récupérer les animaux assignés au personnel
         $sql = "SELECT *
                 FROM animal a
                 JOIN s_occuper s ON a.id_animal = s.id_animal
-                WHERE s.id_personnel = :id_personnel";
+                WHERE s.id_personnel = :id_personnel AND a.isArchived = 0";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(['id_personnel' => $id_personnel]);
 
         // Retourne les résultats sous forme de tableau associatif
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    // fonction pour récupérer un animal et ses soigneurs en fonction de son id
+
+    // Cette méthode récupère un animal et ses soigneurs en fonction de son id
     public function getAnimalById($id)
     {
+        // Connexion à la base de données
         $pdo = dbConnect();
-        try{
-            $sql = "SELECT a.nom ,a.genre,a.image, a.date_naissance, a.numero, p.nom nomSoigneur, p.prenom FROM animal a JOIN s_occuper so ON a.id_animal = so.id_animal JOIN personnel p ON so.id_personnel = p.id_personnel WHERE a.id_animal = ?";
+        try {
+            // Requête SQL pour récupérer l'animal et ses soigneurs
+            $sql = "SELECT a.nom, a.genre, a.image, a.date_naissance, a.numero, p.nom nomSoigneur, p.prenom 
+                    FROM animal a 
+                    JOIN s_occuper so ON a.id_animal = so.id_animal 
+                    JOIN personnel p ON so.id_personnel = p.id_personnel 
+                    WHERE a.id_animal = ?";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$id]);
-        }catch(PDOException $e){
-            echo "Erreur lors de la récupération de l'animal" . $e->getMessage();
+        } catch (PDOException $e) {
+            // Gestion des erreurs
+            echo "Erreur lors de la récupération de l'animal: " . $e->getMessage();
         }
+
+        // Retourne les résultats sous forme de tableau associatif
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getSpeciesById($id){
+    // Cette méthode récupère l'espèce d'un animal en fonction de son id
+    public function getSpeciesById($id)
+    {
+        // Connexion à la base de données
         $pdo = dbConnect();
-        try{
-            $sql = "SELECT a.id_animal, e.nom FROM animal a JOIN animal_espece ae ON a.id_animal = ae.id_animal JOIN espece e ON ae.id_espece = e.id_espece WHERE a.id_animal = ?;";
+        try {
+            // Requête SQL pour récupérer l'espèce de l'animal
+            $sql = "SELECT a.id_animal, e.nom 
+                    FROM animal a 
+                    JOIN animal_espece ae ON a.id_animal = ae.id_animal 
+                    JOIN espece e ON ae.id_espece = e.id_espece 
+                    WHERE a.id_animal = ?";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$id]);
-
-        }catch(PDOException $e){
-            echo "Erreur lors de la récupération de l'espèce" . $e->getMessage();
+        } catch (PDOException $e) {
+            // Gestion des erreurs
+            echo "Erreur lors de la récupération de l'espèce: " . $e->getMessage();
         }
+
+        // Retourne les résultats sous forme de tableau associatif
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function getPaginatedAnimaux($limit, $offset, $sort, $order) {
+
+    // Cette méthode récupère les animaux paginés avec des options de tri
+    public function getPaginatedAnimaux($limit, $offset, $sort, $order)
+    {
+        // Connexion à la base de données
         $pdo = dbConnect();
-        // $sort = real_escape_string($sort);
-        // $order = real_escape_string($order);
-        $query = "SELECT * FROM animal ORDER BY $sort $order LIMIT :limit OFFSET :offset";
+        $query = "SELECT * FROM animal WHERE isArchived = 0 ORDER BY $sort $order LIMIT :limit OFFSET :offset";
         $stmt = $pdo->prepare($query);
-       
+
+        // Liaison des paramètres de limite et d'offset
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
+
+        // Retourne les résultats sous forme de tableau associatif
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
 }

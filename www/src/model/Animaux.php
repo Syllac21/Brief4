@@ -10,7 +10,7 @@ class Animaux
         $pdo = dbConnect();
 
         // Requête SQL pour sélectionner tous les enregistrements de la table animal
-        $requete = $pdo->query("SELECT * FROM animal");
+        $requete = $pdo->query("SELECT * FROM animal WHERE isArchived = 0");
 
         // Retourne les résultats sous forme de tableau associatif
         return $requete->fetchAll(PDO::FETCH_ASSOC);
@@ -21,7 +21,7 @@ class Animaux
     {
         // Connexion à la base de données
         $pdo = dbConnect();
-        $sql = "SELECT COUNT(*) as total FROM animal";
+        $sql = "SELECT COUNT(*) as total FROM animal WHERE isArchived = 0";
         $requete = $pdo->query($sql);
 
         // Retourne le nombre total d'animaux
@@ -94,7 +94,7 @@ class Animaux
         $sql = "SELECT *
                 FROM animal a
                 JOIN s_occuper s ON a.id_animal = s.id_animal
-                WHERE s.id_personnel = :id_personnel";
+                WHERE s.id_personnel = :id_personnel AND a.isArchived = 0";
         $stmt = $pdo->prepare($sql);
         $stmt->execute(['id_personnel' => $id_personnel]);
 
@@ -153,7 +153,7 @@ class Animaux
     {
         // Connexion à la base de données
         $pdo = dbConnect();
-        $query = "SELECT * FROM animal ORDER BY $sort $order LIMIT :limit OFFSET :offset";
+        $query = "SELECT * FROM animal WHERE isArchived = 0 ORDER BY $sort $order LIMIT :limit OFFSET :offset";
         $stmt = $pdo->prepare($query);
 
         // Liaison des paramètres de limite et d'offset

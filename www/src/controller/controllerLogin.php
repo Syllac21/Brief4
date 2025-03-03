@@ -20,11 +20,12 @@ if ($login != '' && $password != '') {
         $_SESSION['login'] = $login;
         $_SESSION['time'] = $time;
         $_SESSION['id_personnel'] = $personnel['id_personnel'];
+        $_SESSION['role'] = $personnel['role'];
         // Redirige vers la page d'accueil
         header('Location: /');
     } else {
         // Si les identifiants sont incorrects, affiche un message d'erreur et redirige vers la page de connexion
-        echo 'Erreur de connexion';
+        // echo 'Erreur de connexion';
         header('Location: /');
     }
 }

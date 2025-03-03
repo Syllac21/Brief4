@@ -70,7 +70,7 @@ class AnimalController {
     }
 }
 // Créez une instance du contrôleur et appelez la méthode pour ajouter un animal
-// $controller = new AnimalController();
-// $controller->ajouterAnimal();
+ $controller = new AnimalController();
+ $controller->ajouterAnimal();
 
 ?>

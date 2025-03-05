@@ -74,6 +74,12 @@ public function ajoutPersonnel($post)
     }
 }
 
+/**
+ * Archive a personnel
+ * @param int $id
+ * @return bool
+ */
+
 public function archivePersonnel($id){
     $pdo = dbconnect();
     try {
@@ -88,5 +94,25 @@ public function archivePersonnel($id){
     }
 }
 
+/**
+ * Update a personnel
+ * @param array $postdata
+ * @return bool
+ */
+public function updatePersonnel($postdata){
+    $pdo = dbconnect();
+    try {
+        $stmt = $pdo->prepare('UPDATE personnel SET nom = :nom, prenom = :prenom, poste = :poste, login = :login WHERE id_personnel = :id');
+        $stmt->bindParam(':id', $postdata['id_personnel'], PDO::PARAM_INT);
+        $stmt->bindParam(':nom', $postdata['nom'], PDO::PARAM_STR);
+        $stmt->bindParam(':prenom', $postdata['prenom'], PDO::PARAM_STR);
+        $stmt->bindParam(':poste', $postdata['poste'], PDO::PARAM_STR);
+        $stmt->bindParam(':login', $postdata['login'], PDO::PARAM_STR);
+        $stmt->execute();
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
 
 }

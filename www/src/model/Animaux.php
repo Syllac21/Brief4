@@ -1,6 +1,6 @@
 <?php
 require_once 'Model.php'; // Inclut le fichier Model.php
-
+require_once (dirname(__DIR__,1).'/controller/controlleranimal.php');// Inclut le fichier conreolleranimal.php
 class Animaux
 {
     // Cette méthode récupère tous les animaux de la base de données
@@ -164,4 +164,53 @@ class Animaux
         // Retourne les résultats sous forme de tableau associatif
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    // Cette méthode permet de modifier le soigneur d'un animal
+    public function updateSoigneur($id_animal, $id_personnel)
+    {
+        // Connexion à la base de données
+        $pdo = dbConnect();
+        try {
+            // Requête SQL pour mettre à jour le soigneur de l'animal
+            $sql = "INSERT INTO s_occuper (id_animal, id_personnel) VALUES (:id_animal, :id_personnel)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['id_animal' => $id_animal, 'id_personnel' => $id_personnel]);
+        } catch (PDOException $e) {
+            // Gestion des erreurs
+            return "Erreur lors de la mise à jour du soigneur: " . $e->getMessage();
+        }
+    }
+
+    // supprimer le lien s_occuper entre le soigneur et l'animal
+    public function removeSoigneur($id_animal, $id_personnel)
+    {
+        // Connexion à la base de données
+        $pdo = dbConnect();
+        try {
+            // Requête SQL pour supprimer le lien entre le soigneur et l'animal
+            $sql = "DELETE FROM s_occuper WHERE id_animal = :id_animal AND id_personnel = :id_personnel";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(
+                ['id_animal' => $id_animal,
+                'id_personnel' => $id_personnel]);
+        } catch (PDOException $e) {
+            // Gestion des erreurs
+            return "Erreur lors de la suppression du soigneur: " . $e->getMessage();
+        }
+    }
+
+    public function updateResp($idAnimal, $idPersonnel)
+    {
+        // Connexion à la base de données
+        $pdo = dbConnect();
+        try {
+            // Requête SQL pour mettre à jour le soigneur de l'animal
+            $sql = "UPDATE animal a SET a.id_responsable = :id_personnel WHERE a.id_animal = :id_animal";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(['id_animal' => $idAnimal, 'id_personnel' => $idPersonnel]);
+        } catch (PDOException $e) {
+            // Gestion des erreurs
+            return "Erreur lors de la mise à jour du soigneur: " . $e->getMessage();
+        }
+    }	
 }

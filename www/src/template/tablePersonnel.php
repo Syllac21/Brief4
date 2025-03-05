@@ -78,8 +78,11 @@ $showModal = false; // Flag to control modal display
                 onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer " . htmlspecialchars($personne['nom']) . " ?\");'>
                 Supprimer
             </a>
+    
+
             </td>";
     }
+
     ?>
         </tbody>
     </table>

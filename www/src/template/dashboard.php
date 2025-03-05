@@ -86,7 +86,8 @@
                                 break;
                         default:
                             // Si la valeur de "table" ne correspond à aucun cas, redirige vers la déconnexion
-                            header('Location: /controller/logout.php');
+                            // header('Location: /controller/logout.php');
+                            echo "Erreur : table inconnue";
                             break;
                     }
                 } else {

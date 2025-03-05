@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__DIR__, 1) . '/model/Personnel.php');
+require_once(dirname(__DIR__, 1) . '/model/personnel.php');
 
 $personnel = new Personnel;
 
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Update personnel
     if ($personnel->updatePersonnel($postdata)) {
-        header("Location: /?page=dashboard&table=personnel&id=" . $postdata['id_personnel']);
+        header("Location: /?page=dashboard&table=personnel");
         exit();
     } else {
         die("Échec de la mise à jour!");

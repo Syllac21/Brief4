@@ -69,6 +69,12 @@ $allAnimaux = $animalObj->getAllAnimaux();
 </style>
 
 <body>
+
+
+
+
+
+
 <div class="container mt-5">
     <h2 class="text-center text-primary mb-4">Informations sur l'Employé</h2>
     

@@ -20,8 +20,8 @@ class Personnel
     public function loginPersonnel($login, $password)
     {
         try{
-        $pdo=dbConnect();
-        $personnelStatement = $pdo->prepare('SELECT * FROM personnel WHERE login = :login AND mot_de_passe = :password AND IsArchived = 0');
+        $mysqlClient=dbConnect();
+        $personnelStatement = $mysqlClient->prepare('SELECT * FROM personnel WHERE login = :login AND mot_de_passe = :password AND IsArchived = 0');
         $personnelStatement->bindParam(':login', $login);
         $personnelStatement->bindParam(':password', $password);
         $personnelStatement->execute();
@@ -74,31 +74,22 @@ public function ajoutPersonnel($post)
     }
 }
 
-/**
- * Archive a personnel
- * @param int $id
- * @return bool
- */
-
 public function archivePersonnel($id){
     $pdo = dbconnect();
     try {
         $stmt = $pdo->prepare('UPDATE personnel SET IsArchived = 1 WHERE id_personnel = :id');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
-        // echo "Lien avec le soigneur supprimé fghj" ;
-
+        return true;
     } catch (PDOException $e) {
-        echo 'Erreur lors de l\'archivage: ' . $e->getMessage();
         return false;
     }
 }
 
-/**
- * Update a personnel
- * @param array $postdata
- * @return bool
- */
+
+
+
+
 public function updatePersonnel($postdata){
     $pdo = dbconnect();
     try {
@@ -114,5 +105,6 @@ public function updatePersonnel($postdata){
         return false;
     }
 }
+
 
 }

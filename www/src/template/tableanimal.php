@@ -26,6 +26,33 @@ $order = isset($_GET['order']) ? $_GET['order'] : 'asc'; // Ordre par défaut
 // Récupérer les animaux de la page courante
 $paginatedAnimals = $animalObj->getPaginatedAnimaux($limit, $offset, $sort, $order);
 
+
+// Check if the admin is a superadmin
+if ($_SESSION['role'] === 'superadmin') {
+    // Fetch all animals
+    $paginatedAnimals = $animalObj->getPaginatedAnimaux($limit, $offset, $sort, $order);
+} else {
+    // Check if the admin is an 'other' admin (assuming 'admin' is the role for other admins)
+    if ($_SESSION['role']=== 'admin') {
+        // Fetch only specific animals for other admins based on admin's id
+        $paginatedAnimals = $animalObj->getAnimauxByPersonnel($_SESSION['id_personnel']);
+    }
+
+}
+
+// Function Definitions in Animal Class
+class Animal {
+  public function getPaginatedAnimaux($limit, $offset, $sort, $order) {
+      // Fetch all animals logic
+  }
+
+  public function getAdminSpecificAnimals($limit, $offset, $sort, $order, $adminId) {
+      // Fetch specific animals for non-superadmins based on adminId
+  }
+}
+
+
+
 // Récupérer les cages de la page courante
 $allespece = $especeObj->getAllEspeces();
 
@@ -38,6 +65,8 @@ $totalAnimals = $animalObj->getTotalAnimaux();
 // Calculer le nombre total de pages
 $totalPages = ceil($totalAnimals / $limit);
 ?>
+
+
 <div class="container mt-4">
   <h2 class="mb-4">Liste des Animaux</h2>
 
@@ -60,7 +89,7 @@ $totalPages = ceil($totalAnimals / $limit);
         <th>Modifier</th>
         <th>supp</th>
       </tr>
-    </thead>
+    </thead> 
     <tbody>
       <?php foreach ($paginatedAnimals as $animal): ?>
         <tr>
@@ -86,6 +115,7 @@ $totalPages = ceil($totalAnimals / $limit);
     </tbody>
   </table>
 
+  
   <!-- Pagination Bootstrap -->
   <nav>
     <ul class="pagination justify-content-center">
@@ -109,6 +139,15 @@ $totalPages = ceil($totalAnimals / $limit);
     </tbody>
     </table>
 
+
+
+
+
+
+
+
+
+    
     <!-- Pagination -->
     <style>
       label {
@@ -146,8 +185,8 @@ $totalPages = ceil($totalAnimals / $limit);
                                 <input type="text" class="form-control" name="animalName" placeholder="Nom" required>
                             </div>
                             <div class="form-group">
-                                <label>Genre</label>
-                                <div>
+                                 <label>Genre</label>
+                               <div>
                                     <label><input type="radio" name="animalGender" value="male"> Mâle</label><br>
                                     <label><input type="radio" name="animalGender" value="female"> Femelle</label><br>
                                 </div>

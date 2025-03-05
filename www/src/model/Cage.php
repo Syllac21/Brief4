@@ -11,7 +11,7 @@ class Cage
         $pdo = dbConnect();
         try {
             // Exécute la requête pour sélectionner toutes les cages
-            $query = $pdo->query("SELECT * FROM cage");
+            $query = $pdo->query("SELECT * FROM cage ORDER BY numero");
 
             // Retourne les résultats sous forme de tableau associatif
             return $query->fetchAll(PDO::FETCH_ASSOC);

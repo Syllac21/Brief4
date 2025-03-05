@@ -29,6 +29,20 @@ $showModal = false; // Flag to control modal display
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Check if the form is submitted using POST method
 // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //     // Process form submission

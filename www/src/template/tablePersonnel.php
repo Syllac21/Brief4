@@ -90,7 +90,7 @@ $showModal = false; // Flag to control modal display
         echo "<td>" . htmlspecialchars($personne['poste']) . "</td>";
 
             // Colonne Modifier : centrer le bouton Modifier
-            echo "<td class='text-center'><a href='?page=updatePersonnel&id=" . $personne['id_personnel'] . "' class='btn btn-warning btn-sm'>Modifier</a></td>";
+            echo "<td class='text-center'><a href='?page=dashboard&table=employe&action=set&id=" . $personne['id_personnel'] . "' class='btn btn-warning btn-sm'>Modifier</a></td>";
 
             // Colonne Supprimer : centrer le bouton Supprimer
             echo "<td class='text-center'>

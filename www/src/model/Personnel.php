@@ -20,8 +20,8 @@ class Personnel
     public function loginPersonnel($login, $password)
     {
         try{
-        $mysqlClient=dbConnect();
-        $personnelStatement = $mysqlClient->prepare('SELECT * FROM personnel WHERE login = :login AND mot_de_passe = :password AND IsArchived = 0');
+        $pdo=dbConnect();
+        $personnelStatement = $pdo->prepare('SELECT * FROM personnel WHERE login = :login AND mot_de_passe = :password AND IsArchived = 0');
         $personnelStatement->bindParam(':login', $login);
         $personnelStatement->bindParam(':password', $password);
         $personnelStatement->execute();

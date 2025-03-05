@@ -26,7 +26,7 @@ $allCages = $cage->getAllCages();
                     echo "<td>" . $cage['numero'] . "</td>";
                     echo "<td>" . $cage['allee'] . "</td>";
                     echo "<td>" . $cage['salle'] . "</td>";
-                    echo "<td class='text-center'><a href='' class='btn btn-danger'>supprimer</a></td>";
+                    echo "<td class='text-center'><a href='./src/controller/controllerSupCage.php?delete_id=" . $cage['id_cage'] . "&confirm_delete=yes' class='btn btn-danger btn-sm' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer l'enclos numero : " . htmlspecialchars($cage['numero']) . " ?);'> Supprimer </a>";
                     echo "</tr>";
                 }
                 ?>

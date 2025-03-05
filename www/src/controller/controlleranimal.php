@@ -14,12 +14,12 @@ class AnimalController {
             $country = is_array($_POST['animalCountry']) ? '' : htmlspecialchars(trim($_POST['animalCountry']), ENT_QUOTES, 'UTF-8');
             $birthDate = is_array($_POST['animalBirthDate']) ? '' : htmlspecialchars($_POST['animalBirthDate'], ENT_QUOTES, 'UTF-8');
             $arrivalDate = is_array($_POST['animalArrivalDate']) ? '' : htmlspecialchars($_POST['animalArrivalDate'], ENT_QUOTES, 'UTF-8');
-            $species = $_POST['animalSpecies[]'];
+            $species = $_POST['animalSpecies'];
             $description = is_array($_POST['animalDescription']) ? '' : htmlspecialchars(trim($_POST['animalDescription']), ENT_QUOTES, 'UTF-8');
             $imageUrl = is_array($_POST['animalImage']) ? '' : htmlspecialchars(trim($_POST['animalImage']), ENT_QUOTES, 'UTF-8');
             $cage = is_array($_POST['animalcage']) ? '' : htmlspecialchars(trim($_POST['animalcage']), ENT_QUOTES, 'UTF-8');
            
-            var_dump($species);
+           var_dump($species); 
             // Effectuez vos validations et traitements ici
             $errors = [];
 

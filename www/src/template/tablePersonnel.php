@@ -22,13 +22,6 @@ $showModal = false; // Flag to control modal display
 
 
 
-
-
-
-
-
-
-
 // Check if the form is submitted using POST method
 // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 //     // Process form submission
@@ -76,7 +69,7 @@ $showModal = false; // Flag to control modal display
         echo "<td>" . htmlspecialchars($personne['poste']) . "</td>";
 
             // Colonne Modifier : centrer le bouton Modifier
-            echo "<td class='text-center'><a href='?page=updatePersonnel&id=" . $personne['id_personnel'] . "' class='btn btn-warning btn-sm'>Modifier</a></td>";
+            echo "<td class='text-center'><a href='#' class='btn btn-warning btn-sm' data-bs-toggle='modal' data-bs-target='#employeeModal'>Modifier</a></td>";
 
             // Colonne Supprimer : centrer le bouton Supprimer
             echo "<td class='text-center'>
@@ -85,20 +78,53 @@ $showModal = false; // Flag to control modal display
                 onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer " . htmlspecialchars($personne['nom']) . " ?\");'>
                 Supprimer
             </a>
-    
-
             </td>";
     }
-
-
-
-
-
-
     ?>
         </tbody>
     </table>
 </div>
+
+
+<!-- Bootstrap Modal -->
+
+<div class="modal fade" id="employeeModal" tabindex="-1" aria-labelledby="employeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="employeeModalLabel">Modifier Employé</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/src/controller/controllerModPersonnel.php">
+                    <input type="hidden" name="id" value="<?php echo $personne['id_personnel']; ?>">
+                    <div class="mb-3">
+                        <label for="employeeName" class="form-label">Nom</label>
+                        <input type="text" class="form-control" id="employeeName" name="nom" value="<?php echo $personne['nom']; ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="employeeSurname" class="form-label">Prénom</label>
+                        <input type="text" class="form-control" id="employeeSurname" name="prenom" value="<?php echo $personne['prenom']; ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="employeePosition" class="form-label">Poste</label>
+                        <input type="text" class="form-control" id="employeePosition" name="poste" value="<?php echo $personne['poste']; ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="employeeLogin" class="form-label">Login</label>
+                        <input type="text" class="form-control" id="employeeLogin" name="login" value="<?php echo $personne['login']; ?>">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sauvegarder les modifications</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
 <div class="container mt-5">
 
         <!-- Button to Open Modal -->

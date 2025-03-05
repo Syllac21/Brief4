@@ -6,7 +6,7 @@ class Personnel
     {
        try{ 
         $mysqlClient=dbConnect();
-        $personnelStatement = $mysqlClient->prepare('SELECT * FROM personnel');
+        $personnelStatement = $mysqlClient->prepare('SELECT * FROM personnel WHERE IsArchived = 0;'); 
         $personnelStatement->execute();
         $personnels=$personnelStatement->fetchAll();
 
@@ -21,7 +21,7 @@ class Personnel
     {
         try{
         $mysqlClient=dbConnect();
-        $personnelStatement = $mysqlClient->prepare('SELECT * FROM personnel WHERE login = :login AND mot_de_passe = :password');
+        $personnelStatement = $mysqlClient->prepare('SELECT * FROM personnel WHERE login = :login AND mot_de_passe = :password AND IsArchived = 0');
         $personnelStatement->bindParam(':login', $login);
         $personnelStatement->bindParam(':password', $password);
         $personnelStatement->execute();
@@ -80,10 +80,28 @@ public function archivePersonnel($id){
         $stmt = $pdo->prepare('UPDATE personnel SET IsArchived = 1 WHERE id_personnel = :id');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
-        echo "Lien avec le soigneur supprimé fghj" ;
-
+        return true;
     } catch (PDOException $e) {
-        echo 'Erreur lors de l\'archivage: ' . $e->getMessage();
+        return false;
+    }
+}
+
+
+
+
+
+public function updatePersonnel($postdata){
+    $pdo = dbconnect();
+    try {
+        $stmt = $pdo->prepare('UPDATE personnel SET nom = :nom, prenom = :prenom, poste = :poste, login = :login WHERE id_personnel = :id');
+        $stmt->bindParam(':id', $postdata['id_personnel'], PDO::PARAM_INT);
+        $stmt->bindParam(':nom', $postdata['nom'], PDO::PARAM_STR);
+        $stmt->bindParam(':prenom', $postdata['prenom'], PDO::PARAM_STR);
+        $stmt->bindParam(':poste', $postdata['poste'], PDO::PARAM_STR);
+        $stmt->bindParam(':login', $postdata['login'], PDO::PARAM_STR);
+        $stmt->execute();
+        return true;
+    } catch (PDOException $e) {
         return false;
     }
 }

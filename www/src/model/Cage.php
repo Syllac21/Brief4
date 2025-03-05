@@ -59,4 +59,23 @@ class Cage
             return [];
         }
     }
+
+    // Fonction pour ajouter une cage
+    public function addCage($postdata){
+        $pdo = dbConnect();
+        try {
+            // Exécute la requête pour ajouter une cage
+            $query = $pdo->prepare("INSERT INTO cage (numero, allee, salle) VALUES (:numero, :allee, :salle)");
+            $query->execute([
+                'numero' => $postdata['numero'],
+                'allee' => $postdata['allee'],
+                'salle' => $postdata['salle']
+            ]);
+            return $pdo->lastInsertId();
+        } catch (PDOException $e) {
+            // Affiche un message d'erreur en cas d'exception
+            echo $e->getMessage();
+            return [];
+        }
+    }
 }

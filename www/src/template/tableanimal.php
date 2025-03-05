@@ -55,11 +55,10 @@ $totalPages = ceil($totalAnimals / $limit);
         <th>
           <a href="/?page=dashboard&table=animaux&sort=genre&order=<?= ($sort == 'genre' && $order == 'asc') ? 'desc' : 'asc' ?>">
             genre <?= ($sort == 'genre') ? ($order == 'asc' ? '↑' : '↓') : '' ?>
-          </a>
-        </th>
-        <th>
-          description
-        </th>
+          </a></th>
+        <th>description</th>
+        <th>Modifier</th>
+        <th>supp</th>
       </tr>
     </thead>
     <tbody>
@@ -80,6 +79,8 @@ $totalPages = ceil($totalAnimals / $limit);
           </td>
           <td><?= htmlspecialchars($animal['genre']) ?></td>
           <td><?= htmlspecialchars($animal['description']) ?></td>
+          <td><a href="/?page=modifier_animal&id=<?= $animal['id_animal'] ?>" class="btn btn-warning">Modifier</a></td>
+          <td><a href="/?page=supprimer_animal&id=<?= $animal['id_animal'] ?>" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer cet animal ?')">Supprimer</a></td>
         </tr>
       <?php endforeach; ?>
     </tbody>
@@ -115,6 +116,7 @@ $totalPages = ceil($totalAnimals / $limit);
       }
     </style>
     </head>
+    <!--formulaire ajoute animal -->
     <!DOCTYPE html>
     <html lang="fr">
     <head>
@@ -215,6 +217,3 @@ $totalPages = ceil($totalAnimals / $limit);
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
-<?php
-

@@ -194,8 +194,9 @@ $allAnimaux = $animalObj->getAllAnimaux();
                 </div>
                 <div class="modal-body">
                     <!-- Form inside the modal -->
-                    <form method="POST" action="./src/controller/controllerSetPersonnel.php">
+                    <form method="POST" action="./src/controller/controllerModPersonnel.php">
                         <div class="mb-3">
+                            <input type="hidden" name="id" value=<?= $employe['id_personnel'] ?>>
                             <label for="nom" class="form-label">Nom :</label>
                             <input type="text" name="nom" id="nom" class="form-control" value=<?= $employe['nom'] ?>>
                         </div>
@@ -209,8 +210,8 @@ $allAnimaux = $animalObj->getAllAnimaux();
                             <label for="poste" class="form-label">Poste :</label>
                             <select name="poste" id="poste" class="form-select">
                                 <option value="">-- Sélectionnez un poste --</option>
-                                <option value="Soigneur">Soigneur</option>
-                                <option value="Administratif">Administratif</option>
+                                <option value="Soigneur" <?=($employe['poste']=='soigneur')?'selected':''?>>Soigneur</option>
+                                <option value="Administratif" <?=($employe['poste']=='administratif')?'selected':''?>>Administratif</option>
                             </select>
                         </div>
 

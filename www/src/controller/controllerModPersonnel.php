@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Update personnel
     if ($personnel->updatePersonnel($postdata)) {
-        header("Location: /?page=dashboard&table=personnel");
+        header("Location: /?page=dashboard&table=personnel&id=" . $postdata['id_personnel']);
         exit();
     } else {
         die("Échec de la mise à jour!");

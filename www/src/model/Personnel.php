@@ -86,7 +86,7 @@ public function archivePersonnel($id){
         $stmt = $pdo->prepare('UPDATE personnel SET IsArchived = 1 WHERE id_personnel = :id');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
-        echo "Lien avec le soigneur supprimé fghj" ;
+        // echo "Lien avec le soigneur supprimé fghj" ;
 
     } catch (PDOException $e) {
         echo 'Erreur lors de l\'archivage: ' . $e->getMessage();

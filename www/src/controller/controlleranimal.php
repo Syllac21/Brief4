@@ -8,17 +8,17 @@ class AnimalController {
         // Vérifiez si la demande est POST et si les données du formulaire existent
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['animalName'])) {
             // Utilisation de htmlspecialchars pour éviter les injections XSS
-            $name = htmlspecialchars(trim($_POST['animalName']), ENT_QUOTES, 'UTF-8');
-            $gender = htmlspecialchars($_POST['animalGender'], ENT_QUOTES, 'UTF-8');
-            $number = htmlspecialchars(trim($_POST['animalNumber']), ENT_QUOTES, 'UTF-8');
-            $country = htmlspecialchars(trim($_POST['animalCountry']), ENT_QUOTES, 'UTF-8');
-            $birthDate = htmlspecialchars($_POST['animalBirthDate'], ENT_QUOTES, 'UTF-8');
-            $arrivalDate = htmlspecialchars($_POST['animalArrivalDate'], ENT_QUOTES, 'UTF-8');
-            $species = htmlspecialchars($_POST['animalSpecies'], ENT_QUOTES, 'UTF-8');
-            $description = htmlspecialchars(trim($_POST['animalDescription']), ENT_QUOTES, 'UTF-8');
-            $imageUrl = htmlspecialchars(trim($_POST['animalImage']), ENT_QUOTES, 'UTF-8');
-            $cage = htmlspecialchars(trim($_POST['animalCage']), ENT_QUOTES, 'UTF-8');
-            $responsable = htmlspecialchars(trim($_POST['animalResponsable']), ENT_QUOTES, 'UTF-8');
+            $name = is_array($_POST['animalName']) ? '' : htmlspecialchars(trim($_POST['animalName']), ENT_QUOTES, 'UTF-8');
+            $gender = is_array($_POST['animalGender']) ? '' : htmlspecialchars($_POST['animalGender'], ENT_QUOTES, 'UTF-8');
+            $number = is_array($_POST['animalNumber']) ? '' : htmlspecialchars(trim($_POST['animalNumber']), ENT_QUOTES, 'UTF-8');
+            $country = is_array($_POST['animalCountry']) ? '' : htmlspecialchars(trim($_POST['animalCountry']), ENT_QUOTES, 'UTF-8');
+            $birthDate = is_array($_POST['animalBirthDate']) ? '' : htmlspecialchars($_POST['animalBirthDate'], ENT_QUOTES, 'UTF-8');
+            $arrivalDate = is_array($_POST['animalArrivalDate']) ? '' : htmlspecialchars($_POST['animalArrivalDate'], ENT_QUOTES, 'UTF-8');
+            $species = is_array($_POST['animalSpecies']) ? '' : htmlspecialchars($_POST['animalSpecies'], ENT_QUOTES, 'UTF-8');
+            $description = is_array($_POST['animalDescription']) ? '' : htmlspecialchars(trim($_POST['animalDescription']), ENT_QUOTES, 'UTF-8');
+            $imageUrl = is_array($_POST['animalImage']) ? '' : htmlspecialchars(trim($_POST['animalImage']), ENT_QUOTES, 'UTF-8');
+            $cage = is_array($_POST['animalCage']) ? '' : htmlspecialchars(trim($_POST['animalCage']), ENT_QUOTES, 'UTF-8');
+            $responsable = is_array($_POST['animalResponsable']) ? '' : htmlspecialchars(trim($_POST['animalResponsable']), ENT_QUOTES, 'UTF-8');
             
             // Effectuez vos validations et traitements ici
             $errors = [];
@@ -70,7 +70,7 @@ class AnimalController {
     }
 }
 // Créez une instance du contrôleur et appelez la méthode pour ajouter un animal
- $controller = new AnimalController();
- $controller->ajouterAnimal();
+$controller = new AnimalController();
+$controller->ajouterAnimal();
 
 ?>

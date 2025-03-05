@@ -183,7 +183,7 @@ $totalPages = ceil($totalAnimals / $limit);
                           <?php } ?>
                         </div>
                         <!-- Bouton "Ajouter un animal" -->
-                        <button type="button" class="btn btn-success mt-3">Ajouter un animal</button>
+                        <button type="button" class="btn btn-success mt-3">Ajouter une espece</button>
                       </div>
                   <div class="form-group">
                     <textarea class="form-control" name="animalDescription" rows="3" placeholder="Description"></textarea>

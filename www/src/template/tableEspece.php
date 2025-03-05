@@ -10,12 +10,11 @@ $listEspeces = $espece->getAllEspeces();
     <h2 class="mb-4">Liste des espèces</h2>
 
     <!-- Create a table with Bootstrap classes -->
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped text-center">
         <thead class="thead-dark">
             <tr>
                 <th>numero</th>
                 <th>espèce</th>
-                <th>modifier</th>
                 <th>supprimer</th>
             </tr>
         </thead>
@@ -26,7 +25,6 @@ $listEspeces = $espece->getAllEspeces();
                 echo "<tr>";
                 echo "<td>" . $espece['id_espece'] . "</td>";
                 echo "<td>" . $espece['nom'] . "</td>";
-                echo "<td class='text-center'><a href='#' class='btn btn-warning' data-toggle='modal' data-target='#modSpecieModal' date-id=1>modifier</a></td>";
                 echo "<td class='text-center'><a href='' class='btn btn-danger'>supprimer</a></td>";
                 
                 echo "</tr>";
@@ -43,7 +41,7 @@ $listEspeces = $espece->getAllEspeces();
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="addSpecieModalLabel">Ajouter un Employé</h5>
+                <h5 class="modal-title" id="addSpecieModalLabel">Ajouter une espèce</h5>
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -63,8 +61,9 @@ $listEspeces = $espece->getAllEspeces();
     </div>
 </div>
 
-<!-- Bootstrap Modal ajouter une espèce-->
+<!-- Bootstrap Modal modifier une espèce-->
 <div class="modal fade" id="modSpecieModal" tabindex="-1" aria-labelledby="modSpecieModalLabel" aria-hidden="true">
+    
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">

@@ -190,6 +190,51 @@ $allAnimaux = $animalObj->getAllAnimaux();
 
 </div>
 
+<!-- Bootstrap Modal -->
+<div class="modal fade" id="setEmployeeModal" tabindex="-1" aria-labelledby="setEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="setEmployeeModalLabel">Ajouter un Employé</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form inside the modal -->
+                    <form method="POST" action="./src/controller/controllerModPersonnel.php">
+                        <div class="mb-3">
+                            <input type="hidden" name="id" value=<?= $employe['id_personnel'] ?>>
+                            <label for="nom" class="form-label">Nom :</label>
+                            <input type="text" name="nom" id="nom" class="form-control" value=<?= $employe['nom'] ?>>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="prenom" class="form-label">Prénom :</label>
+                            <input type="text" name="prenom" id="prenom" class="form-control" value=<?= $employe['prenom'] ?>>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="poste" class="form-label">Poste :</label>
+                            <select name="poste" id="poste" class="form-select">
+                                <option value="">-- Sélectionnez un poste --</option>
+                                <option value="Soigneur" <?=($employe['poste']=='soigneur')?'selected':''?>>Soigneur</option>
+                                <option value="Administratif" <?=($employe['poste']=='administratif')?'selected':''?>>Administratif</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="login" class="form-label">Login :</label>
+                            <input type="text" name="login" id="login" class="form-control" value=<?= $employe['login'] ?>>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success px-4">Modifier</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 <!-- Pied de page -->
 <footer class="text-dark text-center custom-footer py-4 mt-5">
     <div class="container">
@@ -197,6 +242,19 @@ $allAnimaux = $animalObj->getAllAnimaux();
     </div>
 </footer>
 
+<?php 
+if(isset($_GET['action'])){
+    if($_GET['action'] == 'set'){
+        echo "<script>";
+        echo "document.addEventListener('DOMContentLoaded', function () {";
+        echo "var setEmployeeModal = new bootstrap.Modal(document.getElementById('setEmployeeModal'));";
+        echo "setEmployeeModal.show();";
+        echo "});";
+        echo "</script>";
+    }
+    
+}
+?>
 <!-- Inclusion du fichier JavaScript Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

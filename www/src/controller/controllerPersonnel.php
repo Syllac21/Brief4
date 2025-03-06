@@ -1,5 +1,6 @@
 <?php
 
+
 require_once(dirname(__DIR__, 1) . '/model/personnel.php');
 
 // Récupérer tous les personnels

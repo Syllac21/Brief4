@@ -199,6 +199,11 @@ class Animaux
         }
     }
 
+    /**
+     * Archive an animal
+     * @param int $id
+     * @return bool
+     */
     public function updateResp($idAnimal, $idPersonnel)
     {
         // Connexion à la base de données
@@ -214,5 +219,10 @@ class Animaux
         }
     }	
 
-    
+    public function countAnimalWhitoutTread(){
+        $pdo = dbConnect();
+        $sql = "SELECT COUNT(a.id_animal) nb FROM animal a LEFT JOIN s_occuper so ON a.id_animal = so.id_animal WHERE so.id_personnel IS NULL AND a.isArchived =0";
+        $requete = $pdo->query($sql);
+        return $requete->fetch(PDO::FETCH_ASSOC);
+    }
 }

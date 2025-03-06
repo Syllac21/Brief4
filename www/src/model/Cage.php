@@ -11,7 +11,7 @@ class Cage
         $pdo = dbConnect();
         try {
             // Exécute la requête pour sélectionner toutes les cages
-            $query = $pdo->query("SELECT * FROM cage");
+            $query = $pdo->query("SELECT * FROM cage ORDER BY numero");
 
             // Retourne les résultats sous forme de tableau associatif
             return $query->fetchAll(PDO::FETCH_ASSOC);
@@ -57,6 +57,44 @@ class Cage
             // Affiche un message d'erreur en cas d'exception
             echo $e->getMessage();
             return [];
+        }
+    }
+
+    // Fonction pour ajouter une cage
+    public function addCage($postdata){
+        $pdo = dbConnect();
+        try {
+            // Exécute la requête pour ajouter une cage
+            $query = $pdo->prepare("INSERT INTO cage (numero, allee, salle) VALUES (:numero, :allee, :salle)");
+            $query->execute([
+                'numero' => $postdata['numero'],
+                'allee' => $postdata['allee'],
+                'salle' => $postdata['salle']
+            ]);
+            return $pdo->lastInsertId();
+        } catch (PDOException $e) {
+            // Affiche un message d'erreur en cas d'exception
+            echo $e->getMessage();
+            return [];
+        }
+    }
+
+    // Fonction pour supprimer une cage
+    public function removeCage($id)
+    {
+        // Connexion à la base de données
+        $pdo = dbConnect();
+        try {
+            // Exécute la requête pour supprimer une cage
+            $query = $pdo->prepare("DELETE FROM cage WHERE id_cage = :id");
+            $query->execute([
+                'id' => $id
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            // Affiche un message d'erreur en cas d'exception
+            echo $e->getMessage();
+            return false;
         }
     }
 }

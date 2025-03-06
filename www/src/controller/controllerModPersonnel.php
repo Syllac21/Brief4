@@ -24,4 +24,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Échec de la mise à jour!");
     }
 }
-?>

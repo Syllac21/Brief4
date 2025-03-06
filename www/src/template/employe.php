@@ -91,7 +91,7 @@ $allAnimaux = $animalObj->getAllAnimaux();
 
                     <!-- Bouton pour réinitialiser le mot de passe (fonctionnalité à implémenter) -->
                     <div class="text-center mt-4">
-                        <button class="btn btn-reset px-4">Réinitialiser le mot de passe</button>
+                        <a href='/?page=dashboard&table=resseting&id=<?=$employe['id_personnel'] ?>' class="btn btn-reset px-4">Réinitialiser le mot de passe</a>
                     </div>
                 </div>
             <?php endif; ?>

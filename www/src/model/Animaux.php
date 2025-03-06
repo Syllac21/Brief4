@@ -214,7 +214,5 @@ class Animaux
         }
     }	
 
-
-
     
 }

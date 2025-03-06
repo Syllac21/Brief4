@@ -29,16 +29,15 @@ $paginatedAnimals = $animalObj->getPaginatedAnimaux($limit, $offset, $sort, $ord
 
 // Check if the admin is a superadmin
 if ($_SESSION['role'] === 'superadmin') {
-    // Fetch all animals
-    $paginatedAnimals = $animalObj->getPaginatedAnimaux($limit, $offset, $sort, $order);
+  // Fetch all animals with pagination
+  $paginatedAnimals = $animalObj->getPaginatedAnimaux($limit, $offset, $sort, $order);
 } else {
-    // Check if the admin is an 'other' admin (assuming 'admin' is the role for other admins)
-    if ($_SESSION['role']=== 'admin') {
-        // Fetch only specific animals for other admins based on admin's id
-        $paginatedAnimals = $animalObj->getAnimauxByPersonnel($_SESSION['id_personnel']);
-    }
-
+  // Fetch only specific animals for admins
+  $paginatedAnimals = $animalObj->getAnimauxByPersonnel($_SESSION['id_personnel']);
+  // Since regular admins don’t have pagination, force page to 1
+  $totalPages = 1;
 }
+
 
 // Function Definitions in Animal Class
 class Animal {
@@ -115,26 +114,43 @@ $totalPages = ceil($totalAnimals / $limit);
   </table>
 
   
+
+
+
+
+  
   <!-- Pagination Bootstrap -->
   <nav>
-    <ul class="pagination justify-content-center">
-      <!-- Bouton Précédent -->
-      <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
+  <ul class="pagination justify-content-center">
+    <!-- Previous Button -->
+    <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
         <a class="page-link" href="/?page=dashboard&table=animaux&index=<?= max($page - 1, 1) ?>">Précédent</a>
-      </li>
+    </li>
 
-      <!-- Numéros de pages -->
-      <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-        <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
-          <a class="page-link" href="/?page=dashboard&table=animaux&index=<?= $i ?>"><?= $i ?></a>
+    <!-- Page Numbers -->
+    <?php 
+    if ($_SESSION['role'] === 'superadmin') {
+        // Superadmin sees all pages
+        for ($i = 1; $i <= $totalPages; $i++): ?>
+            <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                <a class="page-link" href="/?page=dashboard&table=animaux&index=<?= $i ?>"><?= $i ?></a>
+            </li>
+        <?php endfor; 
+    } else {
+        // Regular admin sees only page 1
+        ?>
+        <li class="page-item active">
+            <a class="page-link" href="/?page=dashboard&table=animaux&index=1">1</a>
         </li>
-      <?php endfor; ?>
+    <?php } ?>
 
-      <!-- Bouton Suivant -->
-      <li class="page-item <?= ($page >= $totalPages) ? 'disabled' : '' ?>">
+    <!-- Next Button -->
+    <li class="page-item <?= ($page >= $totalPages || $_SESSION['role'] !== 'superadmin') ? 'disabled' : '' ?>">
         <a class="page-link" href="/?page=dashboard&table=animaux&index=<?= min($page + 1, $totalPages) ?>">Suivant</a>
-      </li>
-    </ul>
+    </li>
+</ul>
+
+
     </tbody>
     </table>
 

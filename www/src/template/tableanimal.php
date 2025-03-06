@@ -27,6 +27,10 @@ $order = isset($_GET['order']) ? $_GET['order'] : 'asc'; // Ordre par défaut
 $paginatedAnimals = $animalObj->getPaginatedAnimaux($limit, $offset, $sort, $order);
 
 
+
+
+// $animalObj = new Animal(); // Ensure this object is created if it isn't already
+
 // Check if the admin is a superadmin
 if ($_SESSION['role'] === 'superadmin') {
   // Fetch all animals with pagination
@@ -114,11 +118,6 @@ $totalPages = ceil($totalAnimals / $limit);
   </table>
 
   
-
-
-
-
-  
   <!-- Pagination Bootstrap -->
   <nav>
   <ul class="pagination justify-content-center">
@@ -149,7 +148,6 @@ $totalPages = ceil($totalAnimals / $limit);
         <a class="page-link" href="/?page=dashboard&table=animaux&index=<?= min($page + 1, $totalPages) ?>">Suivant</a>
     </li>
 </ul>
-
 
     </tbody>
     </table>

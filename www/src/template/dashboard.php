@@ -93,6 +93,9 @@
                         case 'log':
                             include "tableLog.php";
                             break;
+                        case 'resseting':
+                            include "./src/controller/controllerResettingPassword.php";
+                            break;
                         default:
                             // Si la valeur de "table" ne correspond à aucun cas, redirige vers la déconnexion
                             // header('Location: /controller/logout.php');

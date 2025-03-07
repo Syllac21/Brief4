@@ -106,5 +106,18 @@ public function updatePersonnel($postdata){
     }
 }
 
+public function updatePassword($id,$password){
+    $pdo = dbConnect();
+    try{
+        $stmt = $pdo->prepare('UPDATE personnel SET mot_de_passe = :password WHERE id_personnel = :id');
+        $stmt->bindParam(':password',$password,PDO::PARAM_STR);
+        $stmt->bindParam('id',$id,PDO::PARAM_INT);
+        $stmt->execute();
+        return true;
+    }catch(PDOException $e){
+        return false;
+    }
+}
+
 
 }

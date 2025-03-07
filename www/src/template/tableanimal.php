@@ -196,6 +196,7 @@ $totalPages = ceil($totalAnimals / $limit);
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
+                                <input type="hidden" name="id_personnel" value=<?=$_SESSION['id_personnel']?>>
                                 <input type="text" class="form-control" name="animalName" placeholder="Nom" required>
                             </div>
                             <div class="form-group">

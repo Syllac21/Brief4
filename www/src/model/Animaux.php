@@ -226,8 +226,28 @@ class Animaux
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function addAnimal($nom, $genre, $numero, $pays, $dateNaissance, $dateArrivee, $description, $image, $cage, $id_responsable, $espece)
+    public function addAnimal($nom, $genre, $numero, $pays, $dateNaissance, $dateArrivee, $description, $image, $cage, $id_responsable)
     {
-        
+        $pdo = dbConnect();
+        try{
+            $sql = "INSERT INTO animal(nom, genre, numero, pays, date_naissance, date_arrivee, description, image, id_cage, id_responsable) VALUES (:nom, :genre, :numero, :pays, :date_naissance, :date_arrivee, :description, :image, :id_cage, :id_responsable)";
+            $stmt = $pdo->prepare($sql);
+            $params = [
+                'nom' => $nom,
+                'genre' => $genre,
+                'numero' => $numero,
+                'pays' => $pays,
+                'date_naissance' => $dateNaissance,
+                'date_arrivee' => $dateArrivee,
+                'description' => $description,
+                'image' => $image,
+                'id_cage' => $cage,
+                'id_responsable' => $id_responsable
+            ];
+            $stmt->execute($params);
+            return 'ok';
+        }catch(PDOException $e) {
+            return $e->getMessage();
+        }
     }
 }

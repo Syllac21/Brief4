@@ -7,6 +7,10 @@ require_once '../model/Personnel.php';
 $persoObj = new Personnel();
 $allPersonnel = $persoObj->getAllPersonnel();
 
+// Inclut le fichier Log.php
+require_once '../model/Log.php';
+$logObj = new Log();
+
 // Récupère et nettoie les données de login et password envoyées via POST
 $login = trim(strip_tags($_POST['login']));
 $password = trim(strip_tags($_POST['password']));
@@ -38,7 +42,9 @@ if($login != '' && $password!= ''){
             $_SESSION['time'] = $time;
             $_SESSION['id_personnel'] = $personnel['id_personnel'];
             $_SESSION['role'] = $personnel['role'];
-            header('Location: /');
+            // Ajout d'une entrée dans la table Logs après une connexion réussie
+            $logObj->addLog('Connexion', 'Connexion réussie', $personnel['id_personnel']);
+                        header('Location: /');
         }
     }
 }

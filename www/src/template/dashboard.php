@@ -1,54 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- Link to the external CSS file dashboard.css -->
-    <link rel="stylesheet" href="css/dashboardstyle.css">
+<?php
+echo '<link rel="stylesheet" href="style/dashboard.css">';
+?>
 
-
-</head>
-<body>
-    
-
-<style>
-      /* Style du bouton principal */
-      .btn {
-        margin-top: 20px;
-        background: green;
-    }
-
-    /* Style de la barre latérale (menu) */
-    .sidebar {
-        height: 100vh; /* Hauteur de 100% de la fenêtre visible */
-        position: fixed; /* Reste fixe sur le côté gauche de l'écran */
-        top: 0;
-        left: 0;
-        width: 250px; /* Largeur de la barre latérale */
-        background-color: #343a40; /* Couleur de fond sombre */
-        padding-top: 20px;
-    }
-
-    /* Boutons à l'intérieur de la barre latérale */
-    .sidebar .btn {
-        width: 100%; /* Chaque bouton prend toute la largeur de la barre */
-        margin-bottom: 15px;
-    }
-
-    /* Conteneur principal qui contient le contenu affiché à droite de la barre latérale */
-    .content-wrapper {
-        margin-left: 250px; /* Décalage à droite pour ne pas chevaucher la barre latérale */
-        padding: 20px;
-    }
-
-    /* Style pour la barre de navigation */
-    nav {
-        color: white;
-    }
-</style>
-</body>
-</html>
 
 <!-- Barre latérale contenant les liens de navigation -->
 <aside class="sidebar pt-5">
@@ -57,6 +10,7 @@
     <a class="btn btn-outline-light" href="/?page=dashboard&table=animaux">Gestion des Animaux</a>
     <a class="btn btn-outline-light" href="/?page=dashboard&table=personnel">Gestion des Personnes</a>
     <a class="btn btn-outline-light" href="/?page=dashboard&table=espece">Gestion des Espèces</a>
+    <a class="btn btn-outline-light" href="/?page=dashboard&table=log">Log</a>
 </aside>
 
 <!-- Conteneur principal qui affiche le contenu en fonction de la page sélectionnée -->
@@ -100,6 +54,9 @@
                             case 'ajoutEmploye':
                                 include "ajoutEmploye.php";
                                 break;
+                        case 'log':
+                            include "tableLog.php";
+                            break;
                         default:
                             // Si la valeur de "table" ne correspond à aucun cas, redirige vers la déconnexion
                             // header('Location: /controller/logout.php');

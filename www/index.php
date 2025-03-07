@@ -1,4 +1,6 @@
 <?php
+
+
 // Démarre la session PHP pour gérer les informations de session (par exemple, les utilisateurs connectés)
 session_start();
 
@@ -22,6 +24,7 @@ $animaux = $animauxModel->getAllAnimaux();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- Inclusion du fichier CSS de Bootstrap pour le style de la page -->
+    <link rel="stylesheet" href="./style/dashboard.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>

@@ -46,6 +46,7 @@
     <a class="btn btn-outline-light" href="/?page=dashboard&table=animaux">Gestion des Animaux</a>
     <a class="btn btn-outline-light" href="/?page=dashboard&table=personnel">Gestion des Personnes</a>
     <a class="btn btn-outline-light" href="/?page=dashboard&table=espece">Gestion des Espèces</a>
+    <a class="btn btn-outline-light" href="/?page=dashboard&table=log">Log</a>
 </aside>
 
 <!-- Conteneur principal qui affiche le contenu en fonction de la page sélectionnée -->
@@ -89,6 +90,9 @@
                             case 'ajoutEmploye':
                                 include "ajoutEmploye.php";
                                 break;
+                        case 'log':
+                            include "tableLog.php";
+                            break;
                         default:
                             // Si la valeur de "table" ne correspond à aucun cas, redirige vers la déconnexion
                             // header('Location: /controller/logout.php');

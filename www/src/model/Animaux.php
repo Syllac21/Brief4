@@ -109,7 +109,7 @@ class Animaux
         $pdo = dbConnect();
         try {
             // Requête SQL pour récupérer l'animal et ses soigneurs
-            $sql = "SELECT a.nom, a.genre, a.image, a.date_naissance, a.numero, p.nom nomSoigneur, p.prenom 
+            $sql = "SELECT a.*,p.nom nomSoigneur,p.prenom
                     FROM animal a 
                     JOIN s_occuper so ON a.id_animal = so.id_animal 
                     JOIN personnel p ON so.id_personnel = p.id_personnel 
@@ -274,7 +274,7 @@ class Animaux
     function archiveAnimal($id)
     {
         
-        $pdo = dbconnect();
+        $pdo = dbConnect();
         try {
             $stmt = $pdo->prepare('UPDATE animal SET isArchived = 1 WHERE id_animal = :id');
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -284,6 +284,30 @@ class Animaux
             return $e->getMessage();
         }
         
+    }
+
+    function updateAnimal($postdata)
+    {
+        $pdo = dbConnect();
+        try{
+            $sql = 'UPDATE animal SET nom = :nom, numero = :numero, description = :description, image = :image, id_cage = :id_cage WHERE id_animal = :id';
+            $stmt = $pdo->prepare($sql);
+            $params =[
+                'nom' => $postdata['nom'],
+                'numero' => $postdata['numero'],
+                'description' => $postdata['description'],
+                'image' => $postdata['image'],
+                'id_cage' => $postdata['id_cage'],
+                'id'=> $postdata['id_animal']
+            ];
+            $stmt->execute($params);
+            return 'ok';
+            
+
+        }catch(PDOException $e){
+            return $e->getMessage();
+        }
+
     }
 
 

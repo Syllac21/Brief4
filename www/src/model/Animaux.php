@@ -226,6 +226,21 @@ class Animaux
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Fonction pour ajouter un animal
+     *
+     * @param [type] $nom
+     * @param [type] $genre
+     * @param [type] $numero
+     * @param [type] $pays
+     * @param [type] $dateNaissance
+     * @param [type] $dateArrivee
+     * @param [type] $description
+     * @param [type] $image
+     * @param [type] $cage
+     * @param [type] $id_responsable
+     * @return void
+     */
     public function addAnimal($nom, $genre, $numero, $pays, $dateNaissance, $dateArrivee, $description, $image, $cage, $id_responsable)
     {
         $pdo = dbConnect();
@@ -250,4 +265,26 @@ class Animaux
             return $e->getMessage();
         }
     }
+
+    function addEspeceAnimal($idEspece,$idAnimal)
+    {
+
+    }
+
+    function archiveAnimal($id)
+    {
+        
+        $pdo = dbconnect();
+        try {
+            $stmt = $pdo->prepare('UPDATE animal SET isArchived = 1 WHERE id_animal = :id');
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            return 'ok';
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+        
+    }
+
+
 }

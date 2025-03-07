@@ -112,7 +112,7 @@ $totalPages = ceil($totalAnimals / $limit);
           <td><?= htmlspecialchars($animal['genre']) ?></td>
           <td><?= htmlspecialchars($animal['description']) ?></td>
           <td><a href="/?page=modifier_animal&id=<?= $animal['id_animal'] ?>" class="btn btn-warning">Modifier</a></td>
-          <td><a href="/?page=supprimer_animal&id=<?= $animal['id_animal'] ?>" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer cet animal ?')">Supprimer</a></td>
+          <td><a href='./src/controller/controllerSupAnimal.php?delete_id=<?= $animal['id_animal'] ?>&confirm_delete=yes' class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer cet animal ?')">Supprimer</a></td>
         </tr>
       <?php endforeach; ?>
     </tbody>

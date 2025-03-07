@@ -16,7 +16,9 @@ if(
         $newPassword = trim(strip_tags($postData['newPassword']));
         $confirmPassword = trim(strip_tags($postData['confirmPassword']));
     if(password_verify($postData['oldPassword'], $personnel['mot_de_passe']) && $postData['newPassword'] == $postData['confirmPassword']){
-        echo 'ok';
+        $password = password_hash(trim(strip_tags($postData['newPassword'])), PASSWORD_DEFAULT);
+        $objPersonnel->updatePassword($postData['id'], $password);
+        header('location: /?page=dashboard&table=personnel');
     }
         
 }else{

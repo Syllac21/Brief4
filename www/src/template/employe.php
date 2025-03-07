@@ -90,9 +90,11 @@ $allAnimaux = $animalObj->getAllAnimaux();
                     <p><strong>Login :</strong> <?= htmlspecialchars($employe['login']) ?></p>
 
                     <!-- Bouton pour réinitialiser le mot de passe (fonctionnalité à implémenter) -->
+                     <?php if ($_SESSION['id_personnel'] == $employe['id_personnel']) : ?>
                     <div class="text-center mt-4">
                         <a href='/?page=dashboard&table=resseting&id=<?=$employe['id_personnel'] ?>' class="btn btn-reset px-4">Réinitialiser le mot de passe</a>
                     </div>
+                    <?php endif ?>
                 </div>
             <?php endif; ?>
         </div>

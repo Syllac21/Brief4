@@ -6,18 +6,19 @@
         <div class="col-md-2 mx-auto">
             <input type="hidden" name="id" value=<?=isset($_GET['id'])?intval($_GET['id']):'erreur'?>>
             <div class="form-group">
-                <input type="text" name="oldPassword" id="oldPassword" placeholder="Ancien mot de passe" required>
+                <input type="password" name="oldPassword" id="oldPassword" placeholder="Ancien mot de passe" required>
             </div>
             <div class="form-group">
-                <input type="text" name="newPassword" id="newPassword" placeholder="Nouveau mot de passe" required>
+                <input type="password" name="newPassword" id="newPassword" placeholder="Nouveau mot de passe" required>
             </div>
             <div class="form-group">
-                <input type="text" name="confirmPassword" id="confirmPassword" placeholder="Confirmez le mot de passe" required>
+                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirmez le mot de passe" required>
             </div>
         </div>
     </div>
     <div class="text-center">
 
         <button type="submit" class="btn btn-primary">Valider</button>
+        <a href="/?page=dashboard&table=personnel" class="btn btn-secondary">Annuler</a>
     </div>
 </form>

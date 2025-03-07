@@ -100,7 +100,7 @@ $allAnimaux = $animalObj->getAllAnimaux();
         </div>
         <?php if($_SESSION['role'] == 'superadmin') :?>
             <div class="container d-flex justify-content-center gap-3">
-                <button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#animalsTreated">gérer les animaux soigné</button>
+                <button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#animalsTreated">gérer les animaux soignés</button>
                 <button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#animalsResp">gérer les animaux en responsabilité</button>
             </div>
         <?php else : ?>
@@ -123,7 +123,7 @@ $allAnimaux = $animalObj->getAllAnimaux();
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="animalsTreatedLabel">Animaux soigné par l'employé</h5>
+                <h5 class="modal-title" id="animalsTreatedLabel">Animaux soignés par l'employé</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

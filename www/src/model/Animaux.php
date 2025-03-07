@@ -164,4 +164,9 @@ class Animaux
         // Retourne les résultats sous forme de tableau associatif
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function addAnimal($nom, $genre, $numero, $pays, $dateNaissance, $dateArrivee, $description, $image, $cage, $id_responsable, $espece)
+    {
+        
+    }
 }

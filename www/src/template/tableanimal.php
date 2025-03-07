@@ -148,8 +148,8 @@ $totalPages = ceil($totalAnimals / $limit);
                             <div class="form-group">
                                 <label>Genre</label>
                                 <div>
-                                    <label><input type="radio" name="animalGender" value="male"> Mâle</label><br>
-                                    <label><input type="radio" name="animalGender" value="female"> Femelle</label><br>
+                                    <label><input type="radio" name="animalGender" value="M"> Mâle</label><br>
+                                    <label><input type="radio" name="animalGender" value="F"> Femelle</label><br>
                                 </div>
                             </div>
                             <div class="form-group">

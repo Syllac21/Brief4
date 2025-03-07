@@ -1,9 +1,11 @@
 <?php
 // Inclusion du fichier Cage.php situé dans le dossier parent du répertoire actuel
 require_once (dirname(__DIR__,1).'/model/Cage.php');
+require_once (dirname(__DIR__,1).'/model/Animaux.php');
 
-// Création d'une instance de la classe Cage
+// Création des instances
 $cageObj = new Cage;
+$animalObj = new Animaux;
 
 // Récupération du nombre total de cages
 $cageTot = $cageObj->countCages();
@@ -22,6 +24,7 @@ $donnees = [
 
 // Conversion du tableau en format JSON pour être utilisé en JavaScript
 $donnees_json = json_encode($donnees);
+$animauxSansSoigneur = $animalObj->countAnimalWhitoutTread();
 ?>
 
 <!-- Carte affichant les informations sur l'occupation des cages -->
@@ -40,6 +43,15 @@ $donnees_json = json_encode($donnees);
         <canvas id="occupationChart"></canvas>
     </div>
 </div>
+<?php if($animauxSansSoigneur['nb'] > 0): ?>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Animaux sans soigneur</h3>
+        <div class="text-center mt-4 bg-danger text-white">
+            <?php echo $animauxSansSoigneur['nb'] ?>
+        </div>
+</div>
+<?php endif; ?>
 
 <!-- Script JavaScript pour afficher un graphique en camembert -->
 <script>

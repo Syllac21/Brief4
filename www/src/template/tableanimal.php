@@ -26,6 +26,36 @@ $order = isset($_GET['order']) ? $_GET['order'] : 'asc'; // Ordre par défaut
 // Récupérer les animaux de la page courante
 $paginatedAnimals = $animalObj->getPaginatedAnimaux($limit, $offset, $sort, $order);
 
+
+
+
+// $animalObj = new Animal(); // Ensure this object is created if it isn't already
+
+// Check if the admin is a superadmin
+if ($_SESSION['role'] === 'superadmin') {
+  // Fetch all animals with pagination
+  $paginatedAnimals = $animalObj->getPaginatedAnimaux($limit, $offset, $sort, $order);
+} else {
+  // Fetch only specific animals for admins
+  $paginatedAnimals = $animalObj->getAnimauxByPersonnel($_SESSION['id_personnel']);
+  // Since regular admins don’t have pagination, force page to 1
+  $totalPages = 1;
+}
+
+
+// Function Definitions in Animal Class
+class Animal {
+  public function getPaginatedAnimaux($limit, $offset, $sort, $order) {
+      // Fetch all animals logic
+  }
+
+  public function getAdminSpecificAnimals($limit, $offset, $sort, $order, $adminId) {
+      // Fetch specific animals for non-superadmins based on adminId
+  }
+}
+
+
+
 // Récupérer les cages de la page courante
 $allespece = $especeObj->getAllEspeces();
 
@@ -38,6 +68,8 @@ $totalAnimals = $animalObj->getTotalAnimaux();
 // Calculer le nombre total de pages
 $totalPages = ceil($totalAnimals / $limit);
 ?>
+
+
 <div class="container mt-4">
   <h2 class="mb-4">Liste des Animaux</h2>
 
@@ -60,7 +92,7 @@ $totalPages = ceil($totalAnimals / $limit);
         <th>Modifier</th>
         <th>supp</th>
       </tr>
-    </thead>
+    </thead> 
     <tbody>
       <?php foreach ($paginatedAnimals as $animal): ?>
         <tr>
@@ -86,29 +118,50 @@ $totalPages = ceil($totalAnimals / $limit);
     </tbody>
   </table>
 
+  
   <!-- Pagination Bootstrap -->
   <nav>
-    <ul class="pagination justify-content-center">
-      <!-- Bouton Précédent -->
-      <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
+  <ul class="pagination justify-content-center">
+    <!-- Previous Button -->
+    <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
         <a class="page-link" href="/?page=dashboard&table=animaux&index=<?= max($page - 1, 1) ?>">Précédent</a>
-      </li>
+    </li>
 
-      <!-- Numéros de pages -->
-      <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-        <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
-          <a class="page-link" href="/?page=dashboard&table=animaux&index=<?= $i ?>"><?= $i ?></a>
+    <!-- Page Numbers -->
+    <?php 
+    if ($_SESSION['role'] === 'superadmin') {
+        // Superadmin sees all pages
+        for ($i = 1; $i <= $totalPages; $i++): ?>
+            <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                <a class="page-link" href="/?page=dashboard&table=animaux&index=<?= $i ?>"><?= $i ?></a>
+            </li>
+        <?php endfor; 
+    } else {
+        // Regular admin sees only page 1
+        ?>
+        <li class="page-item active">
+            <a class="page-link" href="/?page=dashboard&table=animaux&index=1">1</a>
         </li>
-      <?php endfor; ?>
+    <?php } ?>
 
-      <!-- Bouton Suivant -->
-      <li class="page-item <?= ($page >= $totalPages) ? 'disabled' : '' ?>">
+    <!-- Next Button -->
+    <li class="page-item <?= ($page >= $totalPages || $_SESSION['role'] !== 'superadmin') ? 'disabled' : '' ?>">
         <a class="page-link" href="/?page=dashboard&table=animaux&index=<?= min($page + 1, $totalPages) ?>">Suivant</a>
-      </li>
-    </ul>
+    </li>
+</ul>
+
     </tbody>
     </table>
 
+
+
+
+
+
+
+
+
+    
     <!-- Pagination -->
     <style>
       label {

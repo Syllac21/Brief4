@@ -54,17 +54,17 @@ public function ajoutPersonnel($post)
 
 {
     $pdo = dbConnect();
-
+    $password=password_hash(trim(strip_tags($post['password'])), PASSWORD_DEFAULT);
     try{
         $stmt = $pdo->prepare('
             INSERT INTO personnel(nom, prenom, poste, mot_de_passe, login)
             VALUES(:nom,:prenom,:poste,:password,:login)'
         );
-        $stmt->bindParam(':nom',               $_POST['nom'], PDO::PARAM_STR);
-        $stmt->bindParam(':prenom',            $_POST['prenom'], PDO::PARAM_STR);
-        $stmt->bindParam(':poste',             $_POST['poste'], PDO::PARAM_STR);
-        $stmt->bindParam(':password',          $_POST['password'], PDO::PARAM_STR);
-        $stmt->bindParam(':login',             $_POST['login'], PDO::PARAM_STR);
+        $stmt->bindParam(':nom',               $post['nom'], PDO::PARAM_STR);
+        $stmt->bindParam(':prenom',            $post['prenom'], PDO::PARAM_STR);
+        $stmt->bindParam(':poste',             $post['poste'], PDO::PARAM_STR);
+        $stmt->bindParam(':password',          $password, PDO::PARAM_STR);
+        $stmt->bindParam(':login',             $post['login'], PDO::PARAM_STR);
         $stmt->execute();
         // $success = true;
         // echo "success";
@@ -80,10 +80,41 @@ public function archivePersonnel($id){
         $stmt = $pdo->prepare('UPDATE personnel SET IsArchived = 1 WHERE id_personnel = :id');
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
-        echo "Lien avec le soigneur supprimé fghj" ;
-
+        return true;
     } catch (PDOException $e) {
-        echo 'Erreur lors de l\'archivage: ' . $e->getMessage();
+        return false;
+    }
+}
+
+
+
+
+
+public function updatePersonnel($postdata){
+    $pdo = dbconnect();
+    try {
+        $stmt = $pdo->prepare('UPDATE personnel SET nom = :nom, prenom = :prenom, poste = :poste, login = :login WHERE id_personnel = :id');
+        $stmt->bindParam(':id', $postdata['id_personnel'], PDO::PARAM_INT);
+        $stmt->bindParam(':nom', $postdata['nom'], PDO::PARAM_STR);
+        $stmt->bindParam(':prenom', $postdata['prenom'], PDO::PARAM_STR);
+        $stmt->bindParam(':poste', $postdata['poste'], PDO::PARAM_STR);
+        $stmt->bindParam(':login', $postdata['login'], PDO::PARAM_STR);
+        $stmt->execute();
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+public function updatePassword($id,$password){
+    $pdo = dbConnect();
+    try{
+        $stmt = $pdo->prepare('UPDATE personnel SET mot_de_passe = :password WHERE id_personnel = :id');
+        $stmt->bindParam(':password',$password,PDO::PARAM_STR);
+        $stmt->bindParam('id',$id,PDO::PARAM_INT);
+        $stmt->execute();
+        return true;
+    }catch(PDOException $e){
         return false;
     }
 }

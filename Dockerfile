@@ -1,4 +1,4 @@
-FROM php:8.0-apache
+FROM php:8.3-apache
 
 # # Installation des dépendances système
 RUN apt-get update && apt-get install -y libicu-dev libpq-dev libzip-dev && rm -rf /var/lib/apt/lists/*

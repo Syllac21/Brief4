@@ -1,8 +1,38 @@
-<?php
-echo '<link rel="stylesheet" href="style/dashboard.css">';
-?>
+<style>
+.btn {
+    margin-top: 20px;
+    background: green;
+}
 
+/* Style de la barre latérale (menu) */
+.sidebar {
+    height: 100vh; /* Hauteur de 100% de la fenêtre visible */
+    position: fixed; /* Reste fixe sur le côté gauche de l'écran */
+    top: 0;
+    left: 0;
+    width: 250px; /* Largeur de la barre latérale */
+    background-color: #343a40; /* Couleur de fond sombre */
+    padding-top: 20px;
+}
 
+/* Boutons à l'intérieur de la barre latérale */
+.sidebar .btn {
+    width: 100%; /* Chaque bouton prend toute la largeur de la barre */
+    margin-bottom: 15px;
+}
+
+/* Conteneur principal qui contient le contenu affiché à droite de la barre latérale */
+.content-wrapper {
+    margin-left: 250px; /* Décalage à droite pour ne pas chevaucher la barre latérale */
+    padding: 20px;
+}
+
+/* Style pour la barre de navigation */
+nav {
+    color: white;
+}
+
+</style>
 <!-- Barre latérale contenant les liens de navigation -->
 <aside class="sidebar pt-5">
     <a class="btn btn-outline-light" href="/?page=dashboard">Accueil dashboard</a>

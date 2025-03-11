@@ -15,7 +15,7 @@ $allPersonnel = $objPersonnel->getAllPersonnel();
     <h2>Log Table</h2>
     <?php
     echo '<pre>';
-    var_dump($allLog[0]['action']);
+    var_dump($allLog[30]);
     echo '</pre>';?>
     <table class="table table-bordered mt-5">
         <thead class="table-dark">

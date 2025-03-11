@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once(dirname(__DIR__, 1) . '/model/personnel.php');
 require_once(dirname(__DIR__, 1) . '/model/Log.php'); // ✅ Inclusion du modèle Logs
 
@@ -21,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $lastId = $personnel->ajoutPersonnel($_POST);
         
         // ✅ Enregistrer un log avec le format demandé
-        $logObj->addLog("Ajout du personnel : $nom $prenom", "Ajout d'un personnel", $lastId);
+        $logObj->addLog( "Ajout d'un personnel", "Ajout du personnel : $nom $prenom", $_SESSION['id_personnel']);
 
         header("Location: /?page=dashboard&table=employe&id=" . $lastId);
         exit();
@@ -30,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ✅ Log lors de l'archivage d'un personnel
     if (isset($_POST['id'])) {
         $personnel->archivePersonnel($_POST['id']);
-        $logObj->addLog("Archivage du personnel ID: {$_POST['id']}", "Archivage d'un personnel", $_POST['id']);
+        $logObj->addLog("Archivage du personnel ID: {$_POST['id']}", "Archivage d'un personnel", $_SESSION['id_personnel']);
 
         header('Location: /?page=dashboard&table=personnel');
         exit();

@@ -55,7 +55,7 @@ if (isset($_SESSION['id_personnel'])) {
     <!-- Section de filtrage et recherche -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <!-- Formulaire de sélection des espèces -->
-        <form method="POST" action="">
+        <!-- <form method="POST" action="">
             <select class="form-control" name="species" onchange="this.form.submit()">
                 <option value="all">Toutes les espèces</option>
                 <option value="chien" <?php echo (isset($_POST['species']) && $_POST['species'] == 'chien') ? 'selected' : ''; ?>>Chiens</option>
@@ -69,7 +69,7 @@ if (isset($_SESSION['id_personnel'])) {
                 <option value="mulet" <?php echo (isset($_POST['species']) && $_POST['species'] == 'mulet') ? 'selected' : ''; ?>>Mulets</option>
                 <option value="cheval" <?php echo (isset($_POST['species']) && $_POST['species'] == 'cheval') ? 'selected' : ''; ?>>Chevaux</option>
             </select>
-        </form>
+        </form> -->
 
         <!-- Formulaire de recherche d'animaux -->
         <form method="POST" action="src/controller/controllerSearch.php">

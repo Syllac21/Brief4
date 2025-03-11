@@ -74,7 +74,7 @@ foreach ($listPersonnel as $personne) {
     // Vérifier si l'utilisateur est superAdmin avant d'afficher les boutons Modifier et Supprimer
     if ($_SESSION['role'] === 'superadmin') {
         // Colonne Modifier : centrer le bouton Modifier
-        echo "<td class='text-center'><a href='#' class='btn btn-warning btn-sm' data-bs-toggle='modal' data-bs-target='#employeeModal'>Modifier</a></td>";
+        echo "<td class='text-center'><a href='/?page=dashboard&table=employe&id=". $personne['id_personnel'] ."&action=set' class='btn btn-warning btn-sm'>Modifier</a></td>";
 
         // Colonne Supprimer : centrer le bouton Supprimer
         echo "<td class='text-center'>

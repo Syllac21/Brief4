@@ -109,7 +109,7 @@ class Animaux
         $pdo = dbConnect();
         try {
             // Requête SQL pour récupérer l'animal et ses soigneurs
-            $sql = "SELECT a.nom, a.genre, a.image, a.date_naissance, a.numero, p.nom nomSoigneur, p.prenom 
+            $sql = "SELECT a.*,p.nom nomSoigneur,p.prenom
                     FROM animal a 
                     JOIN s_occuper so ON a.id_animal = so.id_animal 
                     JOIN personnel p ON so.id_personnel = p.id_personnel 
@@ -225,4 +225,90 @@ class Animaux
         $requete = $pdo->query($sql);
         return $requete->fetch(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * Fonction pour ajouter un animal
+     *
+     * @param [type] $nom
+     * @param [type] $genre
+     * @param [type] $numero
+     * @param [type] $pays
+     * @param [type] $dateNaissance
+     * @param [type] $dateArrivee
+     * @param [type] $description
+     * @param [type] $image
+     * @param [type] $cage
+     * @param [type] $id_responsable
+     * @return void
+     */
+    public function addAnimal($nom, $genre, $numero, $pays, $dateNaissance, $dateArrivee, $description, $image, $cage, $id_responsable)
+    {
+        $pdo = dbConnect();
+        try{
+            $sql = "INSERT INTO animal(nom, genre, numero, pays, date_naissance, date_arrivee, description, image, id_cage, id_responsable) VALUES (:nom, :genre, :numero, :pays, :date_naissance, :date_arrivee, :description, :image, :id_cage, :id_responsable)";
+            $stmt = $pdo->prepare($sql);
+            $params = [
+                'nom' => $nom,
+                'genre' => $genre,
+                'numero' => $numero,
+                'pays' => $pays,
+                'date_naissance' => $dateNaissance,
+                'date_arrivee' => $dateArrivee,
+                'description' => $description,
+                'image' => $image,
+                'id_cage' => $cage,
+                'id_responsable' => $id_responsable
+            ];
+            $stmt->execute($params);
+            return 'ok';
+        }catch(PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+
+    function addEspeceAnimal($idEspece,$idAnimal)
+    {
+
+    }
+
+    function archiveAnimal($id)
+    {
+        
+        $pdo = dbConnect();
+        try {
+            $stmt = $pdo->prepare('UPDATE animal SET isArchived = 1 WHERE id_animal = :id');
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            return 'ok';
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+        
+    }
+
+    function updateAnimal($postdata)
+    {
+        $pdo = dbConnect();
+        try{
+            $sql = 'UPDATE animal SET nom = :nom, numero = :numero, description = :description, image = :image, id_cage = :id_cage WHERE id_animal = :id';
+            $stmt = $pdo->prepare($sql);
+            $params =[
+                'nom' => $postdata['nom'],
+                'numero' => $postdata['numero'],
+                'description' => $postdata['description'],
+                'image' => $postdata['image'],
+                'id_cage' => $postdata['id_cage'],
+                'id'=> $postdata['id_animal']
+            ];
+            $stmt->execute($params);
+            return 'ok';
+            
+
+        }catch(PDOException $e){
+            return $e->getMessage();
+        }
+
+    }
+
+
 }

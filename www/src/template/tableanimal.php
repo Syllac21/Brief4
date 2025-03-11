@@ -111,8 +111,8 @@ $totalPages = ceil($totalAnimals / $limit);
           </td>
           <td><?= htmlspecialchars($animal['genre']) ?></td>
           <td><?= htmlspecialchars($animal['description']) ?></td>
-          <td><a href="/?page=modifier_animal&id=<?= $animal['id_animal'] ?>" class="btn btn-warning">Modifier</a></td>
-          <td><a href="/?page=supprimer_animal&id=<?= $animal['id_animal'] ?>" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer cet animal ?')">Supprimer</a></td>
+          <td><a href="/?page=dashboard&table=animaux&id=<?= $animal['id_animal'] ?>&action=set" class="btn btn-warning">Modifier</a></td>
+          <td><a href='./src/controller/controllerSupAnimal.php?delete_id=<?= $animal['id_animal'] ?>&confirm_delete=yes' class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer cet animal ?')">Supprimer</a></td>
         </tr>
       <?php endforeach; ?>
     </tbody>
@@ -192,17 +192,18 @@ $totalPages = ceil($totalAnimals / $limit);
                 </button>
             </div>
             <div class="modal-body">
-                <form action="../src/controller/controlleranimal.php" method="POST" onsubmit="return validateForm()">
+                <form action="../src/controller/controlleranimal.php" method="POST">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
+                                <input type="hidden" name="id_personnel" value=<?=$_SESSION['id_personnel']?>>
                                 <input type="text" class="form-control" name="animalName" placeholder="Nom" required>
                             </div>
                             <div class="form-group">
-                              <label>Genre</label>
-                              <div>
-                                    <label><input type="radio" name="animalGender" value="male"> Mâle</label><br>
-                                    <label><input type="radio" name="animalGender" value="female"> Femelle</label><br>
+                                <label>Genre</label>
+                                <div>
+                                    <label><input type="radio" name="animalGender" value="M"> Mâle</label><br>
+                                    <label><input type="radio" name="animalGender" value="F"> Femelle</label><br>
                                 </div>
                             </div>
                             <div class="form-group">

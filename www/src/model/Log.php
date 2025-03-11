@@ -14,7 +14,7 @@ class Log
             // Préparation de la requête SQL pour sélectionner tous les logs
             $logsStatement = $pdo->prepare('SELECT * FROM Logs');
             $logsStatement->execute();
-            $logs = $logsStatement->fetchAll();
+            $logs = $logsStatement->fetchAll(PDO::FETCH_ASSOC);
             return $logs;
         } catch (Exception $exception) {
             die('Erreur : ' . $exception->getMessage());

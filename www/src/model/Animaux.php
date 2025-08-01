@@ -49,7 +49,7 @@ class Animaux
             echo '<div class="card-body">';
             echo '<h5 class="card-title">' . htmlspecialchars($animal['nom']) . '</h5>';
             foreach($espece as $especes){
-                echo '<p class="card-text"><strong>Espece :</strong> ' . htmlspecialchars($especes['nom']) . '</p>';
+            echo '<p class="card-text"><strong>Espece :</strong> ' . htmlspecialchars($especes['nom']) . '</p>';
             }
             echo '<p class="card-text"><strong>Sexe :</strong> ' . htmlspecialchars($animal['genre']) . '</p>';
             echo '<p class="card-text">' . htmlspecialchars($animal['description']) . '</p>';

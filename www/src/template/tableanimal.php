@@ -90,7 +90,7 @@ $totalPages = ceil($totalAnimals / $limit);
           </a></th>
         <th>description</th>
         <th>Modifier</th>
-        <th>supp</th>
+        <th>supprimer</th>
       </tr>
     </thead> 
     <tbody>

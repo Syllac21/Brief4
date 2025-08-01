@@ -74,17 +74,10 @@ public function ajoutPersonnel($post)
     }
 }
 
-public function archivePersonnel($id){
-    $pdo = dbconnect();
-    try {
-        $stmt = $pdo->prepare('UPDATE personnel SET IsArchived = 1 WHERE id_personnel = :id');
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        return true;
-    } catch (PDOException $e) {
-        return false;
-    }
-}
+
+
+
+
 
 
 
